@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Елена Фукина](https://up.htmlacademy.ru/react/15/user/1706423).
-* Наставник: `Неизвестно`.
+* Наставник: [Yulia Volkova](https://htmlacademy.ru/profile/julie_volkova).
 
 ---
 
