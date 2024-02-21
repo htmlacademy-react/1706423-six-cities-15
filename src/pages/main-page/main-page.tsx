@@ -27,7 +27,9 @@ const MainPage = ({rentalOffersCount, renderedCardsCount}: MainPageProps): JSX.E
             />
             <SortPlaces sortItems={SORT_ITEMS}/>
             <div className="cities__places-list places__list tabs__content">
-              {[...Array(renderedCardsCount).keys()].map((item: number) => <RentalOfferCard key={item} />)}
+              {[...Array(renderedCardsCount).keys()].map((item: number) => (
+                <RentalOfferCard className='cities' key={item} />
+              ))}
             </div>
           </section>
           <div className="cities__right-section">

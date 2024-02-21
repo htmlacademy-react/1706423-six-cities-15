@@ -1,9 +1,13 @@
-const RentalOfferCard = (): JSX.Element => (
-  <article className="cities__card place-card">
+type RentalOfferCardProps = {
+  className: string;
+}
+
+const RentalOfferCard = ({className}: RentalOfferCardProps): JSX.Element => (
+  <article className={`${className}__card place-card`}>
     <div className="place-card__mark">
       <span>Premium</span>
     </div>
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${className}__image-wrapper place-card__image-wrapper`}>
       <a href="#">
         <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image"/>
       </a>
