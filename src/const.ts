@@ -43,3 +43,9 @@ export const SORT_ITEMS = [
     isActive: false,
   },
 ];
+
+export enum ClassNameCards {
+  Main = 'cities',
+  Favorites = 'favorites',
+  Offer = 'near-places',
+}

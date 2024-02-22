@@ -1,6 +1,7 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
+import {ClassNameCards} from '../../const';
 
 const FavoritesPage = (): JSX.Element => (
   <div className="page">
@@ -21,7 +22,7 @@ const FavoritesPage = (): JSX.Element => (
               </div>
               <div className="favorites__places">
                 {[...Array(2).keys()].map((item: number) => (
-                  <RentalOfferCard className='favorites' key={item} />
+                  <RentalOfferCard className={ClassNameCards.Favorites} key={item} />
                 ))}
               </div>
             </li>

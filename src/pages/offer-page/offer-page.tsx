@@ -1,6 +1,7 @@
 import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
+import {ClassNameCards} from '../../const';
 
 const OfferPage = (): JSX.Element => (
   <div className="page">
@@ -183,9 +184,8 @@ const OfferPage = (): JSX.Element => (
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {/* <article className="near-places__card place-card"> */}
             {[...Array(3).keys()].map((item: number) => (
-              <RentalOfferCard className='near-places' key={item} />
+              <RentalOfferCard className={ClassNameCards.Offer} key={item} />
             ))}
           </div>
         </section>

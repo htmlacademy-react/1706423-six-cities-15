@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import NavTabs from '../../components/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/found-places/found-places';
 import Map from '../../components/map/map';
-import {CITIES, SORT_ITEMS} from '../../const';
+import {CITIES, SORT_ITEMS, ClassNameCards} from '../../const';
 import SortPlaces from '../../components/sort-places/sort-places';
 
 type MainPageProps = {
@@ -28,7 +28,7 @@ const MainPage = ({rentalOffersCount, renderedCardsCount}: MainPageProps): JSX.E
             <SortPlaces sortItems={SORT_ITEMS}/>
             <div className="cities__places-list places__list tabs__content">
               {[...Array(renderedCardsCount).keys()].map((item: number) => (
-                <RentalOfferCard className='cities' key={item} />
+                <RentalOfferCard className={ClassNameCards.Main} key={item} />
               ))}
             </div>
           </section>
