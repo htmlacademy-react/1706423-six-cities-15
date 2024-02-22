@@ -5,6 +5,7 @@ import FoundPlaces from '../../components/found-places/found-places';
 import Map from '../../components/map/map';
 import {CITIES, SORT_ITEMS, ClassNameCards} from '../../const';
 import SortPlaces from '../../components/sort-places/sort-places';
+import {Helmet} from 'react-helmet-async';
 
 type MainPageProps = {
   rentalOffersCount: number;
@@ -22,6 +23,9 @@ type MainPageProps = {
 
 const MainPage = ({rentalOffersCount, offers}: MainPageProps): JSX.Element => (
   <div className="page page--gray page--main">
+    <Helmet>
+      <title>6 cities.</title>
+    </Helmet>
     <Header />
     <main className="page__main page__main--index">
       <h1 className ="visually-hidden">Cities</h1>

@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {Helmet} from 'react-helmet-async';
 
 const LoginPage = (): JSX.Element => (
   <div className="page page--gray page--login">
+    <Helmet>
+      <title>6 cities. Sign in.</title>
+    </Helmet>
     <header className="header">
       <div className="container">
         <div className="header__wrapper">

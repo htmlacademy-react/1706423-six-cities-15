@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards} from '../../const';
+import {Helmet} from 'react-helmet-async';
 
 type FavoritesPageProps = {
   offers: {
@@ -18,6 +19,9 @@ type FavoritesPageProps = {
 
 const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => (
   <div className="page">
+    <Helmet>
+      <title>6 cities. Saved listing.</title>
+    </Helmet>
     <Header />
 
     <main className="page__main page__main--favorites">

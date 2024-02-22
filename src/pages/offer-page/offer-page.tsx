@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
+import {Helmet} from 'react-helmet-async';
 
 type OfferPageProps = {
   offers: {
@@ -29,6 +30,9 @@ type OfferPageProps = {
 
 const OfferPage = ({offers, comments}: OfferPageProps): JSX.Element => (
   <div className="page">
+    <Helmet>
+      <title>6 cities. Rental offer.</title>
+    </Helmet>
     <Header />
 
     <main className="page__main page__main--offer">
