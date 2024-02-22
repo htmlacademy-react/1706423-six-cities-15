@@ -3,7 +3,20 @@ import Footer from '../../components/footer/footer';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards} from '../../const';
 
-const FavoritesPage = (): JSX.Element => (
+type FavoritesPageProps = {
+  offers: {
+    id: string;
+    title: string;
+    type: string;
+    price: number;
+    isFavorite: boolean;
+    isPremium: boolean;
+    rating: number;
+    previewImage: string;
+  }[];
+}
+
+const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => (
   <div className="page">
     <Header />
 
@@ -21,9 +34,14 @@ const FavoritesPage = (): JSX.Element => (
                 </div>
               </div>
               <div className="favorites__places">
-                {[...Array(2).keys()].map((item: number) => (
-                  <RentalOfferCard className={ClassNameCards.Favorites} key={item} />
-                ))}
+                {offers.filter(({isFavorite}) => isFavorite === true)
+                  .map((offer) => (
+                    <RentalOfferCard
+                      className={ClassNameCards.Favorites}
+                      key={offer.id}
+                      offer={offer}
+                    />
+                  ))}
               </div>
             </li>
 
@@ -36,7 +54,14 @@ const FavoritesPage = (): JSX.Element => (
                 </div>
               </div>
               <div className="favorites__places">
-                <RentalOfferCard className='favorites' />
+                {offers.filter(({isFavorite}) => isFavorite === true)
+                  .map((offer) => (
+                    <RentalOfferCard
+                      className={ClassNameCards.Favorites}
+                      key={offer.id}
+                      offer={offer}
+                    />
+                  ))}
               </div>
             </li>
           </ul>

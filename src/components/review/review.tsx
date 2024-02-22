@@ -1,30 +1,49 @@
-// type ReviewProps = {
+import {STAR_WIDTH} from '../../const';
 
-// }
+type ReviewProps = {
+  comment: {
+    id: string;
+    date: string;
+    user: {
+      name: string;
+      avatarUrl: string;
+      isPro: boolean;
+    };
+    text: string;
+    rating: number;
+  };
+}
 
-const Review = (): JSX.Element => (
-  <li className="reviews__item">
-    <div className="reviews__user user">
-      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-      </div>
-      <span className="reviews__user-name">
-        Max
-      </span>
-    </div>
-    <div className="reviews__info">
-      <div className="reviews__rating rating">
-        <div className="reviews__stars rating__stars">
-          <span style={{width: `${80}%`}}></span>
-          <span className="visually-hidden">Rating</span>
+const Review = ({comment}: ReviewProps): JSX.Element => {
+  const {date, user, text, rating} = comment;
+  const commentData: Date = new Date(date);
+
+  return (
+    <li className="reviews__item">
+      <div className="reviews__user user">
+        <div className="reviews__avatar-wrapper user__avatar-wrapper">
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
+        <span className="reviews__user-name">
+          {user.name}
+        </span>
       </div>
-      <p className="reviews__text">
-        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-      </p>
-      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-    </div>
-  </li>
-);
+      <div className="reviews__info">
+        <div className="reviews__rating rating">
+          <div className="reviews__stars rating__stars">
+            <span style={{width: `${STAR_WIDTH * rating}%`}}></span>
+            <span className="visually-hidden">Rating</span>
+          </div>
+        </div>
+        <p className="reviews__text">
+          {text}
+        </p>
+        <time className="reviews__time" dateTime={date.split('T')[0]}>
+          {`${commentData.toLocaleString('en', { month: 'long' })} ${commentData.getFullYear()}`}
+        </time>
+      </div>
+    </li>
+  );
+};
 
 export default Review;

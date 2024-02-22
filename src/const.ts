@@ -44,6 +44,10 @@ export const SORT_ITEMS = [
   },
 ];
 
+export const STAR_WIDTH = 20;
+
+export const MAX_OFFER_PAGE_CARDS = 3;
+
 export enum ClassNameCards {
   Main = 'cities',
   Favorites = 'favorites',

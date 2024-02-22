@@ -1,8 +1,27 @@
 import Review from '../review/review';
 
-const ReviewsList = (): JSX.Element => (
+type ReviewsListProps = {
+  comments: {
+    id: string;
+    date: string;
+    user: {
+      name: string;
+      avatarUrl: string;
+      isPro: boolean;
+    };
+    text: string;
+    rating: number;
+  }[];
+}
+
+const ReviewsList = ({comments}: ReviewsListProps): JSX.Element => (
   <ul className="reviews__list">
-    <Review />
+    {comments.map((comment) => (
+      <Review
+        key={comment.id}
+        comment={comment}
+      />
+    ))}
   </ul>
 );
 

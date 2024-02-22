@@ -1,9 +1,33 @@
 import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
-import {ClassNameCards} from '../../const';
+import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
 
-const OfferPage = (): JSX.Element => (
+type OfferPageProps = {
+  offers: {
+    id: string;
+    title: string;
+    type: string;
+    price: number;
+    isFavorite: boolean;
+    isPremium: boolean;
+    rating: number;
+    previewImage: string;
+  }[];
+  comments: {
+    id: string;
+    date: string;
+    user: {
+      name: string;
+      avatarUrl: string;
+      isPro: boolean;
+    };
+    text: string;
+    rating: number;
+  }[];
+}
+
+const OfferPage = ({offers, comments}: OfferPageProps): JSX.Element => (
   <div className="page">
     <Header />
 
@@ -128,7 +152,7 @@ const OfferPage = (): JSX.Element => (
             </div>
             <section className="offer__reviews reviews">
               <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-              <ReviewsList />
+              <ReviewsList comments={comments} />
               <form className="reviews__form form" action="#" method="post">
                 <label className="reviews__label form__label" htmlFor="review">Your review</label>
                 <div className="reviews__rating-form form__rating">
@@ -184,8 +208,12 @@ const OfferPage = (): JSX.Element => (
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {[...Array(3).keys()].map((item: number) => (
-              <RentalOfferCard className={ClassNameCards.Offer} key={item} />
+            {offers.slice(0, MAX_OFFER_PAGE_CARDS).map((offer) => (
+              <RentalOfferCard
+                className={ClassNameCards.Offer}
+                key={offer.id}
+                offer={offer}
+              />
             ))}
           </div>
         </section>

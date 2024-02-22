@@ -8,10 +8,19 @@ import SortPlaces from '../../components/sort-places/sort-places';
 
 type MainPageProps = {
   rentalOffersCount: number;
-  renderedCardsCount: number;
+  offers: {
+    id: string;
+    title: string;
+    type: string;
+    price: number;
+    isFavorite: boolean;
+    isPremium: boolean;
+    rating: number;
+    previewImage: string;
+  }[];
 }
 
-const MainPage = ({rentalOffersCount, renderedCardsCount}: MainPageProps): JSX.Element => (
+const MainPage = ({rentalOffersCount, offers}: MainPageProps): JSX.Element => (
   <div className="page page--gray page--main">
     <Header />
     <main className="page__main page__main--index">
@@ -27,8 +36,12 @@ const MainPage = ({rentalOffersCount, renderedCardsCount}: MainPageProps): JSX.E
             />
             <SortPlaces sortItems={SORT_ITEMS}/>
             <div className="cities__places-list places__list tabs__content">
-              {[...Array(renderedCardsCount).keys()].map((item: number) => (
-                <RentalOfferCard className={ClassNameCards.Main} key={item} />
+              {offers.map((offer) => (
+                <RentalOfferCard
+                  className={ClassNameCards.Main}
+                  key={offer.id}
+                  offer={offer}
+                />
               ))}
             </div>
           </section>
