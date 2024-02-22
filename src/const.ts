@@ -53,3 +53,11 @@ export enum ClassNameCards {
   Favorites = 'favorites',
   Offer = 'near-places',
 }
+
+export enum AppRoutes {
+  Main = '/',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+  Login = '/login',
+  NotFound = '*',
+}

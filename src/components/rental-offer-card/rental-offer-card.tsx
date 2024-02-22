@@ -1,4 +1,5 @@
 import {STAR_WIDTH} from '../../const';
+import {Link} from 'react-router-dom';
 
 type RentalOfferCardProps = {
   className: string;
@@ -15,7 +16,7 @@ type RentalOfferCardProps = {
 }
 
 const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element => {
-  const {title, type, price, isPremium, isFavorite, rating, previewImage} = offer;
+  const {id, title, type, price, isPremium, isFavorite, rating, previewImage} = offer;
 
   return (
     <article className={`${className}__card place-card`}>
@@ -25,9 +26,9 @@ const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element 
         : false}
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`/offer/:${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -55,7 +56,7 @@ const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element 
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/:${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
