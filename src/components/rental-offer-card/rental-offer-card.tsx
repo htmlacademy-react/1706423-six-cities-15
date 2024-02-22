@@ -23,7 +23,7 @@ const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element 
 
       {isPremium
         ? <div className="place-card__mark"><span>Premium</span></div>
-        : false}
+        : null}
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/:${id}`}>

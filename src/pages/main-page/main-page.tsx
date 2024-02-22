@@ -1,5 +1,4 @@
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
-import Header from '../../components/header/header';
 import NavTabs from '../../components/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/found-places/found-places';
 import Map from '../../components/map/map';
@@ -22,11 +21,10 @@ type MainPageProps = {
 }
 
 const MainPage = ({rentalOffersCount, offers}: MainPageProps): JSX.Element => (
-  <div className="page page--gray page--main">
+  <>
     <Helmet>
       <title>6 cities.</title>
     </Helmet>
-    <Header />
     <main className="page__main page__main--index">
       <h1 className ="visually-hidden">Cities</h1>
       <NavTabs cities={CITIES} />
@@ -55,7 +53,7 @@ const MainPage = ({rentalOffersCount, offers}: MainPageProps): JSX.Element => (
         </div>
       </div>
     </main>
-  </div>
+  </>
 );
 
 export default MainPage;

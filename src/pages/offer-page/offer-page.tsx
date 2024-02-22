@@ -1,4 +1,3 @@
-import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
@@ -29,11 +28,10 @@ type OfferPageProps = {
 }
 
 const OfferPage = ({offers, comments}: OfferPageProps): JSX.Element => (
-  <div className="page">
+  <>
     <Helmet>
       <title>6 cities. Rental offer.</title>
     </Helmet>
-    <Header />
 
     <main className="page__main page__main--offer">
       <section className="offer">
@@ -223,7 +221,7 @@ const OfferPage = ({offers, comments}: OfferPageProps): JSX.Element => (
         </section>
       </div>
     </main>
-  </div>
+  </>
 );
 
 export default OfferPage;
