@@ -3,8 +3,9 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {AppRoutes} from '../../const';
+import {AppRoutes, AuthStatus} from '../../const';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   rentalOffersCount: number;
@@ -50,7 +51,9 @@ const App = (props: AppProps): JSX.Element => (
       }
       />
       <Route path={AppRoutes.Favorites} element={
-        <FavoritesPage offers={props.offers} />
+        <PrivateRoute authStatus={AuthStatus.NoAuth}>
+          <FavoritesPage offers={props.offers} />
+        </PrivateRoute>
       }
       />
       <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
