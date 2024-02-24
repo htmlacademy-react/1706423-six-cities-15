@@ -16,42 +16,52 @@ type AppProps = {
   comments: Comment[];
 }
 
-const App = (props: AppProps): JSX.Element => (
-  <HelmetProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoutes.Main} element={<Layout authStatus={AuthStatus.NoAuth} />}>
-          <Route index element={
-            <MainPage
-              rentalOffersCount={props.rentalOffersCount}
-              offers={props.offers}
+const App = (props: AppProps): JSX.Element => {
+  const {rentalOffersCount, offers, comments} = props;
+
+  return (
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={AppRoutes.Main} element={
+            <Layout
+              authStatus={AuthStatus.Auth}
+              favoriteOffers={offers.filter((offer) => offer.isFavorite === true).length}
             />
           }
-          />
-          <Route path={AppRoutes.Offer} element={
-            <OfferPage
-              offers={props.offers}
-              comments={props.comments}
+          >
+            <Route index element={
+              <MainPage
+                rentalOffersCount={rentalOffersCount}
+                offers={offers}
+              />
+            }
             />
-          }
-          />
-          <Route path={AppRoutes.Favorites} element={
-            <PrivateRoute authStatus={AuthStatus.NoAuth}>
-              <FavoritesPage offers={props.offers} />
-            </PrivateRoute>
-          }
-          />
-          <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
-          <Route path={AppRoutes.Login} element={
-            <PrivateRoute authStatus={AuthStatus.NoAuth} isRevers>
-              <LoginPage />
-            </PrivateRoute>
-          }
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </HelmetProvider>
-);
+            <Route path={AppRoutes.Offer} element={
+              <OfferPage
+                offers={offers}
+                comments={comments}
+              />
+            }
+            />
+            <Route path={AppRoutes.Favorites} element={
+              <PrivateRoute authStatus={AuthStatus.Auth}>
+                <FavoritesPage offers={offers} />
+              </PrivateRoute>
+            }
+            />
+            <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
+            <Route path={AppRoutes.Login} element={
+              <PrivateRoute authStatus={AuthStatus.Auth} isRevers>
+                <LoginPage />
+              </PrivateRoute>
+            }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
+  );
+};
 
 export default App;

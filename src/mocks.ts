@@ -9,16 +9,22 @@ export const data = {
     isPremium: false,
     rating: 4,
     previewImage: 'img/apartment-01.jpg',
+    city: {
+      name: 'Amsterdam',
+    }
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f01',
     title: 'Wood and stone place',
     type: 'House',
     price: 150,
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 5,
     previewImage: 'img/apartment-02.jpg',
+    city: {
+      name: 'Amsterdam',
+    }
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f02',
@@ -29,16 +35,22 @@ export const data = {
     isPremium: false,
     rating: 3,
     previewImage: 'img/room.jpg',
+    city: {
+      name: 'Paris',
+    }
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f03',
     title: 'Nice, cozy, warm big bed apartment',
     type: 'Hotel',
     price: 100,
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 3,
     previewImage: 'img/apartment-03.jpg',
+    city: {
+      name: 'Paris',
+    }
   }],
   comments: [
     {

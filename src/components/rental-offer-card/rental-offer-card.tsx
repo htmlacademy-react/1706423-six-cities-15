@@ -1,5 +1,5 @@
-import {STAR_WIDTH} from '../../const';
-import {Link} from 'react-router-dom';
+import {AppRoutes, FAVORITE_CARD_CLASS, STAR_WIDTH, IMG_CARD, IMG_CARD_FAVORITES} from '../../const';
+import {Link, useLocation} from 'react-router-dom';
 import {Offer} from '../../types';
 
 type RentalOfferCardProps = {
@@ -9,6 +9,7 @@ type RentalOfferCardProps = {
 
 const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element => {
   const {id, title, type, price, isPremium, isFavorite, rating, previewImage} = offer;
+  const {pathname} = useLocation();
 
   return (
     <article className={`${className}__card place-card`}>
@@ -17,10 +18,13 @@ const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element 
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/:${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={previewImage} alt="Place image"
+            width={pathname as AppRoutes === AppRoutes.Favorites ? IMG_CARD_FAVORITES.width : IMG_CARD.width}
+            height={pathname as AppRoutes === AppRoutes.Favorites ? IMG_CARD_FAVORITES.height : IMG_CARD.height}
+          />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${pathname as AppRoutes === AppRoutes.Favorites && FAVORITE_CARD_CLASS} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

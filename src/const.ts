@@ -36,10 +36,21 @@ export const SORT_ITEMS = [
   },
 ];
 
+export const IMG_CARD = {
+  width: '260',
+  height: '200',
+};
+
+export const IMG_CARD_FAVORITES = {
+  width: '150',
+  height: '110',
+};
+
 export const STAR_WIDTH = 20;
 export const MAX_OFFER_PAGE_CARDS = 3;
 export const MAIN_ROOT_CLASS = 'page--gray page--main';
 export const LOGIN_ROOT_CLASS = 'page--gray page--login';
+export const FAVORITE_CARD_CLASS = 'favorites__card-info';
 
 export enum ClassNameCards {
   Main = 'cities',

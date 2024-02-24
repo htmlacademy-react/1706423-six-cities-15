@@ -3,9 +3,10 @@ import {AppRoutes, AuthStatus} from '../../const';
 
 type HeaderNavProps = {
   authStatus: AuthStatus;
+  favoriteOffers: number;
 }
 
-const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => (
+const HeaderNav = ({authStatus, favoriteOffers}: HeaderNavProps): JSX.Element => (
   <nav className="header__nav">
     <ul className="header__nav-list">
       <li className="header__nav-item user">
@@ -16,7 +17,7 @@ const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => (
             ?
             <>
               <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favoriteOffers}</span>
             </>
             :
             <span className="header__login">Sign in</span>}

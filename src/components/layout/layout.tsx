@@ -6,9 +6,10 @@ import Footer from '../footer/footer';
 
 type LayoutProps = {
   authStatus: AuthStatus;
+  favoriteOffers: number;
 }
 
-const Layout = ({authStatus}: LayoutProps): JSX.Element => {
+const Layout = (props: LayoutProps): JSX.Element => {
   const {pathname} = useLocation();
   const {classNameRoot} = getClassesLayout(pathname as AppRoutes);
 
@@ -26,12 +27,12 @@ const Layout = ({authStatus}: LayoutProps): JSX.Element => {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
-            {pathname as AppRoutes !== AppRoutes.Login && <HeaderNav authStatus={authStatus} />}
+            {pathname as AppRoutes !== AppRoutes.Login && <HeaderNav {...props} />}
           </div>
         </div>
       </header>
       <Outlet />
-      {pathname as AppRoutes === AppRoutes.Favorites || AppRoutes.NotFound && <Footer />}
+      {pathname as AppRoutes === AppRoutes.Favorites && <Footer />}
     </div>
   );
 };

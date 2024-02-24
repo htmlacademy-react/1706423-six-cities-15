@@ -1,3 +1,7 @@
+export type City = {
+  name: string;
+};
+
 export type Offer = {
   id: string;
   title: string;
@@ -7,6 +11,7 @@ export type Offer = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
+  city: City;
 };
 
 export type Comment = {
