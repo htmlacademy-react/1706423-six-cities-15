@@ -2,6 +2,7 @@ import {Link, Outlet, useLocation} from 'react-router-dom';
 import {AppRoutes, AuthStatus} from '../../const';
 import HeaderNav from '../header-nav/header-nav';
 import {getClassesLayout} from '../../utils';
+import Footer from '../footer/footer';
 
 type LayoutProps = {
   authStatus: AuthStatus;
@@ -9,7 +10,7 @@ type LayoutProps = {
 
 const Layout = ({authStatus}: LayoutProps): JSX.Element => {
   const {pathname} = useLocation();
-  const {classNameLink, classNameRoot} = getClassesLayout(pathname as AppRoutes);
+  const {classNameRoot} = getClassesLayout(pathname as AppRoutes);
 
   return (
     <div className={`page ${classNameRoot}`}>
@@ -19,7 +20,8 @@ const Layout = ({authStatus}: LayoutProps): JSX.Element => {
             <div className="header__left">
               <Link
                 to={AppRoutes.Main}
-                className={`header__logo-link ${classNameLink}`}
+                className={`header__logo-link ${
+                  pathname as AppRoutes === AppRoutes.Main && 'header__logo-link--active'}`}
               >
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
@@ -29,6 +31,7 @@ const Layout = ({authStatus}: LayoutProps): JSX.Element => {
         </div>
       </header>
       <Outlet />
+      {pathname as AppRoutes === AppRoutes.Favorites || AppRoutes.NotFound && <Footer />}
     </div>
   );
 };

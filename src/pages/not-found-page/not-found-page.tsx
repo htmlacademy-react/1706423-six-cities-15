@@ -1,4 +1,3 @@
-import Footer from '../../components/footer/footer';
 import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 
@@ -13,7 +12,6 @@ const NotFoundPage = (): JSX.Element => (
         <Link to={'/'}>Go back to the main page.</Link>
       </section>
     </main>
-    <Footer />
   </>
 );
 

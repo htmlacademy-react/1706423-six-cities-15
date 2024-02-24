@@ -1,17 +1,15 @@
-import {AppRoutes} from './const';
+import {AppRoutes, LOGIN_ROOT_CLASS, MAIN_ROOT_CLASS} from './const';
 
 export const getClassesLayout = (pathname: AppRoutes) => {
   let classNameRoot = '';
-  let classNameLink = '';
 
   if (pathname === AppRoutes.Main) {
-    classNameRoot = 'page--gray page--main';
-    classNameLink = 'header__logo-link--active';
+    classNameRoot = MAIN_ROOT_CLASS;
   }
 
   if (pathname === AppRoutes.Login) {
-    classNameRoot = 'page--gray page--login';
+    classNameRoot = LOGIN_ROOT_CLASS;
   }
 
-  return {classNameRoot, classNameLink};
+  return {classNameRoot};
 };
