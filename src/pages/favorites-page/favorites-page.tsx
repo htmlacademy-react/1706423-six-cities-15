@@ -2,18 +2,10 @@ import Footer from '../../components/footer/footer';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards} from '../../const';
 import {Helmet} from 'react-helmet-async';
+import {Offer} from '../../types';
 
 type FavoritesPageProps = {
-  offers: {
-    id: string;
-    title: string;
-    type: string;
-    price: number;
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
-    previewImage: string;
-  }[];
+  offers: Offer[];
 }
 
 const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => (

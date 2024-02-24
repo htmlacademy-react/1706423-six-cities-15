@@ -24,11 +24,7 @@ const Layout = ({authStatus}: LayoutProps): JSX.Element => {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
-            {pathname as AppRoutes !== AppRoutes.Login
-              ?
-              <HeaderNav authStatus={authStatus} />
-              :
-              null}
+            {pathname as AppRoutes !== AppRoutes.Login && <HeaderNav authStatus={authStatus} />}
           </div>
         </div>
       </header>

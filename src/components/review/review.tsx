@@ -1,17 +1,8 @@
 import {STAR_WIDTH} from '../../const';
+import {Comment} from '../../types';
 
 type ReviewProps = {
-  comment: {
-    id: string;
-    date: string;
-    user: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    text: string;
-    rating: number;
-  };
+  comment: Comment;
 }
 
 const Review = ({comment}: ReviewProps): JSX.Element => {

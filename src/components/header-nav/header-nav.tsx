@@ -22,14 +22,12 @@ const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => (
             <span className="header__login">Sign in</span>}
         </Link>
       </li>
-      {authStatus === AuthStatus.Auth
-        ?
+      {authStatus === AuthStatus.Auth &&
         <li className="header__nav-item">
           <Link className="header__nav-link" to={AppRoutes.Main}>
             <span className="header__signout">Sign out</span>
           </Link>
-        </li>
-        : null}
+        </li>}
     </ul>
   </nav>
 );

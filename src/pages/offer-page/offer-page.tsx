@@ -2,29 +2,11 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
 import {Helmet} from 'react-helmet-async';
+import {Offer, Comment} from '../../types';
 
 type OfferPageProps = {
-  offers: {
-    id: string;
-    title: string;
-    type: string;
-    price: number;
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
-    previewImage: string;
-  }[];
-  comments: {
-    id: string;
-    date: string;
-    user: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    text: string;
-    rating: number;
-  }[];
+  offers: Offer[];
+  comments: Comment[];
 }
 
 const OfferPage = ({offers, comments}: OfferPageProps): JSX.Element => (

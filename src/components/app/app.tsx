@@ -8,30 +8,12 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {HelmetProvider} from 'react-helmet-async';
 import Layout from '../layout/layout';
+import {Offer, Comment} from '../../types';
 
 type AppProps = {
   rentalOffersCount: number;
-  offers: {
-    id: string;
-    title: string;
-    type: string;
-    price: number;
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
-    previewImage: string;
-  }[];
-  comments: {
-    id: string;
-    date: string;
-    user: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    text: string;
-    rating: number;
-  }[];
+  offers: Offer[];
+  comments: Comment[];
 }
 
 const App = (props: AppProps): JSX.Element => (

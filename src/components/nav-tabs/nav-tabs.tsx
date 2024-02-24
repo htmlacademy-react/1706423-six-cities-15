@@ -1,10 +1,8 @@
 import TabLocation from '../tab-location/tab-location';
+import {CityTab} from '../../types';
 
 type NavTabsProps = {
-  cities: {
-    name: string;
-    isActive: boolean;
-  }[];
+  cities: CityTab[];
 }
 
 const NavTabs = ({cities} : NavTabsProps): JSX.Element => (
