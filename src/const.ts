@@ -46,11 +46,20 @@ export const IMG_CARD_FAVORITES = {
   height: '110',
 };
 
+export const RATING = {
+  '5': 'perfect',
+  '4': 'good',
+  '3': 'not bad',
+  '2': 'badly',
+  '1': 'terribly',
+};
+
 export const STAR_WIDTH = 20;
 export const MAX_OFFER_PAGE_CARDS = 3;
 export const MAIN_ROOT_CLASS = 'page--gray page--main';
 export const LOGIN_ROOT_CLASS = 'page--gray page--login';
 export const FAVORITE_CARD_CLASS = 'favorites__card-info';
+export const MAX_RATING = 5;
 
 export enum ClassNameCards {
   Main = 'cities',

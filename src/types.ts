@@ -22,6 +22,11 @@ export type Comment = {
   rating: number;
 };
 
+export type DataOffer = {
+  images: string[];
+  goods: string[];
+};
+
 export type User = {
   name: string;
   avatarUrl: string;

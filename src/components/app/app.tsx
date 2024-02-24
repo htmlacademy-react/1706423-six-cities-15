@@ -8,16 +8,17 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {HelmetProvider} from 'react-helmet-async';
 import Layout from '../layout/layout';
-import {Offer, Comment} from '../../types';
+import {Offer, Comment, DataOffer} from '../../types';
 
 type AppProps = {
   rentalOffersCount: number;
   offers: Offer[];
   comments: Comment[];
+  dataOffer: DataOffer;
 }
 
 const App = (props: AppProps): JSX.Element => {
-  const {rentalOffersCount, offers, comments} = props;
+  const {rentalOffersCount, offers, comments, dataOffer} = props;
 
   return (
     <HelmetProvider>
@@ -25,7 +26,7 @@ const App = (props: AppProps): JSX.Element => {
         <Routes>
           <Route path={AppRoutes.Main} element={
             <Layout
-              authStatus={AuthStatus.Auth}
+              authStatus={AuthStatus.NoAuth}
               favoriteOffers={offers.filter((offer) => offer.isFavorite === true).length}
             />
           }
@@ -39,20 +40,21 @@ const App = (props: AppProps): JSX.Element => {
             />
             <Route path={AppRoutes.Offer} element={
               <OfferPage
+                dataOffer={dataOffer}
                 offers={offers}
                 comments={comments}
               />
             }
             />
             <Route path={AppRoutes.Favorites} element={
-              <PrivateRoute authStatus={AuthStatus.Auth}>
+              <PrivateRoute authStatus={AuthStatus.NoAuth}>
                 <FavoritesPage offers={offers} />
               </PrivateRoute>
             }
             />
             <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
             <Route path={AppRoutes.Login} element={
-              <PrivateRoute authStatus={AuthStatus.Auth} isRevers>
+              <PrivateRoute authStatus={AuthStatus.NoAuth} isRevers>
                 <LoginPage />
               </PrivateRoute>
             }

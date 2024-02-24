@@ -65,4 +65,22 @@ export const data = {
       rating: 4
     },
   ],
+  dataOffer: {
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/amsterdam.jpg',
+    ],
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+    ],
+  }
 };
