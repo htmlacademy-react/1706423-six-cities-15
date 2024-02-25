@@ -1,5 +1,5 @@
 import TabLocation from '../tab-location/tab-location';
-import {CityTab} from '../../types';
+import {CityTab} from '../../../types';
 
 type NavTabsProps = {
   cities: CityTab[];

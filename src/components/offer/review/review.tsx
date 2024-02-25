@@ -1,5 +1,5 @@
-import {STAR_WIDTH} from '../../const';
-import {Comment} from '../../types';
+import {STAR_WIDTH} from '../../../const';
+import {Comment} from '../../../types';
 
 type ReviewProps = {
   comment: Comment;

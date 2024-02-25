@@ -1,9 +1,9 @@
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
-import NavTabs from '../../components/nav-tabs/nav-tabs';
+import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/found-places/found-places';
-import Map from '../../components/map/map';
+import Map from '../../components/main/map/map';
 import {CITIES_TABS, SORT_ITEMS, ClassNameCards} from '../../const';
-import SortPlaces from '../../components/sort-places/sort-places';
+import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types';
 

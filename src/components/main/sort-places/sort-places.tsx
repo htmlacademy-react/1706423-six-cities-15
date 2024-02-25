@@ -1,4 +1,4 @@
-import {SortItem} from '../../types';
+import {SortItem} from '../../../types';
 
 type SortPlacesProps = {
   sortItems: SortItem[];

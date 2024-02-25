@@ -1,11 +1,11 @@
-import ReviewsList from '../../components/reviews-list/reviews-list';
+import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import {Offer, Comment, DataOffer} from '../../types';
-import GalleryImage from '../../components/gallery-image/gallery-image';
-import GoodsItem from '../../components/goods-item/goods-item';
-import ReviewForm from '../../components/review-form/review-form';
+import GalleryImage from '../../components/offer/gallery-image/gallery-image';
+import GoodsItem from '../../components/offer/goods-item/goods-item';
+import ReviewForm from '../../components/offer/review-form/review-form';
 
 type OfferPageProps = {
   offers: Offer[];

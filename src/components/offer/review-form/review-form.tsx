@@ -1,4 +1,4 @@
-import {RATING} from '../../const';
+import {RATING} from '../../../const';
 import RatingFormField from '../rating-form-field/rating-form-field';
 
 const ReviewForm = (): JSX.Element => (
