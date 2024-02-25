@@ -1,6 +1,6 @@
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import NavTabs from '../../components/main/nav-tabs/nav-tabs';
-import FoundPlaces from '../../components/found-places/found-places';
+import FoundPlaces from '../../components/main/found-places/found-places';
 import Map from '../../components/main/map/map';
 import {CITIES_TABS, SORT_ITEMS, ClassNameCards} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';

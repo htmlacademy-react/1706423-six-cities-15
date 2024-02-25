@@ -67,6 +67,11 @@ export enum ClassNameCards {
   Offer = 'near-places',
 }
 
+export enum ClassNameLogo {
+  Header = 'header',
+  Footer = 'footer',
+}
+
 export enum AppRoutes {
   Main = '/',
   Favorites = '/favorites',

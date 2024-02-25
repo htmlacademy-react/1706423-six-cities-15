@@ -1,8 +1,9 @@
-import {Link, Outlet, useLocation} from 'react-router-dom';
-import {AppRoutes, AuthStatus} from '../../const';
+import {Outlet, useLocation} from 'react-router-dom';
+import {AppRoutes, AuthStatus, ClassNameLogo} from '../../const';
 import HeaderNav from '../header-nav/header-nav';
 import {getClassesLayout} from '../../utils';
 import Footer from '../footer/footer';
+import Logo from '../logo/logo';
 
 type LayoutProps = {
   authStatus: AuthStatus;
@@ -19,13 +20,7 @@ const Layout = (props: LayoutProps): JSX.Element => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link
-                to={AppRoutes.Main}
-                className={`header__logo-link ${
-                  pathname as AppRoutes === AppRoutes.Main && 'header__logo-link--active'}`}
-              >
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
+              <Logo pathname={pathname as AppRoutes} className={ClassNameLogo.Header} />
             </div>
             {pathname as AppRoutes !== AppRoutes.Login && <HeaderNav {...props} />}
           </div>
