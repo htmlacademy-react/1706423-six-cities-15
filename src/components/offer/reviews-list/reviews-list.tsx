@@ -1,17 +1,8 @@
 import Review from '../review/review';
+import {Comment} from '../../../types';
 
 type ReviewsListProps = {
-  comments: {
-    id: string;
-    date: string;
-    user: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    text: string;
-    rating: number;
-  }[];
+  comments: Comment[];
 }
 
 const ReviewsList = ({comments}: ReviewsListProps): JSX.Element => (

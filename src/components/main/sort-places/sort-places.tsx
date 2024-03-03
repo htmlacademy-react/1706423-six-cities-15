@@ -1,8 +1,7 @@
+import {SortItem} from '../../../types';
+
 type SortPlacesProps = {
-  sortItems: {
-    item: string;
-    isActive: boolean;
-  }[];
+  sortItems: SortItem[];
 }
 
 const SortPlaces = ({sortItems}: SortPlacesProps): JSX.Element => (
@@ -15,7 +14,7 @@ const SortPlaces = ({sortItems}: SortPlacesProps): JSX.Element => (
       </svg>
     </span>
     <ul className="places__options places__options--custom places__options--opened">
-      {sortItems.map(({item, isActive}) => (
+      {sortItems.map(({item, isActive = false}) => (
         <li
           className={`places__option ${isActive && 'places__option--active'}`}
           tabIndex={0}

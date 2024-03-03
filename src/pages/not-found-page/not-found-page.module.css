@@ -1,0 +1,22 @@
+.content {
+  text-align: center;
+   padding: 15%;
+   border-bottom: 2px solid rgba(222,222,222,.5);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 30px;
+  font-style: italic;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.link {
+  transition: text-shadow 0.3s;
+}
+
+.link:hover {
+  text-shadow: 0.5px 0 0, -0.5px 0 0;
+}

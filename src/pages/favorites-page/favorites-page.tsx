@@ -1,76 +1,51 @@
-import Header from '../../components/header/header';
+import {Helmet} from 'react-helmet-async';
+import {Offer} from '../../types';
+import FavoriteLocation from '../../components/favorite-location/favorite-location';
 import Footer from '../../components/footer/footer';
-import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
-import {ClassNameCards} from '../../const';
 
 type FavoritesPageProps = {
-  offers: {
-    id: string;
-    title: string;
-    type: string;
-    price: number;
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
-    previewImage: string;
-  }[];
+  offers: Offer[];
 }
 
-const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => (
-  <div className="page">
-    <Header />
+const groupByCityOffers = (offers: Offer[]) => {
+  const groupedOffers = offers.reduce((obj: {[key: string]: Offer[]}, offer) => {
+    const key = offer.city.name;
 
-    <main className="page__main page__main--favorites">
-      <div className="page__favorites-container container">
-        <section className="favorites">
-          <h1 className="favorites__title">Saved listing</h1>
-          <ul className="favorites__list">
-            <li className="favorites__locations-items">
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
-                  <a className="locations__item-link" href="#">
-                    <span>Amsterdam</span>
-                  </a>
-                </div>
-              </div>
-              <div className="favorites__places">
-                {offers.filter(({isFavorite}) => isFavorite === true)
-                  .map((offer) => (
-                    <RentalOfferCard
-                      className={ClassNameCards.Favorites}
-                      key={offer.id}
-                      offer={offer}
-                    />
-                  ))}
-              </div>
-            </li>
+    if (!obj.hasOwnProperty.call(obj, key)) {
+      obj[key] = [];
+    }
 
-            <li className="favorites__locations-items">
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
-                  <a className="locations__item-link" href="#">
-                    <span>Cologne</span>
-                  </a>
-                </div>
-              </div>
-              <div className="favorites__places">
-                {offers.filter(({isFavorite}) => isFavorite === true)
-                  .map((offer) => (
-                    <RentalOfferCard
-                      className={ClassNameCards.Favorites}
-                      key={offer.id}
-                      offer={offer}
-                    />
-                  ))}
-              </div>
-            </li>
-          </ul>
-        </section>
-      </div>
-    </main>
+    obj[key].push(offer);
+    return obj;
+  }, {});
 
-    <Footer />
-  </div>
-);
+  return groupedOffers;
+};
+
+const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => {
+  const favoriteOffers = groupByCityOffers(offers.filter((offer) => offer.isFavorite));
+
+  return (
+    <>
+      <Helmet>
+        <title>6 cities. Saved listing.</title>
+      </Helmet>
+
+      <main className="page__main page__main--favorites">
+        <div className="page__favorites-container container">
+          <section className="favorites">
+            <h1 className="favorites__title">Saved listing</h1>
+            <ul className="favorites__list">
+              {Object.entries(favoriteOffers).map(([key, value]: [string, Offer[]]) => (
+                <FavoriteLocation key={key} city={key} offers={value} />
+              ))}
+            </ul>
+          </section>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+};
 
 export default FavoritesPage;
