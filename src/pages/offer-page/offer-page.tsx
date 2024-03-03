@@ -1,7 +1,7 @@
+import {Helmet} from 'react-helmet-async';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
-import {Helmet} from 'react-helmet-async';
 import {Offer, Comment, DataOffer} from '../../types';
 import GalleryImage from '../../components/offer/gallery-image/gallery-image';
 import GoodsItem from '../../components/offer/goods-item/goods-item';

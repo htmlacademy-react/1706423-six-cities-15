@@ -2,7 +2,6 @@ import {Outlet, useLocation} from 'react-router-dom';
 import {AppRoutes, AuthStatus, ClassNameLogo} from '../../const';
 import HeaderNav from '../header-nav/header-nav';
 import {getClassesLayout} from '../../utils';
-import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 
 type LayoutProps = {
@@ -27,7 +26,6 @@ const Layout = (props: LayoutProps): JSX.Element => {
         </div>
       </header>
       <Outlet />
-      {pathname as AppRoutes === AppRoutes.Favorites && <Footer />}
     </div>
   );
 };

@@ -1,12 +1,12 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import {AppRoutes, AuthStatus} from '../../const';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
-import {HelmetProvider} from 'react-helmet-async';
 import Layout from '../layout/layout';
 import {Offer, Comment, DataOffer} from '../../types';
 
@@ -19,6 +19,7 @@ type AppProps = {
 
 const App = (props: AppProps): JSX.Element => {
   const {rentalOffersCount, offers, comments, dataOffer} = props;
+  const authStatus = AuthStatus.NoAuth;
 
   return (
     <HelmetProvider>
@@ -26,7 +27,7 @@ const App = (props: AppProps): JSX.Element => {
         <Routes>
           <Route path={AppRoutes.Main} element={
             <Layout
-              authStatus={AuthStatus.NoAuth}
+              authStatus={authStatus}
               favoriteOffers={offers.filter((offer) => offer.isFavorite === true).length}
             />
           }
@@ -47,14 +48,14 @@ const App = (props: AppProps): JSX.Element => {
             }
             />
             <Route path={AppRoutes.Favorites} element={
-              <PrivateRoute authStatus={AuthStatus.NoAuth}>
+              <PrivateRoute authStatus={authStatus}>
                 <FavoritesPage offers={offers} />
               </PrivateRoute>
             }
             />
             <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
             <Route path={AppRoutes.Login} element={
-              <PrivateRoute authStatus={AuthStatus.NoAuth} isRevers>
+              <PrivateRoute authStatus={authStatus} isRevers>
                 <LoginPage />
               </PrivateRoute>
             }

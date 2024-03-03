@@ -1,6 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types';
 import FavoriteLocation from '../../components/favorite-location/favorite-location';
+import Footer from '../../components/footer/footer';
 
 type FavoritesPageProps = {
   offers: Offer[];
@@ -42,6 +43,7 @@ const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => {
           </section>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
