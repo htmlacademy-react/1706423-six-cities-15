@@ -42,3 +42,5 @@ export type CityTab = {
   name: string;
   isActive?: boolean;
 };
+
+export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>

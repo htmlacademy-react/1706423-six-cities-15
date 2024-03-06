@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
-import {ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
+import {AuthStatus, ClassNameCards, MAX_OFFER_PAGE_CARDS} from '../../const';
 import {Offer, Comment, DataOffer} from '../../types';
 import GalleryImage from '../../components/offer/gallery-image/gallery-image';
 import GoodsItem from '../../components/offer/goods-item/goods-item';
@@ -11,9 +11,10 @@ type OfferPageProps = {
   offers: Offer[];
   comments: Comment[];
   dataOffer: DataOffer;
+  authStatus: AuthStatus;
 }
 
-const OfferPage = ({offers, comments, dataOffer}: OfferPageProps): JSX.Element => {
+const OfferPage = ({offers, comments, dataOffer, authStatus}: OfferPageProps): JSX.Element => {
   const {images, goods} = dataOffer;
   return (
     <>
@@ -99,9 +100,8 @@ const OfferPage = ({offers, comments, dataOffer}: OfferPageProps): JSX.Element =
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
                 <ReviewsList comments={comments} />
-                <ReviewForm />
+                {authStatus === AuthStatus.Auth && <ReviewForm />}
               </section>
             </div>
           </div>
