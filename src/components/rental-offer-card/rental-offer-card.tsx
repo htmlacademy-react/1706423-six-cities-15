@@ -5,15 +5,20 @@ import {Offer} from '../../types';
 type RentalOfferCardProps = {
   className: string;
   offer: Offer;
+  onMouseEnter: (offer: Offer) => void;
+  onMouseLeave: () => void;
 }
 
-const RentalOfferCard = ({className, offer}: RentalOfferCardProps): JSX.Element => {
+const RentalOfferCard = ({className, offer, onMouseEnter, onMouseLeave}: RentalOfferCardProps): JSX.Element => {
   const {id, title, type, price, isPremium, isFavorite, rating, previewImage} = offer;
   const {pathname} = useLocation();
 
   return (
-    <article className={`${className}__card place-card`}>
-
+    <article
+      className={`${className}__card place-card`}
+      onMouseEnter={() => onMouseEnter(offer)}
+      onMouseLeave={onMouseLeave}
+    >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
