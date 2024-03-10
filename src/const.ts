@@ -60,6 +60,8 @@ export const MAIN_ROOT_CLASS = 'page--gray page--main';
 export const LOGIN_ROOT_CLASS = 'page--gray page--login';
 export const FAVORITE_CARD_CLASS = 'favorites__card-info';
 export const MAX_RATING = 5;
+export const MAX_COMMENT_SYMBOLS = 300;
+export const MIN_COMMENT_SYMBOLS = 50;
 
 export enum ClassNameCards {
   Main = 'cities',

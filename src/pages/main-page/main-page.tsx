@@ -1,11 +1,11 @@
 import {Helmet} from 'react-helmet-async';
-import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/main/found-places/found-places';
 import Map from '../../components/main/map/map';
-import {CITIES_TABS, SORT_ITEMS, ClassNameCards} from '../../const';
+import {CITIES_TABS, SORT_ITEMS} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Offer} from '../../types';
+import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
 
 type MainPageProps = {
   rentalOffersCount: number;
@@ -29,15 +29,7 @@ const MainPage = ({rentalOffersCount, offers}: MainPageProps): JSX.Element => (
               place={CITIES_TABS.filter((city) => city.isActive === true)[0].name}
             />
             <SortPlaces sortItems={SORT_ITEMS}/>
-            <div className="cities__places-list places__list tabs__content">
-              {offers.map((offer) => (
-                <RentalOfferCard
-                  className={ClassNameCards.Main}
-                  key={offer.id}
-                  offer={offer}
-                />
-              ))}
-            </div>
+            <RentalOffersList offers={offers} />
           </section>
           <div className="cities__right-section">
             <Map />

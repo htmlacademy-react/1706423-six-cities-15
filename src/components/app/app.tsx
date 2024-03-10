@@ -19,7 +19,7 @@ type AppProps = {
 
 const App = (props: AppProps): JSX.Element => {
   const {rentalOffersCount, offers, comments, dataOffer} = props;
-  const authStatus = AuthStatus.NoAuth;
+  const authStatus = AuthStatus.Auth;
 
   return (
     <HelmetProvider>
@@ -44,6 +44,7 @@ const App = (props: AppProps): JSX.Element => {
                 dataOffer={dataOffer}
                 offers={offers}
                 comments={comments}
+                authStatus={authStatus}
               />
             }
             />

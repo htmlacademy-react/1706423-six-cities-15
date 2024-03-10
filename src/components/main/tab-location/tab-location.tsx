@@ -1,3 +1,6 @@
+import {Link} from 'react-router-dom';
+import {AppRoutes} from '../../../const';
+
 type TabLocationProps = {
   name: string;
   isActive?: boolean;
@@ -5,9 +8,9 @@ type TabLocationProps = {
 
 const TabLocation = ({name, isActive = false}: TabLocationProps): JSX.Element => (
   <li className="locations__item">
-    <a className={`locations__item-link tabs__item ${isActive && 'tabs__item--active'}`} href="#">
+    <Link className={`locations__item-link tabs__item ${isActive && 'tabs__item--active'}`} to={AppRoutes.Main}>
       <span>{name}</span>
-    </a>
+    </Link>
   </li>
 );
 
