@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {RATING} from '../../../const';
+import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING} from '../../../const';
 import {ChangeEventHandler} from '../../../types';
 import RatingFormField from '../rating-form-field/rating-form-field';
 
@@ -41,12 +41,16 @@ const ReviewForm = (): JSX.Element => {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_SYMBOLS} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={ratingValue === '' || comment.length < 50}
+          disabled={
+            ratingValue === ''
+            || comment.length < MIN_COMMENT_SYMBOLS
+            || comment.length > MAX_COMMENT_SYMBOLS
+          }
         >
           Submit
         </button>
