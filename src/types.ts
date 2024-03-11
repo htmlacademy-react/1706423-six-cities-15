@@ -30,9 +30,19 @@ export type Comment = {
   rating: number;
 };
 
-export type DataOffer = {
+export type Host = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
+export type DataOffer = Omit<Offer, 'previewImage'> & {
   images: string[];
   goods: string[];
+  host: Host;
+  description: string;
+  bedrooms: number;
+  maxAdults: number;
 };
 
 export type User = {

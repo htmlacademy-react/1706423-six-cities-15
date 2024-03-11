@@ -238,28 +238,54 @@ export const data = {
       user: {
         name: 'Max',
         avatarUrl: 'img/avatar-max.jpg',
-        isPro: false
+        isPro: true
       },
       text: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
       rating: 4
     },
   ],
   dataOffer: {
+    id: '66344e12-f1eb-4336-a5c7-df54088d21ea',
+    title: 'Perfectly located Castro',
+    description: 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
+    type: 'apartment',
+    price: 223,
     images: [
-      'img/room.jpg',
-      'img/apartment-01.jpg',
-      'img/apartment-02.jpg',
-      'img/apartment-03.jpg',
-      'img/studio-01.jpg',
-      'img/amsterdam.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/16.jpg'
     ],
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 52.36554,
+      longitude: 4.911976,
+      zoom: 16
+    },
     goods: [
-      'Wi-Fi',
-      'Washing machine',
-      'Towels',
-      'Heating',
-      'Coffee machine',
       'Baby seat',
+      'Towels',
+      'Cable TV',
+      'Laptop friendly workspace'
     ],
+    host: {
+      isPro: false,
+      name: 'Angelina',
+      avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
+    },
+    isPremium: false,
+    isFavorite: true,
+    rating: 1.5,
+    bedrooms: 5,
+    maxAdults: 3
   }
 };

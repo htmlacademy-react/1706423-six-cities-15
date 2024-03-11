@@ -48,7 +48,7 @@ const RentalOfferCard = ({className, offer, onMouseEnter, onMouseLeave}: RentalO
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${STAR_WIDTH * rating}%`}}></span>
+            <span style={{width: `${STAR_WIDTH * Math.round(rating)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
