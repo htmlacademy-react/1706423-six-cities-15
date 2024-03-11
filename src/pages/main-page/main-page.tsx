@@ -33,14 +33,17 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
       </Helmet>
       <main className="page__main page__main--index">
         <h1 className ="visually-hidden">Cities</h1>
-        <NavTabs cities={CITIES_TABS} />
+        <NavTabs
+          cities={CITIES_TABS}
+          selectedCity={defaultCity}
+        />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <FoundPlaces
                 count={offersBySelectedCity.length}
-                place={CITIES_TABS.filter((city) => city.isActive === true)[0].name}
+                place={defaultCity}
               />
               <SortPlaces sortItems={SORT_ITEMS}/>
               <RentalOffersList

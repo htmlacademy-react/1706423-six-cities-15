@@ -1,24 +1,4 @@
-export const CITIES_TABS = [
-  {
-    name: 'Paris',
-  },
-  {
-    name: 'Cologne',
-  },
-  {
-    name: 'Brussels',
-  },
-  {
-    name: 'Amsterdam',
-    isActive: true,
-  },
-  {
-    name: 'Hamburg',
-  },
-  {
-    name: 'Dusseldorf',
-  },
-];
+export const CITIES_TABS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const SORT_ITEMS = [
   {
