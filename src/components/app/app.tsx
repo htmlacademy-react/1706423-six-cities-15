@@ -11,14 +11,13 @@ import Layout from '../layout/layout';
 import {Offer, Comment, DataOffer} from '../../types';
 
 type AppProps = {
-  rentalOffersCount: number;
   offers: Offer[];
   comments: Comment[];
   dataOffer: DataOffer;
 }
 
 const App = (props: AppProps): JSX.Element => {
-  const {rentalOffersCount, offers, comments, dataOffer} = props;
+  const {offers, comments, dataOffer} = props;
   const authStatus = AuthStatus.Auth;
 
   return (
@@ -34,7 +33,6 @@ const App = (props: AppProps): JSX.Element => {
           >
             <Route index element={
               <MainPage
-                rentalOffersCount={rentalOffersCount}
                 offers={offers}
               />
             }

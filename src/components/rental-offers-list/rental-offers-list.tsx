@@ -1,21 +1,20 @@
-import {useEffect, useState} from 'react';
 import {ClassNameCards} from '../../const';
 import {Offer} from '../../types';
 import RentalOfferCard from '../rental-offer-card/rental-offer-card';
 
 type RentalOffersListProps = {
   offers: Offer[];
+  onOfferHover: (offer?: Offer) => void;
 }
 
-const RentalOfferList = ({offers}: RentalOffersListProps): JSX.Element => {
-  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
+const RentalOfferList = ({offers, onOfferHover}: RentalOffersListProps): JSX.Element => {
 
-  useEffect(() => {
-
-  }, [activeOffer]);
-
-  const handleMouseEnter = (offer: Offer) => setActiveOffer(offer);
-  const handleMouseLeave = () => setActiveOffer(null);
+  const handleMouseEnter = (offer: Offer) => {
+    onOfferHover(offer);
+  };
+  const handleMouseLeave = () => {
+    onOfferHover();
+  };
 
   return (
     <div className="cities__places-list places__list tabs__content">

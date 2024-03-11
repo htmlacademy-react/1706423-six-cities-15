@@ -1,5 +1,12 @@
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
 export type City = {
   name: string;
+  location: Location;
 };
 
 export type Offer = {
@@ -12,6 +19,7 @@ export type Offer = {
   rating: number;
   previewImage: string;
   city: City;
+  location: Location;
 };
 
 export type Comment = {

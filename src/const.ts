@@ -1,24 +1,4 @@
-export const CITIES_TABS = [
-  {
-    name: 'Paris',
-  },
-  {
-    name: 'Cologne',
-    isActive: true,
-  },
-  {
-    name: 'Brussels',
-  },
-  {
-    name: 'Amsterdam',
-  },
-  {
-    name: 'Hamburg',
-  },
-  {
-    name: 'Dusseldorf',
-  },
-];
+export const CITIES_TABS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const SORT_ITEMS = [
   {
@@ -62,6 +42,8 @@ export const FAVORITE_CARD_CLASS = 'favorites__card-info';
 export const MAX_RATING = 5;
 export const MAX_COMMENT_SYMBOLS = 300;
 export const MIN_COMMENT_SYMBOLS = 50;
+export const URL_MARKER_DEFAULT = 'img/pin.svg';
+export const URL_MARKER_ACTIVE = 'img/pin-active.svg';
 
 export enum ClassNameCards {
   Main = 'cities',
