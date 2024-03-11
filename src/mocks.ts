@@ -1,5 +1,4 @@
 export const data = {
-  rentalOffersCount: 312,
   offers: [
     {
       id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
