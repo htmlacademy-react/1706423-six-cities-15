@@ -2,8 +2,8 @@ import {useState} from 'react';
 import {Helmet} from 'react-helmet-async';
 import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/main/found-places/found-places';
-import Map from '../../components/main/map/map';
-import {CITIES_TABS, SORT_ITEMS} from '../../const';
+import Map from '../../components/map/map';
+import {CITIES_TABS, ClassNames, SORT_ITEMS} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Offer} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
@@ -56,6 +56,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
                 offers={offersBySelectedCity}
                 city={offersBySelectedCity[0].city}
                 selectedOfferId={selectedOfferId}
+                className={ClassNames.Main}
               />
             </div>
           </div>

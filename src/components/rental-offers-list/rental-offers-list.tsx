@@ -1,4 +1,4 @@
-import {ClassNameCards} from '../../const';
+import {ClassNames} from '../../const';
 import {Offer} from '../../types';
 import RentalOfferCard from '../rental-offer-card/rental-offer-card';
 
@@ -20,7 +20,7 @@ const RentalOfferList = ({offers, onOfferHover}: RentalOffersListProps): JSX.Ele
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
         <RentalOfferCard
-          className={ClassNameCards.Main}
+          className={ClassNames.Main}
           key={offer.id}
           offer={offer}
           onMouseEnter={handleMouseEnter}

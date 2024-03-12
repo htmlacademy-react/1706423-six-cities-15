@@ -1,12 +1,14 @@
+import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
-import {AuthStatus, ClassNameCards, MAX_OFFER_PAGE_CARDS, STAR_WIDTH} from '../../const';
+import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, STAR_WIDTH} from '../../const';
 import {Offer, Comment, DataOffer} from '../../types';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
 import Goods from '../../components/offer/goods/goods';
+import Map from '../../components/map/map';
 
 type OfferPageProps = {
   offers: Offer[];
@@ -16,20 +18,27 @@ type OfferPageProps = {
 }
 
 const OfferPage = ({offers, comments, dataOffer, authStatus}: OfferPageProps): JSX.Element => {
+  const {offerId} = useParams();
+  const currentOffer = offers.find((offer) => offer.id === offerId) as Offer;
   const {
+    id,
     title,
     type,
     price,
     isPremium,
     isFavorite,
     rating,
+    city,
     host,
     images,
     goods,
     bedrooms,
     maxAdults,
     description,
-  } = dataOffer;
+  } = Object.assign(currentOffer, dataOffer);
+
+  const nearestOffers = offers.filter((offer) => offer.city.name === city.name && offer.id !== id)
+    .slice(0, MAX_OFFER_PAGE_CARDS);
 
   return (
     <>
@@ -88,15 +97,20 @@ const OfferPage = ({offers, comments, dataOffer, authStatus}: OfferPageProps): J
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map
+            offers={[currentOffer, ...nearestOffers]}
+            city={city}
+            selectedOfferId={id}
+            className={ClassNames.OfferMap}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {offers.slice(0, MAX_OFFER_PAGE_CARDS).map((offer) => (
+              {nearestOffers.map((offer) => (
                 <RentalOfferCard
-                  className={ClassNameCards.Offer}
+                  className={ClassNames.Offer}
                   key={offer.id}
                   offer={offer}
                 />

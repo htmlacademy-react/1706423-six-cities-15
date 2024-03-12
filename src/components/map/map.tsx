@@ -1,14 +1,15 @@
 import {useEffect, useRef} from 'react';
 import leaflet, {LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {City, Offer} from '../../../types';
-import useMap from '../../../hooks/use-map';
-import {URL_MARKER_ACTIVE, URL_MARKER_DEFAULT} from '../../../const';
+import {City, Offer} from '../../types';
+import useMap from '../../hooks/use-map';
+import {URL_MARKER_ACTIVE, URL_MARKER_DEFAULT} from '../../const';
 
 type MapProps = {
   offers: Offer[];
   city: City;
   selectedOfferId: string | null;
+  className: string;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -23,7 +24,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13.5, 39],
 });
 
-const Map = ({offers, city, selectedOfferId}: MapProps): JSX.Element => {
+const Map = ({offers, city, selectedOfferId, className}: MapProps): JSX.Element => {
   const mapRef = useRef<HTMLElement | null>(null);
   const map = useMap(mapRef, city.location);
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
@@ -59,7 +60,7 @@ const Map = ({offers, city, selectedOfferId}: MapProps): JSX.Element => {
 
   return (
     <section
-      className="cities__map map"
+      className={`${className}__map map`}
       ref={mapRef}
     >
 

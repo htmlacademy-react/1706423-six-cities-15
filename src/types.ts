@@ -36,7 +36,7 @@ export type Host = {
   isPro: boolean;
 };
 
-export type DataOffer = Omit<Offer, 'previewImage'> & {
+export type DataOffer = {
   images: string[];
   goods: string[];
   host: Host;
@@ -55,10 +55,5 @@ export type SortItem = {
   item: string;
   isActive?: boolean;
 }
-
-export type CityTab = {
-  name: string;
-  isActive?: boolean;
-};
 
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>

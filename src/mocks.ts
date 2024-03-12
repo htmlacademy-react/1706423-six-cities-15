@@ -1,7 +1,7 @@
 export const data = {
   offers: [
     {
-      id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+      id: '66344e12-f1eb-4336-a5c7-df54088d21ea',
       title: 'Beautiful & luxurious studio at great location',
       type: 'Apartment',
       price: 120,
@@ -245,11 +245,7 @@ export const data = {
     },
   ],
   dataOffer: {
-    id: '66344e12-f1eb-4336-a5c7-df54088d21ea',
-    title: 'Perfectly located Castro',
     description: 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
-    type: 'apartment',
-    price: 223,
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
@@ -258,19 +254,6 @@ export const data = {
       'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/16.jpg'
     ],
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
-        zoom: 13
-      }
-    },
-    location: {
-      latitude: 52.36554,
-      longitude: 4.911976,
-      zoom: 16
-    },
     goods: [
       'Baby seat',
       'Towels',
@@ -282,9 +265,6 @@ export const data = {
       name: 'Angelina',
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
-    isPremium: false,
-    isFavorite: true,
-    rating: 1.5,
     bedrooms: 5,
     maxAdults: 3
   }

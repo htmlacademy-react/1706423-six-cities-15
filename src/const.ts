@@ -45,10 +45,11 @@ export const MIN_COMMENT_SYMBOLS = 50;
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 export const URL_MARKER_ACTIVE = 'img/pin-active.svg';
 
-export enum ClassNameCards {
+export enum ClassNames {
   Main = 'cities',
   Favorites = 'favorites',
   Offer = 'near-places',
+  OfferMap = 'offer',
 }
 
 export enum ClassNameLogo {
@@ -59,7 +60,7 @@ export enum ClassNameLogo {
 export enum AppRoutes {
   Main = '/',
   Favorites = '/favorites',
-  Offer = '/offer/:id',
+  Offer = '/offer/:offerId',
   Login = '/login',
   NotFound = '*',
 }
