@@ -7,6 +7,7 @@ import {CITIES_TABS, ClassNames, SORT_ITEMS} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Offer} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
+import cn from 'classnames';
 
 type MainPageProps = {
   offers: Offer[];
@@ -47,6 +48,8 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
               />
               <SortPlaces sortItems={SORT_ITEMS}/>
               <RentalOffersList
+                classNamesList={cn('cities__places-list', 'tabs__content')}
+                classNameCard={ClassNames.Main}
                 offers={offersBySelectedCity}
                 onOfferHover={handleOfferHover}
               />

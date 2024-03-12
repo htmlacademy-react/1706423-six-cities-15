@@ -1,7 +1,6 @@
 import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
-import RentalOfferCard from '../../components/rental-offer-card/rental-offer-card';
 import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, STAR_WIDTH} from '../../const';
 import {Offer, Comment, DataOffer} from '../../types';
 import ReviewForm from '../../components/offer/review-form/review-form';
@@ -9,6 +8,7 @@ import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
 import Goods from '../../components/offer/goods/goods';
 import Map from '../../components/map/map';
+import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
 
 type OfferPageProps = {
   offers: Offer[];
@@ -107,15 +107,11 @@ const OfferPage = ({offers, comments, dataOffer, authStatus}: OfferPageProps): J
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {nearestOffers.map((offer) => (
-                <RentalOfferCard
-                  className={ClassNames.Offer}
-                  key={offer.id}
-                  offer={offer}
-                />
-              ))}
-            </div>
+            <RentalOfferList
+              classNamesList={'near-places__list'}
+              classNameCard={ClassNames.Offer}
+              offers={nearestOffers}
+            />
           </section>
         </div>
       </main>
