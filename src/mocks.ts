@@ -1,7 +1,7 @@
 export const data = {
   offers: [
     {
-      id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+      id: '66344e12-f1eb-4336-a5c7-df54088d21ea',
       title: 'Beautiful & luxurious studio at great location',
       type: 'Apartment',
       price: 120,
@@ -233,33 +233,61 @@ export const data = {
   ],
   comments: [
     {
-      id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
-      date: '2019-04-08T14:13:56.569Z',
+      id: '1',
+      date: '2019-06-08T14:13:56.569Z',
       user: {
         name: 'Max',
         avatarUrl: 'img/avatar-max.jpg',
-        isPro: false
+        isPro: true
+      },
+      text: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+      rating: 3.3
+    },
+    {
+      id: '2',
+      date: '2019-09-08T14:13:56.569Z',
+      user: {
+        name: 'Max',
+        avatarUrl: 'img/avatar-max.jpg',
+        isPro: true
       },
       text: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
       rating: 4
     },
+    {
+      id: '3',
+      date: '2019-02-08T14:13:56.569Z',
+      user: {
+        name: 'Max',
+        avatarUrl: 'img/avatar-max.jpg',
+        isPro: true
+      },
+      text: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+      rating: 2.8
+    },
   ],
   dataOffer: {
+    description: 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
     images: [
-      'img/room.jpg',
-      'img/apartment-01.jpg',
-      'img/apartment-02.jpg',
-      'img/apartment-03.jpg',
-      'img/studio-01.jpg',
-      'img/amsterdam.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/16.jpg'
     ],
     goods: [
-      'Wi-Fi',
-      'Washing machine',
-      'Towels',
-      'Heating',
-      'Coffee machine',
       'Baby seat',
+      'Towels',
+      'Cable TV',
+      'Laptop friendly workspace'
     ],
+    host: {
+      isPro: false,
+      name: 'Angelina',
+      avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
+    },
+    bedrooms: 5,
+    maxAdults: 3
   }
 };

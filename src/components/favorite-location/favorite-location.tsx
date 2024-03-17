@@ -1,5 +1,5 @@
 import RentalOfferCard from '../rental-offer-card/rental-offer-card';
-import {AppRoutes, ClassNameCards} from '../../const';
+import {AppRoutes, ClassNames} from '../../const';
 import {Offer} from '../../types';
 import {Link} from 'react-router-dom';
 
@@ -20,7 +20,7 @@ const FavoriteLocation = ({city, offers}: FavoriteLocationProps): JSX.Element =>
     <div className="favorites__places">
       {offers.map((offer) => (
         <RentalOfferCard
-          className={ClassNameCards.Favorites}
+          className={ClassNames.Favorites}
           key={offer.id}
           offer={offer}
         />

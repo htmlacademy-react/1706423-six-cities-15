@@ -30,9 +30,19 @@ export type Comment = {
   rating: number;
 };
 
+export type Host = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
 export type DataOffer = {
   images: string[];
   goods: string[];
+  host: Host;
+  description: string;
+  bedrooms: number;
+  maxAdults: number;
 };
 
 export type User = {
@@ -45,10 +55,5 @@ export type SortItem = {
   item: string;
   isActive?: boolean;
 }
-
-export type CityTab = {
-  name: string;
-  isActive?: boolean;
-};
 
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
