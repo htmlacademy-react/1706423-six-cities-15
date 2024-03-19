@@ -8,16 +8,11 @@ import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Offer} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
 import cn from 'classnames';
+import {useAppSelector} from '../../hooks/use-app-selector';
 
-type MainPageProps = {
-  offers: Offer[];
-}
-
-const MainPage = ({offers}: MainPageProps): JSX.Element => {
-  const defaultCity = 'Amsterdam';
-
+const MainPage = ({offers}: {offers: Offer[]}): JSX.Element => {
+  const city = useAppSelector((state) => state.city.city);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
-  const offersBySelectedCity = offers.filter((offer) => offer.city.name === defaultCity);
 
   const handleOfferHover = (offer?: Offer) => {
     let activeOffer: Offer | undefined;
@@ -26,6 +21,8 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
     }
     setSelectedOfferId(activeOffer ? activeOffer.id : null);
   };
+
+  const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 
   return (
     <>
@@ -36,7 +33,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
         <h1 className ="visually-hidden">Cities</h1>
         <NavTabs
           cities={CITIES_TABS}
-          selectedCity={defaultCity}
+          selectedCity={city.name}
         />
         <div className="cities">
           <div className="cities__places-container container">
@@ -44,7 +41,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
               <h2 className="visually-hidden">Places</h2>
               <FoundPlaces
                 count={offersBySelectedCity.length}
-                place={defaultCity}
+                place={city.name}
               />
               <SortPlaces sortItems={SORT_ITEMS}/>
               <RentalOffersList
@@ -57,7 +54,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
             <div className="cities__right-section">
               <Map
                 offers={offersBySelectedCity}
-                city={offersBySelectedCity[0].city}
+                city={city}
                 selectedOfferId={selectedOfferId}
                 className={ClassNames.Main}
               />
