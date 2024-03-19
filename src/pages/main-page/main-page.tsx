@@ -9,7 +9,7 @@ import {Offer} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import EmptyMainComponent from '../../components/main/empty-main/empty-main';
+import EmptyMainComponent from '../../components/main/empty-main-component/empty-main-component';
 
 const MainPage = ({offers}: {offers: Offer[]}): JSX.Element => {
   const city = useAppSelector((state) => state.city.city);
