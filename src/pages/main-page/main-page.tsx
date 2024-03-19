@@ -11,9 +11,10 @@ import cn from 'classnames';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import EmptyMainComponent from '../../components/main/empty-main-component/empty-main-component';
 
-const MainPage = ({offers}: {offers: Offer[]}): JSX.Element => {
+const MainPage = (): JSX.Element => {
   const city = useAppSelector((state) => state.city.city);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
+  const offers = useAppSelector((state) => state.offers.offers);
 
   const handleOfferHover = (offer?: Offer) => {
     let activeOffer: Offer | undefined;

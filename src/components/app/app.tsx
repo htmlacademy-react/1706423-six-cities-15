@@ -12,7 +12,6 @@ import Layout from '../layout/layout';
 import {Comment, DataOffer} from '../../types';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {data} from '../../mocks';
-import {useAppSelector} from '../../hooks/use-app-selector';
 import {getOffers} from '../../store/offers-reducer/offers-reducer';
 
 type AppProps = {
@@ -30,8 +29,6 @@ const App = (props: AppProps): JSX.Element => {
     dispatch(getOffers({offers: data.offers}));
   }, [dispatch]);
 
-  const offers = useAppSelector((state) => state.offers.offers);
-
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -39,15 +36,13 @@ const App = (props: AppProps): JSX.Element => {
           <Route path={AppRoutes.Main} element={
             <Layout
               authStatus={authStatus}
-              favoriteOffers={offers.filter((offer) => offer.isFavorite === true).length}
             />
           }
           >
-            <Route index element={<MainPage offers={offers} />} />
+            <Route index element={<MainPage />} />
             <Route path={AppRoutes.Offer} element={
               <OfferPage
                 dataOffer={dataOffer}
-                offers={offers}
                 comments={comments}
                 authStatus={authStatus}
               />
@@ -55,7 +50,7 @@ const App = (props: AppProps): JSX.Element => {
             />
             <Route path={AppRoutes.Favorites} element={
               <PrivateRoute authStatus={authStatus}>
-                <FavoritesPage offers={offers} />
+                <FavoritesPage />
               </PrivateRoute>
             }
             />

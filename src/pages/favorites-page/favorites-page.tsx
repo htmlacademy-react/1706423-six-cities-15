@@ -2,10 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types';
 import FavoriteLocation from '../../components/favorite-location/favorite-location';
 import Footer from '../../components/footer/footer';
-
-type FavoritesPageProps = {
-  offers: Offer[];
-}
+import {useAppSelector} from '../../hooks/use-app-selector';
 
 const groupByCityOffers = (offers: Offer[]) => {
   const groupedOffers = offers.reduce((obj: {[key: string]: Offer[]}, offer) => {
@@ -22,7 +19,8 @@ const groupByCityOffers = (offers: Offer[]) => {
   return groupedOffers;
 };
 
-const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => {
+const FavoritesPage = (): JSX.Element => {
+  const offers = useAppSelector((state) => state.offers.offers);
   const favoriteOffers = groupByCityOffers(offers.filter((offer) => offer.isFavorite));
 
   return (
