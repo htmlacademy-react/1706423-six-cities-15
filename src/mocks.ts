@@ -93,29 +93,6 @@ export const data = {
       },
     },
     {
-      id: 'd434ba3d-049e-43af-9f07-d4a88d84d4d3',
-      title: 'Wood and stone place',
-      type: 'room',
-      price: 200,
-      previewImage: 'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
-      city: {
-        name: 'Cologne',
-        location: {
-          latitude: 50.938361,
-          longitude: 6.959974,
-          zoom: 13
-        }
-      },
-      location: {
-        latitude: 50.945361,
-        longitude: 6.935974,
-        zoom: 16
-      },
-      isFavorite: false,
-      isPremium: true,
-      rating: 3.5
-    },
-    {
       id: 'b76d9934-eb39-4e30-a7d5-8120d945b318',
       title: 'Nice, cozy, warm big bed apartment',
       type: 'room',

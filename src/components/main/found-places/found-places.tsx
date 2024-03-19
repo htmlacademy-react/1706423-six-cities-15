@@ -4,7 +4,7 @@ type FoundPlacesProps = {
 }
 
 const FoundPlaces = ({count, place}: FoundPlacesProps): JSX.Element => (
-  <b className="places__found">{count} places to stay in {place}</b>
+  <b className="places__found">{count} place{count > 1 && 's'} to stay in {place}</b>
 );
 
 export default FoundPlaces;
