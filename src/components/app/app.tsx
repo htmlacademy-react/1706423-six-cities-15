@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import MainPage from '../../pages/main-page/main-page';
@@ -8,17 +9,25 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import {AppRoutes, AuthStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
-import {Offer, Comment, DataOffer} from '../../types';
+import {Comment, DataOffer} from '../../types';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {data} from '../../mocks';
+import {getOffers} from '../../store/offers-reducer/offers-reducer';
 
 type AppProps = {
-  offers: Offer[];
   comments: Comment[];
   dataOffer: DataOffer;
 }
 
 const App = (props: AppProps): JSX.Element => {
-  const {offers, comments, dataOffer} = props;
+  const {comments, dataOffer} = props;
   const authStatus = AuthStatus.Auth;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getOffers({offers: data.offers}));
+  }, [dispatch]);
 
   return (
     <HelmetProvider>
@@ -27,20 +36,13 @@ const App = (props: AppProps): JSX.Element => {
           <Route path={AppRoutes.Main} element={
             <Layout
               authStatus={authStatus}
-              favoriteOffers={offers.filter((offer) => offer.isFavorite === true).length}
             />
           }
           >
-            <Route index element={
-              <MainPage
-                offers={offers}
-              />
-            }
-            />
+            <Route index element={<MainPage />} />
             <Route path={AppRoutes.Offer} element={
               <OfferPage
                 dataOffer={dataOffer}
-                offers={offers}
                 comments={comments}
                 authStatus={authStatus}
               />
@@ -48,7 +50,7 @@ const App = (props: AppProps): JSX.Element => {
             />
             <Route path={AppRoutes.Favorites} element={
               <PrivateRoute authStatus={authStatus}>
-                <FavoritesPage offers={offers} />
+                <FavoritesPage />
               </PrivateRoute>
             }
             />

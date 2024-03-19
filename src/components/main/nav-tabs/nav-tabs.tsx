@@ -1,7 +1,8 @@
+import {CityTubs} from '../../../types';
 import TabLocation from '../tab-location/tab-location';
 
 type NavTabsProps = {
-  cities: string[];
+  cities: CityTubs;
   selectedCity: string;
 }
 
@@ -11,9 +12,9 @@ const NavTabs = ({cities, selectedCity} : NavTabsProps): JSX.Element => (
       <ul className="locations__list tabs__list">
         {cities.map((city) => (
           <TabLocation
-            key={city}
-            name={city}
-            isActive={city === selectedCity}
+            key={city.name}
+            city={city}
+            isActive={city.name === selectedCity}
           />
         ))}
       </ul>

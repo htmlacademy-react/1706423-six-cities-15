@@ -6,7 +6,6 @@ import Logo from '../logo/logo';
 
 type LayoutProps = {
   authStatus: AuthStatus;
-  favoriteOffers: number;
 }
 
 const Layout = (props: LayoutProps): JSX.Element => {

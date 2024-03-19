@@ -9,16 +9,17 @@ import Gallery from '../../components/offer/gallery/gallery';
 import Goods from '../../components/offer/goods/goods';
 import Map from '../../components/map/map';
 import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 type OfferPageProps = {
-  offers: Offer[];
   comments: Comment[];
   dataOffer: DataOffer;
   authStatus: AuthStatus;
 }
 
-const OfferPage = ({offers, comments, dataOffer, authStatus}: OfferPageProps): JSX.Element => {
+const OfferPage = ({comments, dataOffer, authStatus}: OfferPageProps): JSX.Element => {
   const {offerId} = useParams();
+  const offers = useAppSelector((state) => state.offers.offers);
   const currentOffer = offers.find((offer) => offer.id === offerId) as Offer;
   const {
     id,

@@ -1,3 +1,6 @@
+import {CITIES_TABS} from './const';
+import {store} from './store';
+
 export type Location = {
   latitude: number;
   longitude: number;
@@ -57,3 +60,6 @@ export type SortItem = {
 }
 
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+export type State = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type CityTubs = typeof CITIES_TABS;
