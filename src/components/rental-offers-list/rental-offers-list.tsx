@@ -8,18 +8,20 @@ type RentalOffersListProps = {
   classNameCard: ClassNames;
   offers: Offer[];
   onOfferHover?: (offer?: Offer) => void;
-  activeSortItem: SortItems[number];
+  activeSortItem?: SortItems[number];
 }
 
 const RentalOfferList = ({offers, onOfferHover, classNameCard, classNamesList, activeSortItem}: RentalOffersListProps): JSX.Element => {
   const handleMouseEnter = (offer: Offer) => onOfferHover && onOfferHover(offer);
   const handleMouseLeave = () => onOfferHover && onOfferHover();
 
-  const sortedOffers = sortBy[activeSortItem]([...offers]);
+  const currentOffers = activeSortItem
+    ? sortBy[activeSortItem]([...offers])
+    : offers;
 
   return (
     <div className={`${classNamesList} places__list`}>
-      {sortedOffers.map((offer) => (
+      {currentOffers.map((offer) => (
         <RentalOfferCard
           className={classNameCard}
           key={offer.id}
