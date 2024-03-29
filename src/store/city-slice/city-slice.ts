@@ -10,7 +10,7 @@ const initialState: CityState = {
   city: CITIES_TABS[0],
 };
 
-export const cityReducer = createSlice({
+export const citySlice = createSlice({
   name: 'city',
   initialState,
   reducers: {
@@ -20,4 +20,4 @@ export const cityReducer = createSlice({
   },
 });
 
-export const {changeCity} = cityReducer.actions;
+export const {changeCity} = citySlice.actions;

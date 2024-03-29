@@ -108,6 +108,10 @@ export enum AppRoutes {
   NotFound = '*',
 }
 
+export enum ApiRoutes {
+  Offers = '/offers',
+}
+
 export enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

@@ -11,8 +11,7 @@ import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {Comment, DataOffer} from '../../types';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {data} from '../../mocks';
-import {getOffers} from '../../store/offers-reducer/offers-reducer';
+import {fetchOffers} from '../../store/api-actions';
 
 type AppProps = {
   comments: Comment[];
@@ -26,7 +25,7 @@ const App = (props: AppProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getOffers({offers: data.offers}));
+    dispatch(fetchOffers());
   }, [dispatch]);
 
   return (
