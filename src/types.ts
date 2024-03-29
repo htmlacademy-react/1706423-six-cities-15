@@ -1,4 +1,4 @@
-import {CITIES_TABS} from './const';
+import {CITIES_TABS, SORT_ITEMS} from './const';
 import {store} from './store';
 
 export type Location = {
@@ -54,11 +54,7 @@ export type User = {
   isPro: boolean;
 };
 
-export type SortItem = {
-  item: string;
-  isActive?: boolean;
-}
-
+export type SortItems = typeof SORT_ITEMS;
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

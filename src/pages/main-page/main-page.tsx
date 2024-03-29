@@ -5,7 +5,7 @@ import FoundPlaces from '../../components/main/found-places/found-places';
 import Map from '../../components/map/map';
 import {CITIES_TABS, ClassNames, SORT_ITEMS} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';
-import {Offer} from '../../types';
+import {Offer, SortItems} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -15,6 +15,7 @@ const MainPage = (): JSX.Element => {
   const city = useAppSelector((state) => state.city.city);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
   const offers = useAppSelector((state) => state.offers.offers);
+  const [activeSortItem, setActiveSortItem] = useState<SortItems[number]>(SORT_ITEMS[0]);
 
   const handleOfferHover = (offer?: Offer) => {
     let activeOffer: Offer | undefined;
@@ -49,12 +50,17 @@ const MainPage = (): JSX.Element => {
                   count={offersBySelectedCity.length}
                   place={city.name}
                 />
-                <SortPlaces sortItems={SORT_ITEMS}/>
+                <SortPlaces
+                  sortItems={SORT_ITEMS}
+                  activeSortItem={activeSortItem}
+                  setter={setActiveSortItem}
+                />
                 <RentalOffersList
                   classNamesList={cn('cities__places-list', 'tabs__content')}
                   classNameCard={ClassNames.Main}
                   offers={offersBySelectedCity}
                   onOfferHover={handleOfferHover}
+                  activeSortItem={activeSortItem}
                 />
               </section>
               <div className="cities__right-section">

@@ -49,21 +49,14 @@ export const CITIES_TABS = [
   },
 ] as const;
 
-export const SORT_ITEMS = [
-  {
-    item: 'Popular',
-    isActive: true,
-  },
-  {
-    item: 'Price: low to high',
-  },
-  {
-    item: 'Price: high to low',
-  },
-  {
-    item: 'Top rated first',
-  },
-];
+export const SORT_ITEMS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'] as const;
+
+export enum SortOptions {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  RatingHighToLow = 'Top rated first',
+}
 
 export const IMG_CARD = {
   width: '260',

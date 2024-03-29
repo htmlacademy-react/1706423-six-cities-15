@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, STAR_WIDTH} from '../../const';
-import {Offer, Comment, DataOffer} from '../../types';
+import {Comment, DataOffer} from '../../types';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
@@ -20,23 +20,9 @@ type OfferPageProps = {
 const OfferPage = ({comments, dataOffer, authStatus}: OfferPageProps): JSX.Element => {
   const {offerId} = useParams();
   const offers = useAppSelector((state) => state.offers.offers);
-  const currentOffer = offers.find((offer) => offer.id === offerId) as Offer;
-  const {
-    id,
-    title,
-    type,
-    price,
-    isPremium,
-    isFavorite,
-    rating,
-    city,
-    host,
-    images,
-    goods,
-    bedrooms,
-    maxAdults,
-    description,
-  } = Object.assign(currentOffer, dataOffer);
+  const currentOffer = offers.find((offer) => offer.id === offerId) ?? offers[0];
+  const {id, title, type, price, isPremium, isFavorite, rating, city} = currentOffer;
+  const {host, images, goods, bedrooms, maxAdults, description} = dataOffer;
 
   const nearestOffers = offers.filter((offer) => offer.city.name === city.name && offer.id !== id)
     .slice(0, MAX_OFFER_PAGE_CARDS);
