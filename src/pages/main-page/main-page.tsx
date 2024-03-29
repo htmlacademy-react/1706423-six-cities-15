@@ -10,12 +10,14 @@ import RentalOffersList from '../../components/rental-offers-list/rental-offers-
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import EmptyMainComponent from '../../components/main/empty-main-component/empty-main-component';
+import Loader from '../../components/loader/loader';
 
 const MainPage = (): JSX.Element => {
   const city = useAppSelector((state) => state.city.city);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
   const offers = useAppSelector((state) => state.offers.offers);
   const [activeSortItem, setActiveSortItem] = useState<SortItems[number]>(SORT_ITEMS[0]);
+  const isOffersLoading = useAppSelector((state) => state.offers.isOffersLoading);
 
   const handleOfferHover = (offer?: Offer) => {
     let activeOffer: Offer | undefined;
@@ -41,8 +43,9 @@ const MainPage = (): JSX.Element => {
           selectedCity={city.name}
         />
         <div className="cities">
-          {offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
-          {offersBySelectedCity.length > 0 &&
+          {isOffersLoading && <Loader />}
+          {!isOffersLoading && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
+          {!isOffersLoading && offersBySelectedCity.length > 0 &&
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>

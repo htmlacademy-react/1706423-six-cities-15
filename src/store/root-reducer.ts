@@ -1,8 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {cityReducer} from './city-reducer/city-reducer';
-import {offersReducer} from './offers-reducer/offers-reducer';
+import {citySlice} from './city-slice/city-slice';
+import {offersSlice} from './offers-slice/offers-slice';
 
 export const rootReducer = combineReducers({
-  city: cityReducer.reducer,
-  offers: offersReducer.reducer,
+  city: citySlice.reducer,
+  offers: offersSlice.reducer,
 });
