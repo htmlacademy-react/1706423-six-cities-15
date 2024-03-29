@@ -2,13 +2,10 @@ import {Link} from 'react-router-dom';
 import {AppRoutes, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 
-type HeaderNavProps = {
-  authStatus: AuthStatus;
-}
-
-const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => {
+const HeaderNav = (): JSX.Element => {
   const offers = useAppSelector((state) => state.offers.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
+  const authStatus = useAppSelector((state) => state.user.authStatus);
 
   return (
     <nav className="header__nav">
