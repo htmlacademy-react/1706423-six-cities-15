@@ -1,14 +1,15 @@
 import {Link} from 'react-router-dom';
 import {AppRoutes, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
+import {logout} from '../../store/api-actions';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
-type HeaderNavProps = {
-  authStatus: AuthStatus;
-}
-
-const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => {
+const HeaderNav = (): JSX.Element => {
   const offers = useAppSelector((state) => state.offers.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
+  const authStatus = useAppSelector((state) => state.user.authStatus);
+  const dispatch = useAppDispatch();
+  const email = useAppSelector((state) => state.user.userData?.email);
 
   return (
     <nav className="header__nav">
@@ -20,7 +21,7 @@ const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => {
             {authStatus === AuthStatus.Auth
               ?
               <>
-                <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                <span className="header__user-name user__name">{email}</span>
                 <span className="header__favorite-count">{favoriteOffers.length}</span>
               </>
               :
@@ -29,7 +30,14 @@ const HeaderNav = ({authStatus}: HeaderNavProps): JSX.Element => {
         </li>
         {authStatus === AuthStatus.Auth &&
           <li className="header__nav-item">
-            <Link className="header__nav-link" to={AppRoutes.Main}>
+            <Link
+              onClick={(evt) => {
+                evt.preventDefault();
+                dispatch(logout());
+              }}
+              className="header__nav-link"
+              to={AppRoutes.Login}
+            >
               <span className="header__signout">Sign out</span>
             </Link>
           </li>}

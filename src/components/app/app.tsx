@@ -6,12 +6,12 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {AppRoutes, AuthStatus} from '../../const';
+import {AppRoutes} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {Comment, DataOffer} from '../../types';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {fetchOffers} from '../../store/api-actions';
+import {checkAuth, fetchOffers} from '../../store/api-actions';
 
 type AppProps = {
   comments: Comment[];
@@ -20,12 +20,12 @@ type AppProps = {
 
 const App = (props: AppProps): JSX.Element => {
   const {comments, dataOffer} = props;
-  const authStatus = AuthStatus.Auth;
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOffers());
+    dispatch(checkAuth());
   }, [dispatch]);
 
   return (
@@ -33,9 +33,7 @@ const App = (props: AppProps): JSX.Element => {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoutes.Main} element={
-            <Layout
-              authStatus={authStatus}
-            />
+            <Layout />
           }
           >
             <Route index element={<MainPage />} />
@@ -43,19 +41,18 @@ const App = (props: AppProps): JSX.Element => {
               <OfferPage
                 dataOffer={dataOffer}
                 comments={comments}
-                authStatus={authStatus}
               />
             }
             />
             <Route path={AppRoutes.Favorites} element={
-              <PrivateRoute authStatus={authStatus}>
+              <PrivateRoute>
                 <FavoritesPage />
               </PrivateRoute>
             }
             />
             <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
             <Route path={AppRoutes.Login} element={
-              <PrivateRoute authStatus={authStatus} isRevers>
+              <PrivateRoute isRevers>
                 <LoginPage />
               </PrivateRoute>
             }

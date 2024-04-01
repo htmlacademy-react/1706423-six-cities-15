@@ -54,6 +54,19 @@ export type User = {
   isPro: boolean;
 };
 
+export type UserData = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
+};
+
+export type AuthData = {
+  email: string;
+  password: string;
+};
+
 export type SortItems = typeof SORT_ITEMS;
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 export type State = ReturnType<typeof store.getState>;
