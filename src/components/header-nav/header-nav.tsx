@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {AppRoutes, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {logoutUser} from '../../store/api-actions';
+import {logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
 const HeaderNav = (): JSX.Element => {
@@ -9,7 +9,7 @@ const HeaderNav = (): JSX.Element => {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.user.email);
+  const email = useAppSelector((state) => state.user.userData?.email);
 
   return (
     <nav className="header__nav">
@@ -33,7 +33,7 @@ const HeaderNav = (): JSX.Element => {
             <Link
               onClick={(evt) => {
                 evt.preventDefault();
-                dispatch(logoutUser());
+                dispatch(logout());
               }}
               className="header__nav-link"
               to={AppRoutes.Login}

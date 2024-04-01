@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {FormEvent, useRef} from 'react';
 import {AppRoutes} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {loginUser} from '../../store/api-actions';
+import {login} from '../../store/api-actions';
 
 const LoginPage = (): JSX.Element => {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -15,7 +15,7 @@ const LoginPage = (): JSX.Element => {
     evt.preventDefault();
 
     if (emailRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginUser({
+      dispatch(login({
         email: emailRef.current.value,
         password: passwordRef.current.value,
       }));

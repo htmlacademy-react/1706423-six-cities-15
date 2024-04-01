@@ -1,10 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {AuthStatus} from '../../const';
-import {checkAuth, loginUser, logoutUser} from '../api-actions';
+import {checkAuth, login, logout} from '../api-actions';
+import { UserData } from '../../types';
 
-const initialState = {
+type UserState = {
+  authStatus: AuthStatus;
+  userData: UserData | null;
+}
+
+const initialState: UserState = {
   authStatus: AuthStatus.Unknown,
-  email: ''
+  userData: null,
 };
 
 export const userSlice = createSlice({
@@ -13,20 +19,21 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuth.fulfilled, (state) => {
+      .addCase(checkAuth.fulfilled, (state, action) => {
         state.authStatus = AuthStatus.Auth;
+        state.userData = action.payload;
       })
       .addCase(checkAuth.rejected, (state) => {
         state.authStatus = AuthStatus.NoAuth;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.authStatus = AuthStatus.Auth;
-        state.email = action.payload;
+        state.userData = action.payload;
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(login.rejected, (state) => {
         state.authStatus = AuthStatus.NoAuth;
       })
-      .addCase(logoutUser.fulfilled, (state) => {
+      .addCase(logout.fulfilled, (state) => {
         state.authStatus = AuthStatus.NoAuth;
       });
   }

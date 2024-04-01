@@ -16,18 +16,19 @@ export const fetchOffers = createAsyncThunk<Offer[], undefined, {
   }
 );
 
-export const checkAuth = createAsyncThunk<void, undefined, {
+export const checkAuth = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
   async (_arg, {extra: api}) => {
-    await api.get(ApiRoutes.Login);
+    const {data} = await api.get<UserData>(ApiRoutes.Login);
+    return data;
   }
 );
 
-export const loginUser = createAsyncThunk<string, AuthData, {
+export const login = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -36,11 +37,11 @@ export const loginUser = createAsyncThunk<string, AuthData, {
   async ({email, password}, {extra: api}) => {
     const {data} = await api.post<UserData>(ApiRoutes.Login, {email, password});
     setToken(data.token);
-    return data.email;
+    return data;
   }
 );
 
-export const logoutUser = createAsyncThunk<void, undefined, {
+export const logout = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
