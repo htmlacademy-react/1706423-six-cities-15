@@ -34,28 +34,4 @@ export const data = {
       rating: 2.8
     },
   ],
-  dataOffer: {
-    description: 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/16.jpg'
-    ],
-    goods: [
-      'Baby seat',
-      'Towels',
-      'Cable TV',
-      'Laptop friendly workspace'
-    ],
-    host: {
-      isPro: false,
-      name: 'Angelina',
-      avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
-    },
-    bedrooms: 5,
-    maxAdults: 3
-  }
 };

@@ -39,7 +39,7 @@ export type Host = {
   isPro: boolean;
 };
 
-export type DataOffer = {
+export type DataOffer = Omit<Offer, 'previewImage'> & {
   images: string[];
   goods: string[];
   host: Host;

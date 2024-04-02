@@ -1,8 +1,9 @@
 import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
+import {useEffect} from 'react';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, STAR_WIDTH} from '../../const';
-import {Comment, DataOffer} from '../../types';
+import {Comment} from '../../types';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
@@ -10,21 +11,34 @@ import Goods from '../../components/offer/goods/goods';
 import Map from '../../components/map/map';
 import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {fetchOffer} from '../../store/api-actions';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 type OfferPageProps = {
   comments: Comment[];
-  dataOffer: DataOffer;
 }
 
-const OfferPage = ({comments, dataOffer}: OfferPageProps): JSX.Element => {
-  const {offerId} = useParams();
-  const offers = useAppSelector((state) => state.offers.offers);
+const OfferPage = ({comments}: OfferPageProps): JSX.Element => {
+  const isError = useAppSelector((state) => state.offer.hasError);
   const authStatus = useAppSelector((state) => state.user.authStatus);
-  const currentOffer = offers.find((offer) => offer.id === offerId) ?? offers[0];
-  const {id, title, type, price, isPremium, isFavorite, rating, city} = currentOffer;
-  const {host, images, goods, bedrooms, maxAdults, description} = dataOffer;
+  const offer = useAppSelector((state) => state.offer.offer);
+  const offers = useAppSelector((state) => state.offers.offers);
 
-  const nearestOffers = offers.filter((offer) => offer.city.name === city.name && offer.id !== id)
+  const {offerId} = useParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffer(offerId as string));
+  }, [dispatch, offerId]);
+
+  if (isError || !offer) {
+    return <NotFoundPage />;
+  }
+
+  const {id, title, type, price, isPremium, isFavorite, rating, city,
+    host, images, goods, bedrooms, maxAdults, description} = offer;
+  const nearestOffers = offers.filter((item) => item.city.name === city.name && offer.id !== id)
     .slice(0, MAX_OFFER_PAGE_CARDS);
 
   return (
@@ -85,7 +99,7 @@ const OfferPage = ({comments, dataOffer}: OfferPageProps): JSX.Element => {
             </div>
           </div>
           <Map
-            offers={[currentOffer, ...nearestOffers]}
+            offers={[offer, ...nearestOffers]}
             city={city}
             selectedOfferId={id}
             className={ClassNames.OfferMap}

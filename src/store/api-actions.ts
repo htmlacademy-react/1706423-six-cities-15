@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {AppDispatch, AuthData, Offer, State, UserData} from '../types';
+import {AppDispatch, AuthData, DataOffer, Offer, State, UserData} from '../types';
 import {ApiRoutes} from '../const';
 import {removeToken, setToken} from '../services/token';
 
@@ -12,6 +12,18 @@ export const fetchOffers = createAsyncThunk<Offer[], undefined, {
   'data/fetchOffers',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(ApiRoutes.Offers);
+    return data;
+  }
+);
+
+export const fetchOffer = createAsyncThunk<DataOffer, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<DataOffer>(`${ApiRoutes.Offers}/${id}`);
     return data;
   }
 );

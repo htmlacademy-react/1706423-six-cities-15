@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../../const';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import {CityTubs} from '../../../types';
-import {changeCity} from '../../../store/city-slice/city-slice';
+import {changeCity} from '../../../store/slices/city-slice';
 
 type TabLocationProps = {
   city: CityTubs[number];
