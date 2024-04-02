@@ -1,17 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {DataOffer} from '../../types';
 import {fetchOffer} from '../api-actions';
+import {RequestStatus} from '../../const';
 
 type OfferState = {
   offer: DataOffer | null;
-  isOfferLoading: boolean;
-  hasError: boolean;
+  status: RequestStatus;
 }
 
 const initialState: OfferState = {
   offer: null,
-  isOfferLoading: false,
-  hasError: false,
+  status: RequestStatus.Idle,
 };
 
 export const offerSlice = createSlice({
@@ -22,16 +21,14 @@ export const offerSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchOffer.pending, (state) => {
-        state.isOfferLoading = true;
-        state.hasError = false;
+        state.status = RequestStatus.Loading;
       })
       .addCase(fetchOffer.fulfilled, (state, action) => {
         state.offer = action.payload;
-        state.isOfferLoading = false;
+        state.status = RequestStatus.Success;
       })
       .addCase(fetchOffer.rejected, (state) => {
-        state.isOfferLoading = false;
-        state.hasError = true;
+        state.status = RequestStatus.Failed;
       });
   }
 });

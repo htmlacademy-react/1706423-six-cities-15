@@ -1,32 +1,29 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Offer} from '../../types';
-import {fetchOffers} from '../api-actions';
+import {fetchNearestOffers} from '../api-actions';
 import {RequestStatus} from '../../const';
 
 type OffersState = {
-  offers: Offer[];
+  nearestOffers: Offer[];
   status: RequestStatus;
 }
 
 const initialState: OffersState = {
-  offers: [],
+  nearestOffers: [],
   status: RequestStatus.Idle,
 };
 
-export const offersSlice = createSlice({
-  name: 'offers',
+export const nearestOffersSlice = createSlice({
+  name: 'nearestOffers',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchOffers.pending, (state) => {
-        state.status = RequestStatus.Loading;
-      })
-      .addCase(fetchOffers.fulfilled, (state, action) => {
-        state.offers = action.payload;
+      .addCase(fetchNearestOffers.fulfilled, (state, action) => {
+        state.nearestOffers = action.payload;
         state.status = RequestStatus.Success;
       })
-      .addCase(fetchOffers.rejected, (state) => {
+      .addCase(fetchNearestOffers.rejected, (state) => {
         state.status = RequestStatus.Failed;
       });
   }

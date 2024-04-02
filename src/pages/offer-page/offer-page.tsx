@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import {useEffect} from 'react';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
-import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, STAR_WIDTH} from '../../const';
+import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
 import {Comment} from '../../types';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
@@ -12,34 +12,39 @@ import Map from '../../components/map/map';
 import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {fetchOffer} from '../../store/api-actions';
+import {fetchNearestOffers, fetchOffer} from '../../store/api-actions';
 import NotFoundPage from '../not-found-page/not-found-page';
+import Loader from '../../components/loader/loader';
 
 type OfferPageProps = {
   comments: Comment[];
 }
 
 const OfferPage = ({comments}: OfferPageProps): JSX.Element => {
-  const isError = useAppSelector((state) => state.offer.hasError);
+  const offerStatus = useAppSelector((state) => state.offer.status);
+  const nearestOffersStatus = useAppSelector((state) => state.nearestOffers.status);
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const offer = useAppSelector((state) => state.offer.offer);
-  const offers = useAppSelector((state) => state.offers.offers);
+  const nearestOffers = useAppSelector((state) => state.nearestOffers.nearestOffers)
+    .slice(0, MAX_OFFER_PAGE_CARDS);
 
   const {offerId} = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOffer(offerId as string));
+    Promise.all([dispatch(fetchOffer(offerId as string)), dispatch(fetchNearestOffers(offerId as string))]);
   }, [dispatch, offerId]);
 
-  if (isError || !offer) {
+  if (offerStatus === RequestStatus.Loading) {
+    return <Loader />;
+  }
+
+  if (offerStatus === RequestStatus.Failed || !offer) {
     return <NotFoundPage />;
   }
 
   const {id, title, type, price, isPremium, isFavorite, rating, city,
     host, images, goods, bedrooms, maxAdults, description} = offer;
-  const nearestOffers = offers.filter((item) => item.city.name === city.name && offer.id !== id)
-    .slice(0, MAX_OFFER_PAGE_CARDS);
 
   return (
     <>
@@ -108,11 +113,14 @@ const OfferPage = ({comments}: OfferPageProps): JSX.Element => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <RentalOfferList
-              classNamesList={'near-places__list'}
-              classNameCard={ClassNames.Offer}
-              offers={nearestOffers}
-            />
+            {nearestOffersStatus === RequestStatus.Success &&
+              <RentalOfferList
+                classNamesList={'near-places__list'}
+                classNameCard={ClassNames.Offer}
+                offers={nearestOffers}
+              />}
+            {nearestOffersStatus === RequestStatus.Failed &&
+              <p>No places in the neighbourhood</p>}
           </section>
         </div>
       </main>

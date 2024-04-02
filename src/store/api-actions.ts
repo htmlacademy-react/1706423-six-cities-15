@@ -28,6 +28,18 @@ export const fetchOffer = createAsyncThunk<DataOffer, string, {
   }
 );
 
+export const fetchNearestOffers = createAsyncThunk<Offer[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearestOffers',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(`${ApiRoutes.Offers}/${id}/nearby`);
+    return data;
+  }
+);
+
 export const checkAuth = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;

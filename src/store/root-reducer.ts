@@ -3,10 +3,12 @@ import {citySlice} from './slices/city-slice';
 import {offersSlice} from './slices/offers-slice';
 import {userSlice} from './slices/user-slice';
 import {offerSlice} from './slices/offer-slice';
+import {nearestOffersSlice} from './slices/nearestOffers-slice';
 
 export const rootReducer = combineReducers({
   city: citySlice.reducer,
   offers: offersSlice.reducer,
   user: userSlice.reducer,
   offer: offerSlice.reducer,
+  nearestOffers: nearestOffersSlice.reducer,
 });

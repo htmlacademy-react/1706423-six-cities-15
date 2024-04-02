@@ -112,6 +112,8 @@ export enum ApiRoutes {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
+  Favorites = '/favorites',
 }
 
 export enum AuthStatus {
@@ -119,3 +121,5 @@ export enum AuthStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum RequestStatus {Idle, Loading, Success, Failed}
