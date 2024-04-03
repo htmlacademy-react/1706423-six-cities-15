@@ -2,11 +2,11 @@ import {STAR_WIDTH} from '../../../const';
 import {Comment} from '../../../types';
 
 type ReviewProps = {
-  comment: Comment;
+  review: Comment;
 }
 
-const Review = ({comment}: ReviewProps): JSX.Element => {
-  const {date, user, text, rating} = comment;
+const Review = ({review}: ReviewProps): JSX.Element => {
+  const {date, user, comment, rating} = review;
   const commentData: Date = new Date(date);
 
   return (
@@ -29,7 +29,7 @@ const Review = ({comment}: ReviewProps): JSX.Element => {
           </div>
         </div>
         <p className="reviews__text">
-          {text}
+          {comment}
         </p>
         <time className="reviews__time" dateTime={date.split('T')[0]}>
           {`${commentData.toLocaleString('en', { month: 'long' })} ${commentData.getFullYear()}`}

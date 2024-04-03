@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {AppDispatch, AuthData, DataOffer, Offer, State, UserData} from '../types';
+import {AppDispatch, AuthData, DataOffer, Offer, State, UserData, Comment, PostCommentProps} from '../types';
 import {ApiRoutes} from '../const';
 import {removeToken, setToken} from '../services/token';
 
@@ -36,6 +36,30 @@ export const fetchNearestOffers = createAsyncThunk<Offer[], string, {
   'data/fetchNearestOffers',
   async (id, {extra: api}) => {
     const {data} = await api.get<Offer[]>(`${ApiRoutes.Offers}/${id}/nearby`);
+    return data;
+  }
+);
+
+export const fetchComments = createAsyncThunk<Comment[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'comments/fetchComments',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<Comment[]>(`${ApiRoutes.Comments}/${id}`);
+    return data;
+  }
+);
+
+export const postComment = createAsyncThunk<Comment, PostCommentProps, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'comments/postComment',
+  async ({id, review}, {extra: api}) => {
+    const {data} = await api.post<Comment>(`${ApiRoutes.Comments}/${id}`, review);
     return data;
   }
 );

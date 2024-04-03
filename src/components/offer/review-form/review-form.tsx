@@ -1,11 +1,18 @@
-import {useState} from 'react';
+import {FormEvent, useState} from 'react';
 import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING} from '../../../const';
 import {ChangeEventHandler} from '../../../types';
 import RatingFormField from '../rating-form-field/rating-form-field';
+import {postComment} from '../../../store/api-actions';
+import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 
-const ReviewForm = (): JSX.Element => {
+type ReviewFormProps = {
+  id: string;
+}
+
+const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
   const [ratingValue, setRatingValue] = useState<string>('');
   const [comment, setComment] = useState<string>('');
+  const dispatch = useAppDispatch();
 
   const handleChangeRating: ChangeEventHandler = (evt) => {
     setRatingValue(evt.target.value);
@@ -15,8 +22,28 @@ const ReviewForm = (): JSX.Element => {
     setComment(evt.target.value);
   };
 
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (ratingValue !== '' && comment !== '') {
+      dispatch(postComment({
+        id,
+        review: {
+          comment: comment,
+          rating: Number(ratingValue),
+        },
+      }));
+      setRatingValue('');
+      setComment('');
+    }
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      onSubmit={handleSubmit}
+      className="reviews__form form"
+      action="#" method="post"
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Object.entries(RATING)
@@ -27,6 +54,7 @@ const ReviewForm = (): JSX.Element => {
               rating={rating}
               title={title}
               onChange={handleChangeRating}
+              ratingValue={ratingValue}
             />
           ))}
       </div>

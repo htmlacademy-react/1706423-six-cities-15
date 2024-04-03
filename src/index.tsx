@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import App from './components/app/app';
-import {data} from './mocks';
 import {store} from './store';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +14,7 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <ToastContainer />
-      <App {...data} />
+      <App />
     </React.StrictMode>
   </Provider>
 );

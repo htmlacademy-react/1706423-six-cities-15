@@ -9,17 +9,10 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import {AppRoutes} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
-import {Comment} from '../../types';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {checkAuth, fetchOffers} from '../../store/api-actions';
 
-type AppProps = {
-  comments: Comment[];
-}
-
-const App = (props: AppProps): JSX.Element => {
-  const {comments} = props;
-
+const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -33,12 +26,7 @@ const App = (props: AppProps): JSX.Element => {
         <Routes>
           <Route path={AppRoutes.Main} element={<Layout />}>
             <Route index element={<MainPage />} />
-            <Route path={AppRoutes.Offer} element={
-              <OfferPage
-                comments={comments}
-              />
-            }
-            />
+            <Route path={AppRoutes.Offer} element={<OfferPage />} />
             <Route path={AppRoutes.Favorites} element={
               <PrivateRoute>
                 <FavoritesPage />

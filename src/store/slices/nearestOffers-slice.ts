@@ -3,12 +3,12 @@ import {Offer} from '../../types';
 import {fetchNearestOffers} from '../api-actions';
 import {RequestStatus} from '../../const';
 
-type OffersState = {
+type NearestOffersState = {
   nearestOffers: Offer[];
   status: RequestStatus;
 }
 
-const initialState: OffersState = {
+const initialState: NearestOffersState = {
   nearestOffers: [],
   status: RequestStatus.Idle,
 };
@@ -19,6 +19,9 @@ export const nearestOffersSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchNearestOffers.pending, (state) => {
+        state.status = RequestStatus.Loading;
+      })
       .addCase(fetchNearestOffers.fulfilled, (state, action) => {
         state.nearestOffers = action.payload;
         state.status = RequestStatus.Success;

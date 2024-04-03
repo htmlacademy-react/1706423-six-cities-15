@@ -3,7 +3,6 @@ import {Helmet} from 'react-helmet-async';
 import {useEffect} from 'react';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
-import {Comment} from '../../types';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
@@ -12,27 +11,28 @@ import Map from '../../components/map/map';
 import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {fetchNearestOffers, fetchOffer} from '../../store/api-actions';
+import {fetchComments, fetchNearestOffers, fetchOffer} from '../../store/api-actions';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Loader from '../../components/loader/loader';
 
-type OfferPageProps = {
-  comments: Comment[];
-}
-
-const OfferPage = ({comments}: OfferPageProps): JSX.Element => {
+const OfferPage = (): JSX.Element => {
   const offerStatus = useAppSelector((state) => state.offer.status);
   const nearestOffersStatus = useAppSelector((state) => state.nearestOffers.status);
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const offer = useAppSelector((state) => state.offer.offer);
   const nearestOffers = useAppSelector((state) => state.nearestOffers.nearestOffers)
     .slice(0, MAX_OFFER_PAGE_CARDS);
+  const comments = useAppSelector((state) => state.comments.comments);
 
   const {offerId} = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    Promise.all([dispatch(fetchOffer(offerId as string)), dispatch(fetchNearestOffers(offerId as string))]);
+    Promise.all([
+      dispatch(fetchOffer(offerId as string)),
+      dispatch(fetchNearestOffers(offerId as string)),
+      dispatch(fetchComments(offerId as string)),
+    ]);
   }, [dispatch, offerId]);
 
   if (offerStatus === RequestStatus.Loading) {
@@ -99,7 +99,7 @@ const OfferPage = ({comments}: OfferPageProps): JSX.Element => {
               <HostOffer host={host} description={description} />
               <section className="offer__reviews reviews">
                 <ReviewsList comments={comments} />
-                {authStatus === AuthStatus.Auth && <ReviewForm />}
+                {authStatus === AuthStatus.Auth && <ReviewForm id={offerId as string} />}
               </section>
             </div>
           </div>
