@@ -54,6 +54,7 @@ const LoginPage = (): JSX.Element => {
                   className="login__input form__input"
                   type="password" name="password"
                   placeholder="Password" required
+                  pattern='(?=.*[0-9])(?=.*[a-z]).{2,}'
                 />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
