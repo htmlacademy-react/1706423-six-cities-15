@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
               </PrivateRoute>
             }
             />
-            <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+            <Route path={AppRoute.NotFound} element={<NotFoundPage type='page' />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute isRevers>
                 <LoginPage />

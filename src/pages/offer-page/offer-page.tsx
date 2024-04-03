@@ -40,7 +40,7 @@ const OfferPage = (): JSX.Element => {
   }
 
   if (offerStatus === RequestStatus.Failed || !offer) {
-    return <NotFoundPage />;
+    return <NotFoundPage type='offer' />;
   }
 
   const {id, title, type, price, isPremium, isFavorite, rating, city,
