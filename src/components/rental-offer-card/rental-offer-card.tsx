@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import {AppRoutes, FAVORITE_CARD_CLASS, STAR_WIDTH, IMG_CARD, IMG_CARD_FAVORITES} from '../../const';
+import {AppRoute, FAVORITE_CARD_CLASS, STAR_WIDTH, IMG_CARD, IMG_CARD_FAVORITES} from '../../const';
 import {Offer} from '../../types';
 
 type RentalOfferCardProps = {
@@ -24,12 +24,12 @@ const RentalOfferCard = ({className, offer, onMouseEnter, onMouseLeave}: RentalO
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} alt="Place image"
-            width={pathname as AppRoutes === AppRoutes.Favorites ? IMG_CARD_FAVORITES.width : IMG_CARD.width}
-            height={pathname as AppRoutes === AppRoutes.Favorites ? IMG_CARD_FAVORITES.height : IMG_CARD.height}
+            width={pathname as AppRoute === AppRoute.Favorites ? IMG_CARD_FAVORITES.width : IMG_CARD.width}
+            height={pathname as AppRoute === AppRoute.Favorites ? IMG_CARD_FAVORITES.height : IMG_CARD.height}
           />
         </Link>
       </div>
-      <div className={`${pathname as AppRoutes === AppRoutes.Favorites && FAVORITE_CARD_CLASS} place-card__info`}>
+      <div className={`${pathname as AppRoute === AppRoute.Favorites && FAVORITE_CARD_CLASS} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

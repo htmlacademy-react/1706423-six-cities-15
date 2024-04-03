@@ -3,7 +3,7 @@ import {Helmet} from 'react-helmet-async';
 import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/main/found-places/found-places';
 import Map from '../../components/map/map';
-import {CITIES_TABS, ClassNames, SORT_ITEMS} from '../../const';
+import {CITIES_TABS, ClassName, RequestStatus, SORT_ITEMS} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Offer, SortItems} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
@@ -17,7 +17,7 @@ const MainPage = (): JSX.Element => {
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
   const offers = useAppSelector((state) => state.offers.offers);
   const [activeSortItem, setActiveSortItem] = useState<SortItems[number]>(SORT_ITEMS[0]);
-  const isOffersLoading = useAppSelector((state) => state.offers.isOffersLoading);
+  const status = useAppSelector((state) => state.offers.status);
 
   const handleOfferHover = (offer?: Offer) => {
     let activeOffer: Offer | undefined;
@@ -28,6 +28,10 @@ const MainPage = (): JSX.Element => {
   };
 
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
+
+  if (status === RequestStatus.Loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -43,9 +47,9 @@ const MainPage = (): JSX.Element => {
           selectedCity={city.name}
         />
         <div className="cities">
-          {isOffersLoading && <Loader />}
-          {!isOffersLoading && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
-          {!isOffersLoading && offersBySelectedCity.length > 0 &&
+          {status === RequestStatus.Failed && <EmptyMainComponent city={city} />}
+          {status === RequestStatus.Success && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
+          {status === RequestStatus.Success && offersBySelectedCity.length > 0 &&
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
@@ -60,7 +64,7 @@ const MainPage = (): JSX.Element => {
                 />
                 <RentalOffersList
                   classNamesList={cn('cities__places-list', 'tabs__content')}
-                  classNameCard={ClassNames.Main}
+                  classNameCard={ClassName.Main}
                   offers={offersBySelectedCity}
                   onOfferHover={handleOfferHover}
                   activeSortItem={activeSortItem}
@@ -71,7 +75,7 @@ const MainPage = (): JSX.Element => {
                   offers={offersBySelectedCity}
                   city={city}
                   selectedOfferId={selectedOfferId}
-                  className={ClassNames.Main}
+                  className={ClassName.Main}
                 />
               </div>
             </div> }

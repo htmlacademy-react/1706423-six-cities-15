@@ -1,5 +1,5 @@
 import {Navigate} from 'react-router-dom';
-import {AppRoutes, AuthStatus} from '../../const';
+import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 
 type PrivateRouteProps = {
@@ -13,7 +13,7 @@ const PrivateRoute = ({children, isRevers}: PrivateRouteProps): JSX.Element => {
   return (
     authStatus === (isRevers ? AuthStatus.NoAuth : AuthStatus.Auth)
       ? children
-      : <Navigate to={isRevers ? AppRoutes.Main : AppRoutes.Login} />
+      : <Navigate to={isRevers ? AppRoute.Main : AppRoute.Login} />
   );
 };
 

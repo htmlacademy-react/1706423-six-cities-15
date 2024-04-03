@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {AppRoutes, AuthStatus} from '../../const';
+import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
@@ -15,7 +15,7 @@ const HeaderNav = (): JSX.Element => {
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          <Link className="header__nav-link header__nav-link--profile" to={AppRoutes.Favorites}>
+          <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             {authStatus === AuthStatus.Auth
@@ -36,7 +36,7 @@ const HeaderNav = (): JSX.Element => {
                 dispatch(logout());
               }}
               className="header__nav-link"
-              to={AppRoutes.Login}
+              to={AppRoute.Login}
             >
               <span className="header__signout">Sign out</span>
             </Link>

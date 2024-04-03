@@ -1,12 +1,12 @@
 import {useEffect, useRef} from 'react';
 import leaflet, {LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {City, Offer} from '../../types';
+import {City, DataOffer, Offer} from '../../types';
 import useMap from '../../hooks/use-map';
 import {URL_MARKER_ACTIVE, URL_MARKER_DEFAULT} from '../../const';
 
 type MapProps = {
-  offers: Offer[];
+  offers: [DataOffer, ...Offer[]] | Offer[];
   city: City;
   selectedOfferId: string | null;
   className: string;

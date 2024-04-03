@@ -4,9 +4,10 @@ type RatingFormFieldProps = {
   rating: string;
   title: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  ratingValue: string;
 }
 
-const RatingFormField = ({rating, title, onChange}: RatingFormFieldProps): JSX.Element => (
+const RatingFormField = ({rating, title, onChange, ratingValue}: RatingFormFieldProps): JSX.Element => (
   <>
     <input
       className="form__rating-input visually-hidden"
@@ -15,6 +16,7 @@ const RatingFormField = ({rating, title, onChange}: RatingFormFieldProps): JSX.E
       id={`${rating}-stars`}
       type="radio"
       onChange={onChange}
+      checked={ratingValue === rating}
     />
     <label
       htmlFor={`${rating}-stars`}

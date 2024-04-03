@@ -1,11 +1,11 @@
-import {ClassNames} from '../../const';
+import {ClassName} from '../../const';
 import {Offer, SortItems} from '../../types';
 import RentalOfferCard from '../rental-offer-card/rental-offer-card';
 import {sortBy} from '../../utils';
 
 type RentalOffersListProps = {
   classNamesList: string;
-  classNameCard: ClassNames;
+  classNameCard: ClassName;
   offers: Offer[];
   onOfferHover?: (offer?: Offer) => void;
   activeSortItem?: SortItems[number];

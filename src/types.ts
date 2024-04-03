@@ -29,7 +29,7 @@ export type Comment = {
   id: string;
   date: string;
   user: User;
-  text: string;
+  comment: string;
   rating: number;
 };
 
@@ -39,7 +39,7 @@ export type Host = {
   isPro: boolean;
 };
 
-export type DataOffer = {
+export type DataOffer = Omit<Offer, 'previewImage'> & {
   images: string[];
   goods: string[];
   host: Host;
@@ -65,6 +65,14 @@ export type UserData = {
 export type AuthData = {
   email: string;
   password: string;
+};
+
+export type PostCommentProps = {
+  id: string;
+  review: {
+    comment: string;
+    rating: number;
+  };
 };
 
 export type SortItems = typeof SORT_ITEMS;

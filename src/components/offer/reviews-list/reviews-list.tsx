@@ -7,7 +7,7 @@ type ReviewsListProps = {
 }
 
 const ReviewsList = ({comments}: ReviewsListProps): JSX.Element => {
-  const sortedComments = comments.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  const sortedComments = comments.slice().sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
   return (
     <>
@@ -16,7 +16,7 @@ const ReviewsList = ({comments}: ReviewsListProps): JSX.Element => {
         {sortedComments.slice(0, MAX_REVIEWS).map((comment) => (
           <Review
             key={comment.id}
-            comment={comment}
+            review={comment}
           />
         ))}
       </ul>

@@ -51,7 +51,7 @@ export const CITIES_TABS = [
 
 export const SORT_ITEMS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'] as const;
 
-export enum SortOptions {
+export enum SortOption {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
   PriceHighToLow = 'Price: high to low',
@@ -74,7 +74,7 @@ export const RATING = {
   '3': 'not bad',
   '2': 'badly',
   '1': 'terribly',
-};
+} as const;
 
 export const STAR_WIDTH = 20;
 export const MAX_OFFER_PAGE_CARDS = 3;
@@ -88,7 +88,7 @@ export const URL_MARKER_DEFAULT = 'img/pin.svg';
 export const URL_MARKER_ACTIVE = 'img/pin-active.svg';
 export const MAX_REVIEWS = 10;
 
-export enum ClassNames {
+export enum ClassName {
   Main = 'cities',
   Favorites = 'favorites',
   Offer = 'near-places',
@@ -100,7 +100,7 @@ export enum ClassNameLogo {
   Footer = 'footer',
 }
 
-export enum AppRoutes {
+export enum AppRoute {
   Main = '/',
   Favorites = '/favorites',
   Offer = '/offer/:offerId',
@@ -108,10 +108,12 @@ export enum AppRoutes {
   NotFound = '*',
 }
 
-export enum ApiRoutes {
+export enum ApiRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
+  Favorites = '/favorites',
 }
 
 export enum AuthStatus {
@@ -119,3 +121,5 @@ export enum AuthStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum RequestStatus {Idle, Loading, Success, Failed}
