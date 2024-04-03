@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import {useEffect} from 'react';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
-import {AuthStatus, ClassNames, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
+import {AuthStatus, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
@@ -107,7 +107,7 @@ const OfferPage = (): JSX.Element => {
             offers={[offer, ...nearestOffers]}
             city={city}
             selectedOfferId={id}
-            className={ClassNames.OfferMap}
+            className={ClassName.OfferMap}
           />
         </section>
         <div className="container">
@@ -116,7 +116,7 @@ const OfferPage = (): JSX.Element => {
             {nearestOffersStatus === RequestStatus.Success &&
               <RentalOfferList
                 classNamesList={'near-places__list'}
-                classNameCard={ClassNames.Offer}
+                classNameCard={ClassName.Offer}
                 offers={nearestOffers}
               />}
             {nearestOffersStatus === RequestStatus.Failed &&

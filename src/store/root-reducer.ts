@@ -7,10 +7,10 @@ import {nearestOffersSlice} from './slices/nearestOffers-slice';
 import {commentsSlice} from './slices/comments-slice';
 
 export const rootReducer = combineReducers({
-  city: citySlice.reducer,
-  offers: offersSlice.reducer,
-  user: userSlice.reducer,
-  offer: offerSlice.reducer,
-  nearestOffers: nearestOffersSlice.reducer,
-  comments: commentsSlice.reducer,
+  [citySlice.name]: citySlice.reducer,
+  [offersSlice.name]: offersSlice.reducer,
+  [userSlice.name]: userSlice.reducer,
+  [offerSlice.name]: offerSlice.reducer,
+  [nearestOffersSlice.name]: nearestOffersSlice.reducer,
+  [commentsSlice.name]: commentsSlice.reducer,
 });

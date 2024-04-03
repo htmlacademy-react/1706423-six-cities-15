@@ -6,7 +6,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {AppRoutes} from '../../const';
+import {AppRoute} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
@@ -24,17 +24,17 @@ const App = (): JSX.Element => {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoutes.Main} element={<Layout />}>
+          <Route path={AppRoute.Main} element={<Layout />}>
             <Route index element={<MainPage />} />
-            <Route path={AppRoutes.Offer} element={<OfferPage />} />
-            <Route path={AppRoutes.Favorites} element={
+            <Route path={AppRoute.Offer} element={<OfferPage />} />
+            <Route path={AppRoute.Favorites} element={
               <PrivateRoute>
                 <FavoritesPage />
               </PrivateRoute>
             }
             />
-            <Route path={AppRoutes.NotFound} element={<NotFoundPage />} />
-            <Route path={AppRoutes.Login} element={
+            <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+            <Route path={AppRoute.Login} element={
               <PrivateRoute isRevers>
                 <LoginPage />
               </PrivateRoute>

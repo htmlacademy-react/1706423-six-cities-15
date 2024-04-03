@@ -3,7 +3,7 @@ import {Helmet} from 'react-helmet-async';
 import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import FoundPlaces from '../../components/main/found-places/found-places';
 import Map from '../../components/map/map';
-import {CITIES_TABS, ClassNames, RequestStatus, SORT_ITEMS} from '../../const';
+import {CITIES_TABS, ClassName, RequestStatus, SORT_ITEMS} from '../../const';
 import SortPlaces from '../../components/main/sort-places/sort-places';
 import {Offer, SortItems} from '../../types';
 import RentalOffersList from '../../components/rental-offers-list/rental-offers-list';
@@ -64,7 +64,7 @@ const MainPage = (): JSX.Element => {
                 />
                 <RentalOffersList
                   classNamesList={cn('cities__places-list', 'tabs__content')}
-                  classNameCard={ClassNames.Main}
+                  classNameCard={ClassName.Main}
                   offers={offersBySelectedCity}
                   onOfferHover={handleOfferHover}
                   activeSortItem={activeSortItem}
@@ -75,7 +75,7 @@ const MainPage = (): JSX.Element => {
                   offers={offersBySelectedCity}
                   city={city}
                   selectedOfferId={selectedOfferId}
-                  className={ClassNames.Main}
+                  className={ClassName.Main}
                 />
               </div>
             </div> }

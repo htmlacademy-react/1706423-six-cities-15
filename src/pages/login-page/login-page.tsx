@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import {FormEvent, useRef} from 'react';
-import {AppRoutes} from '../../const';
+import {AppRoute} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {login} from '../../store/api-actions';
 
@@ -61,7 +61,7 @@ const LoginPage = (): JSX.Element => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoutes.Main}>
+              <Link className="locations__item-link" to={AppRoute.Main}>
                 <span>Amsterdam</span>
               </Link>
             </div>
