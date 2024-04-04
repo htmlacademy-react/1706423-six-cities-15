@@ -2,27 +2,30 @@ import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import {useEffect} from 'react';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
-import {AuthStatus, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
 import ReviewForm from '../../components/offer/review-form/review-form';
-import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
-import Goods from '../../components/offer/goods/goods';
 import Map from '../../components/map/map';
 import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
+import NotFoundPage from '../not-found-page/not-found-page';
+import Loader from '../../components/loader/loader';
+import OfferDescription from '../../components/offer/offer-description/offer-description';
+import {AuthStatus, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchComments, fetchNearestOffers, fetchOffer} from '../../store/api-actions';
-import NotFoundPage from '../not-found-page/not-found-page';
-import Loader from '../../components/loader/loader';
+import {offerSelectors} from '../../store/slices/offer-slice';
+import {nearestOffersSelectors} from '../../store/slices/nearestOffers-slice';
+import {userSelectors} from '../../store/slices/user-slice';
+import {commentsSelectors} from '../../store/slices/comments-slice';
 
 const OfferPage = (): JSX.Element => {
-  const offerStatus = useAppSelector((state) => state.offer.status);
-  const nearestOffersStatus = useAppSelector((state) => state.nearestOffers.status);
-  const authStatus = useAppSelector((state) => state.user.authStatus);
-  const offer = useAppSelector((state) => state.offer.offer);
-  const nearestOffers = useAppSelector((state) => state.nearestOffers.nearestOffers)
+  const offerStatus = useAppSelector(offerSelectors.status);
+  const nearestOffersStatus = useAppSelector(nearestOffersSelectors.status);
+  const authStatus = useAppSelector(userSelectors.authStatus);
+  const offer = useAppSelector(offerSelectors.offer);
+  const nearestOffers = useAppSelector(nearestOffersSelectors.nearestOffers)
     .slice(0, MAX_OFFER_PAGE_CARDS);
-  const comments = useAppSelector((state) => state.comments.comments);
+  const comments = useAppSelector(commentsSelectors.comments);
 
   const {offerId} = useParams();
   const dispatch = useAppDispatch();
@@ -43,8 +46,7 @@ const OfferPage = (): JSX.Element => {
     return <NotFoundPage type='offer' />;
   }
 
-  const {id, title, type, price, isPremium, isFavorite, rating, city,
-    host, images, goods, bedrooms, maxAdults, description} = offer;
+  const {id, title, isPremium, isFavorite, city, images} = offer;
 
   return (
     <>
@@ -73,30 +75,7 @@ const OfferPage = (): JSX.Element => {
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{width: `${STAR_WIDTH * Math.round(rating)}%`}}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">{rating}</span>
-              </div>
-              <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">
-                  {type}
-                </li>
-                <li className="offer__feature offer__feature--bedrooms">
-                  {bedrooms} Bedrooms
-                </li>
-                <li className="offer__feature offer__feature--adults">
-                  Max {maxAdults} adults
-                </li>
-              </ul>
-              <div className="offer__price">
-                <b className="offer__price-value">&euro;{price}</b>
-                <span className="offer__price-text">&nbsp;night</span>
-              </div>
-              <Goods goods={goods} />
-              <HostOffer host={host} description={description} />
+              <OfferDescription offer={offer} />
               <section className="offer__reviews reviews">
                 <ReviewsList comments={comments} />
                 {authStatus === AuthStatus.Auth && <ReviewForm id={offerId as string} />}

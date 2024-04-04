@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Host} from '../../../types';
 
 type HostOfferProps = {
@@ -5,7 +6,7 @@ type HostOfferProps = {
   description: string;
 }
 
-const HostOffer = ({host, description}: HostOfferProps): JSX.Element => {
+const HostOffer = memo(({host, description}: HostOfferProps): JSX.Element => {
   const {name, avatarUrl, isPro} = host;
 
   return (
@@ -27,6 +28,8 @@ const HostOffer = ({host, description}: HostOfferProps): JSX.Element => {
       </div>
     </div>
   );
-};
+});
+
+HostOffer.displayName = 'HostOffer';
 
 export default HostOffer;

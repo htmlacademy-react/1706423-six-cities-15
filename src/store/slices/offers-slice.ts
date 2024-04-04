@@ -13,7 +13,7 @@ const initialState: OffersState = {
   status: RequestStatus.Idle,
 };
 
-export const offersSlice = createSlice({
+const offersSlice = createSlice({
   name: 'offers',
   initialState,
   reducers: {},
@@ -29,5 +29,13 @@ export const offersSlice = createSlice({
       .addCase(fetchOffers.rejected, (state) => {
         state.status = RequestStatus.Failed;
       });
+  },
+  selectors: {
+    offers: (state: OffersState) => state.offers,
+    status: (state: OffersState) => state.status,
   }
 });
+
+const offersSelectors = offersSlice.selectors;
+
+export {offersSlice, offersSelectors};

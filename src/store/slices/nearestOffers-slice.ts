@@ -13,7 +13,7 @@ const initialState: NearestOffersState = {
   status: RequestStatus.Idle,
 };
 
-export const nearestOffersSlice = createSlice({
+const nearestOffersSlice = createSlice({
   name: 'nearestOffers',
   initialState,
   reducers: {},
@@ -29,5 +29,13 @@ export const nearestOffersSlice = createSlice({
       .addCase(fetchNearestOffers.rejected, (state) => {
         state.status = RequestStatus.Failed;
       });
+  },
+  selectors: {
+    nearestOffers: (state: NearestOffersState) => state.nearestOffers,
+    status: (state: NearestOffersState) => state.status,
   }
 });
+
+const nearestOffersSelectors = nearestOffersSlice.selectors;
+
+export {nearestOffersSlice, nearestOffersSelectors};

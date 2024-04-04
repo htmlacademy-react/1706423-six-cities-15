@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {memo, useEffect, useRef} from 'react';
 import leaflet, {LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {City, DataOffer, Offer} from '../../types';
@@ -24,7 +24,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13.5, 39],
 });
 
-const Map = ({offers, city, selectedOfferId, className}: MapProps): JSX.Element => {
+const Map = memo(({offers, city, selectedOfferId, className}: MapProps): JSX.Element => {
   const mapRef = useRef<HTMLElement | null>(null);
   const map = useMap(mapRef, city.location);
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
@@ -66,6 +66,8 @@ const Map = ({offers, city, selectedOfferId, className}: MapProps): JSX.Element 
 
     </section>
   );
-};
+});
+
+Map.displayName = 'Map';
 
 export default Map;

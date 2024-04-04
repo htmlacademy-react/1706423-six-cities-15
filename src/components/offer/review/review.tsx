@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {STAR_WIDTH} from '../../../const';
 import {Comment} from '../../../types';
 
@@ -5,7 +6,7 @@ type ReviewProps = {
   review: Comment;
 }
 
-const Review = ({review}: ReviewProps): JSX.Element => {
+const Review = memo(({review}: ReviewProps): JSX.Element => {
   const {date, user, comment, rating} = review;
   const commentData: Date = new Date(date);
 
@@ -37,6 +38,8 @@ const Review = ({review}: ReviewProps): JSX.Element => {
       </div>
     </li>
   );
-};
+});
+
+Review.displayName = 'Review';
 
 export default Review;

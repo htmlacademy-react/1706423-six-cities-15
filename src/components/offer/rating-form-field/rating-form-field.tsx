@@ -1,4 +1,4 @@
-import {ChangeEventHandler} from 'react';
+import {ChangeEventHandler, memo} from 'react';
 
 type RatingFormFieldProps = {
   rating: string;
@@ -7,7 +7,7 @@ type RatingFormFieldProps = {
   ratingValue: string;
 }
 
-const RatingFormField = ({rating, title, onChange, ratingValue}: RatingFormFieldProps): JSX.Element => (
+const RatingFormField = memo(({rating, title, onChange, ratingValue}: RatingFormFieldProps): JSX.Element => (
   <>
     <input
       className="form__rating-input visually-hidden"
@@ -28,6 +28,8 @@ const RatingFormField = ({rating, title, onChange, ratingValue}: RatingFormField
       </svg>
     </label>
   </>
-);
+));
+
+RatingFormField.displayName = 'RatingFormField';
 
 export default RatingFormField;

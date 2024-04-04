@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../../const';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import {CityTubs} from '../../../types';
-import {changeCity} from '../../../store/slices/city-slice';
+import {cityActions} from '../../../store/slices/city-slice';
 
 type TabLocationProps = {
   city: CityTubs[number];
@@ -19,7 +19,7 @@ const TabLocation = ({city, isActive = false}: TabLocationProps): JSX.Element =>
         to={AppRoute.Main}
         onClick={(evt) => {
           evt.preventDefault();
-          dispatch(changeCity({city: city}));
+          dispatch(cityActions.changeCity({city: city}));
         }}
       >
         <span>{city.name}</span>

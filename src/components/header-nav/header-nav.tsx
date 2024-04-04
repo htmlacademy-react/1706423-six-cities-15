@@ -1,15 +1,18 @@
 import {Link} from 'react-router-dom';
+import {memo} from 'react';
 import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {offersSelectors} from '../../store/slices/offers-slice';
+import {userSelectors} from '../../store/slices/user-slice';
 
-const HeaderNav = (): JSX.Element => {
-  const offers = useAppSelector((state) => state.offers.offers);
+const HeaderNav = memo((): JSX.Element => {
+  const offers = useAppSelector(offersSelectors.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
-  const authStatus = useAppSelector((state) => state.user.authStatus);
+  const authStatus = useAppSelector(userSelectors.authStatus);
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.user.userData?.email);
+  const email = useAppSelector(userSelectors.email);
 
   return (
     <nav className="header__nav">
@@ -44,6 +47,8 @@ const HeaderNav = (): JSX.Element => {
       </ul>
     </nav>
   );
-};
+});
+
+HeaderNav.displayName = 'HeaderNav';
 
 export default HeaderNav;

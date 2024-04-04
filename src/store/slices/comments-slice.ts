@@ -13,7 +13,7 @@ const initialState: CommentsState = {
   status: RequestStatus.Idle,
 };
 
-export const commentsSlice = createSlice({
+const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {},
@@ -39,5 +39,13 @@ export const commentsSlice = createSlice({
       .addCase(postComment.rejected, (state) => {
         state.status = RequestStatus.Failed;
       });
+  },
+  selectors: {
+    comments: (state: CommentsState) => state.comments,
+    status: (state: CommentsState) => state.status,
   }
 });
+
+const commentsSelectors = commentsSlice.selectors;
+
+export {commentsSlice, commentsSelectors};

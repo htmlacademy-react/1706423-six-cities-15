@@ -1,6 +1,7 @@
+import {memo} from 'react';
 import GalleryImage from '../gallery-image/gallery-image';
 
-const Gallery = ({images}: {images: string[]}): JSX.Element => (
+const Gallery = memo(({images}: {images: string[]}): JSX.Element => (
   <div className="offer__gallery-container container">
     <div className="offer__gallery">
       {images.map((image) => (
@@ -8,6 +9,8 @@ const Gallery = ({images}: {images: string[]}): JSX.Element => (
       ))}
     </div>
   </div>
-);
+));
+
+Gallery.displayName = 'Gallery';
 
 export default Gallery;

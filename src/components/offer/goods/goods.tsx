@@ -1,6 +1,7 @@
+import {memo} from 'react';
 import GoodsItem from '../goods-item/goods-item';
 
-const Goods = ({goods}: {goods: string[]}): JSX.Element => (
+const Goods = memo(({goods}: {goods: string[]}): JSX.Element => (
   <div className="offer__inside">
     <h2 className="offer__inside-title">What&apos;s inside</h2>
     <ul className="offer__inside-list">
@@ -9,6 +10,8 @@ const Goods = ({goods}: {goods: string[]}): JSX.Element => (
       ))}
     </ul>
   </div>
-);
+));
+
+Goods.displayName = 'Goods';
 
 export default Goods;

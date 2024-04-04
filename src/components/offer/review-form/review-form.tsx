@@ -1,9 +1,10 @@
-import {FormEvent, useState} from 'react';
+import {FormEvent, useCallback, useState} from 'react';
 import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING} from '../../../const';
 import {ChangeEventHandler} from '../../../types';
 import RatingFormField from '../rating-form-field/rating-form-field';
 import {postComment} from '../../../store/api-actions';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
+import ReviewTextarea from '../../review-textarea/review-textarea';
 
 type ReviewFormProps = {
   id: string;
@@ -14,13 +15,15 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
   const [comment, setComment] = useState<string>('');
   const dispatch = useAppDispatch();
 
-  const handleChangeRating: ChangeEventHandler = (evt) => {
-    setRatingValue(evt.target.value);
-  };
+  const handleChangeRating: ChangeEventHandler = useCallback(
+    (evt) => setRatingValue(evt.target.value),
+    []
+  );
 
-  const handleChangeComment: ChangeEventHandler = (evt) => {
-    setComment(evt.target.value);
-  };
+  const handleChangeComment: ChangeEventHandler = useCallback(
+    (evt) => setComment(evt.target.value),
+    []
+  );
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -58,15 +61,10 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
             />
           ))}
       </div>
-      <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        value={comment}
+      <ReviewTextarea
+        comment={comment}
         onChange={handleChangeComment}
-      >
-      </textarea>
+      />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_SYMBOLS} characters</b>.
