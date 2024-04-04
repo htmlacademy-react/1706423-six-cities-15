@@ -1,3 +1,4 @@
+import {memo, useCallback} from 'react';
 import {ClassName} from '../../const';
 import {Offer, SortItems} from '../../types';
 import RentalOfferCard from '../rental-offer-card/rental-offer-card';
@@ -11,9 +12,15 @@ type RentalOffersListProps = {
   activeSortItem?: SortItems[number];
 }
 
-const RentalOfferList = ({offers, onOfferHover, classNameCard, classNamesList, activeSortItem}: RentalOffersListProps): JSX.Element => {
-  const handleMouseEnter = (offer: Offer) => onOfferHover && onOfferHover(offer);
-  const handleMouseLeave = () => onOfferHover && onOfferHover();
+const RentalOfferList = memo(({offers, onOfferHover, classNameCard, classNamesList, activeSortItem}: RentalOffersListProps): JSX.Element => {
+  const handleMouseEnter = useCallback(
+    (offer: Offer) => onOfferHover && onOfferHover(offer),
+    [onOfferHover]
+  );
+  const handleMouseLeave = useCallback(
+    () => onOfferHover && onOfferHover(),
+    [onOfferHover]
+  );
 
   const currentOffers = activeSortItem
     ? sortBy[activeSortItem]([...offers])
@@ -32,6 +39,8 @@ const RentalOfferList = ({offers, onOfferHover, classNameCard, classNamesList, a
       ))}
     </div>
   );
-};
+});
+
+RentalOfferList.displayName = 'RentalOfferList';
 
 export default RentalOfferList;

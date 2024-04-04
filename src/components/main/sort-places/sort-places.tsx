@@ -1,4 +1,4 @@
-import {Dispatch, MouseEventHandler, SetStateAction, useState} from 'react';
+import {Dispatch, MouseEventHandler, SetStateAction, memo, useState} from 'react';
 import {SortItems} from '../../../types';
 
 type SortPlacesProps = {
@@ -7,7 +7,7 @@ type SortPlacesProps = {
   setter: Dispatch<SetStateAction<SortItems[number]>>;
 }
 
-const SortPlaces = ({sortItems, activeSortItem, setter}: SortPlacesProps): JSX.Element => {
+const SortPlaces = memo(({sortItems, activeSortItem, setter}: SortPlacesProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleClick: MouseEventHandler<HTMLElement> = (evt) => {
@@ -42,6 +42,8 @@ const SortPlaces = ({sortItems, activeSortItem, setter}: SortPlacesProps): JSX.E
       </ul>
     </form>
   );
-};
+});
+
+SortPlaces.displayName = 'SortPlaces';
 
 export default SortPlaces;

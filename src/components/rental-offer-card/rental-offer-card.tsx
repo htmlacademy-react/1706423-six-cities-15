@@ -1,4 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
+import {memo} from 'react';
 import {AppRoute, FAVORITE_CARD_CLASS, STAR_WIDTH, IMG_CARD, IMG_CARD_FAVORITES} from '../../const';
 import {Offer} from '../../types';
 
@@ -9,7 +10,7 @@ type RentalOfferCardProps = {
   onMouseLeave?: () => void;
 }
 
-const RentalOfferCard = ({className, offer, onMouseEnter, onMouseLeave}: RentalOfferCardProps): JSX.Element => {
+const RentalOfferCard = memo(({className, offer, onMouseEnter, onMouseLeave}: RentalOfferCardProps): JSX.Element => {
   const {id, title, type, price, isPremium, isFavorite, rating, previewImage} = offer;
   const {pathname} = useLocation();
 
@@ -59,6 +60,8 @@ const RentalOfferCard = ({className, offer, onMouseEnter, onMouseLeave}: RentalO
       </div>
     </article>
   );
-};
+});
+
+RentalOfferCard.displayName = 'RentalOfferCard';
 
 export default RentalOfferCard;

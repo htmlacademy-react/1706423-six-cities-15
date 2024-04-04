@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import Review from '../review/review';
 import {Comment} from '../../../types';
 import {MAX_REVIEWS} from '../../../const';
@@ -6,7 +7,7 @@ type ReviewsListProps = {
   comments: Comment[];
 }
 
-const ReviewsList = ({comments}: ReviewsListProps): JSX.Element => {
+const ReviewsList = memo(({comments}: ReviewsListProps): JSX.Element => {
   const sortedComments = comments.slice().sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
   return (
@@ -22,6 +23,8 @@ const ReviewsList = ({comments}: ReviewsListProps): JSX.Element => {
       </ul>
     </>
   );
-};
+});
+
+ReviewsList.displayName = 'ReviewsList';
 
 export default ReviewsList;
