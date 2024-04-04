@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {AuthStatus} from '../../const';
 import {checkAuth, login, logout} from '../api-actions';
-import { UserData } from '../../types';
+import {UserData} from '../../types';
 
 type UserState = {
   authStatus: AuthStatus;
@@ -13,7 +13,7 @@ const initialState: UserState = {
   userData: null,
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
@@ -36,5 +36,14 @@ export const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.authStatus = AuthStatus.NoAuth;
       });
+  },
+  selectors: {
+    user: (state: UserState) => state.userData,
+    authStatus: (state: UserState) => state.authStatus,
+    email: (state: UserState) => state.userData?.email,
   }
 });
+
+const userSelectors = userSlice.selectors;
+
+export {userSlice, userSelectors};

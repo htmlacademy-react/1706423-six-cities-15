@@ -3,6 +3,7 @@ import {Offer} from '../../types';
 import FavoriteLocation from '../../components/favorite-location/favorite-location';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks/use-app-selector';
+import {offersSelectors} from '../../store/slices/offers-slice';
 
 const groupByCityOffers = (offers: Offer[]) => {
   const groupedOffers = offers.reduce((obj: {[key: string]: Offer[]}, offer) => {
@@ -20,7 +21,7 @@ const groupByCityOffers = (offers: Offer[]) => {
 };
 
 const FavoritesPage = (): JSX.Element => {
-  const offers = useAppSelector((state) => state.offers.offers);
+  const offers = useAppSelector(offersSelectors.offers);
   const favoriteOffers = groupByCityOffers(offers.filter((offer) => offer.isFavorite));
 
   return (

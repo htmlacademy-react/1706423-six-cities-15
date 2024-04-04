@@ -11,13 +11,16 @@ import cn from 'classnames';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import EmptyMainComponent from '../../components/main/empty-main-component/empty-main-component';
 import Loader from '../../components/loader/loader';
+import {citySelectors} from '../../store/slices/city-slice';
+import {offersSelectors} from '../../store/slices/offers-slice';
 
 const MainPage = (): JSX.Element => {
-  const city = useAppSelector((state) => state.city.city);
+  const city = useAppSelector(citySelectors.city);
+  const offers = useAppSelector(offersSelectors.offers);
+  const status = useAppSelector(offersSelectors.status);
+
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
-  const offers = useAppSelector((state) => state.offers.offers);
   const [activeSortItem, setActiveSortItem] = useState<SortItems[number]>(SORT_ITEMS[0]);
-  const status = useAppSelector((state) => state.offers.status);
 
   const handleOfferHover = (offer?: Offer) => {
     let activeOffer: Offer | undefined;

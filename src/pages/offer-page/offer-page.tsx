@@ -2,27 +2,31 @@ import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import {useEffect} from 'react';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
-import {AuthStatus, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
 import ReviewForm from '../../components/offer/review-form/review-form';
 import HostOffer from '../../components/offer/host-offer/host-offer';
 import Gallery from '../../components/offer/gallery/gallery';
 import Goods from '../../components/offer/goods/goods';
 import Map from '../../components/map/map';
 import RentalOfferList from '../../components/rental-offers-list/rental-offers-list';
+import NotFoundPage from '../not-found-page/not-found-page';
+import Loader from '../../components/loader/loader';
+import {AuthStatus, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus, STAR_WIDTH} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchComments, fetchNearestOffers, fetchOffer} from '../../store/api-actions';
-import NotFoundPage from '../not-found-page/not-found-page';
-import Loader from '../../components/loader/loader';
+import {offerSelectors} from '../../store/slices/offer-slice';
+import {nearestOffersSelectors} from '../../store/slices/nearestOffers-slice';
+import {userSelectors} from '../../store/slices/user-slice';
+import {commentsSelectors} from '../../store/slices/comments-slice';
 
 const OfferPage = (): JSX.Element => {
-  const offerStatus = useAppSelector((state) => state.offer.status);
-  const nearestOffersStatus = useAppSelector((state) => state.nearestOffers.status);
-  const authStatus = useAppSelector((state) => state.user.authStatus);
-  const offer = useAppSelector((state) => state.offer.offer);
-  const nearestOffers = useAppSelector((state) => state.nearestOffers.nearestOffers)
+  const offerStatus = useAppSelector(offerSelectors.status);
+  const nearestOffersStatus = useAppSelector(nearestOffersSelectors.status);
+  const authStatus = useAppSelector(userSelectors.authStatus);
+  const offer = useAppSelector(offerSelectors.offer);
+  const nearestOffers = useAppSelector(nearestOffersSelectors.nearestOffers)
     .slice(0, MAX_OFFER_PAGE_CARDS);
-  const comments = useAppSelector((state) => state.comments.comments);
+  const comments = useAppSelector(commentsSelectors.comments);
 
   const {offerId} = useParams();
   const dispatch = useAppDispatch();
