@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {AppDispatch, AuthData, DataOffer, Offer, State, UserData, Comment, PostCommentProps} from '../types';
+import {AppDispatch, AuthData, DataOffer, Offer, State, UserData, Comment, PostCommentProps, PostFavoriteProps} from '../types';
 import {ApiRoute} from '../const';
 import {removeToken, setToken} from '../services/token';
 
@@ -98,5 +98,29 @@ export const logout = createAsyncThunk<void, undefined, {
   async (_arg, {extra: api}) => {
     await api.delete(ApiRoute.Logout);
     removeToken();
+  }
+);
+
+export const fetchFavorites = createAsyncThunk<Offer[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'favorite/fetchFavorites',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(ApiRoute.Favorite);
+    return data;
+  }
+);
+
+export const toggleFavorite = createAsyncThunk<PostFavoriteProps, {offerId: string; status: number}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'favorite/toggleFavorite',
+  async ({offerId, status}, {extra: api}) => {
+    const {data} = await api.post<Offer>(`${ApiRoute.Favorite}/${offerId}/${status}`);
+    return {offer: data, status};
   }
 );

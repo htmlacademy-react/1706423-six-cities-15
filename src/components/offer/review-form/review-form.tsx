@@ -4,7 +4,7 @@ import {ChangeEventHandler} from '../../../types';
 import RatingFormField from '../rating-form-field/rating-form-field';
 import {postComment} from '../../../store/api-actions';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
-import ReviewTextarea from '../../review-textarea/review-textarea';
+import ReviewTextarea from '../review-textarea/review-textarea';
 
 type ReviewFormProps = {
   id: string;

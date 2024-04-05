@@ -75,6 +75,11 @@ export type PostCommentProps = {
   };
 };
 
+export type PostFavoriteProps = {
+  status: number;
+  offer: Offer;
+};
+
 export type SortItems = typeof SORT_ITEMS;
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 export type State = ReturnType<typeof store.getState>;
