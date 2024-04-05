@@ -10,7 +10,7 @@ import {AppRoute} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {checkAuth, fetchOffers} from '../../store/api-actions';
+import {checkAuth, fetchFavorites, fetchOffers} from '../../store/api-actions';
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -18,6 +18,7 @@ const App = (): JSX.Element => {
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(checkAuth());
+    dispatch(fetchFavorites());
   }, [dispatch]);
 
   return (

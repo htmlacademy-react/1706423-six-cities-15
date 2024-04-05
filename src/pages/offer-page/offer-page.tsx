@@ -9,7 +9,7 @@ import RentalOfferList from '../../components/rental-offers-list/rental-offers-l
 import NotFoundPage from '../not-found-page/not-found-page';
 import Loader from '../../components/loader/loader';
 import OfferDescription from '../../components/offer/offer-description/offer-description';
-import {AuthStatus, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus} from '../../const';
+import {AuthStatus, BookmarkButtonClass, ClassName, MAX_OFFER_PAGE_CARDS, RequestStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchComments, fetchNearestOffers, fetchOffer} from '../../store/api-actions';
@@ -17,6 +17,7 @@ import {offerSelectors} from '../../store/slices/offer-slice';
 import {nearestOffersSelectors} from '../../store/slices/nearestOffers-slice';
 import {userSelectors} from '../../store/slices/user-slice';
 import {commentsSelectors} from '../../store/slices/comments-slice';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 
 const OfferPage = (): JSX.Element => {
   const offerStatus = useAppSelector(offerSelectors.status);
@@ -64,16 +65,11 @@ const OfferPage = (): JSX.Element => {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button
-                  className={`offer__bookmark-button button ${
-                    isFavorite && 'offer__bookmark-button--active'}`}
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton
+                  offerId={id}
+                  isFavorite={isFavorite}
+                  className={BookmarkButtonClass.Offer}
+                />
               </div>
               <OfferDescription offer={offer} />
               <section className="offer__reviews reviews">

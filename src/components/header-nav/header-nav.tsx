@@ -4,12 +4,11 @@ import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {offersSelectors} from '../../store/slices/offers-slice';
 import {userSelectors} from '../../store/slices/user-slice';
+import {favoritesSelectors} from '../../store/slices/favorites-slice';
 
 const HeaderNav = memo((): JSX.Element => {
-  const offers = useAppSelector(offersSelectors.offers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
+  const favoriteOffers = useAppSelector(favoritesSelectors.offers);
   const authStatus = useAppSelector(userSelectors.authStatus);
   const dispatch = useAppDispatch();
   const email = useAppSelector(userSelectors.email);

@@ -58,14 +58,23 @@ export enum SortOption {
   RatingHighToLow = 'Top rated first',
 }
 
-export const IMG_CARD = {
-  width: '260',
-  height: '200',
-};
-
-export const IMG_CARD_FAVORITES = {
-  width: '150',
-  height: '110',
+export const IMAGE_SIZE = {
+  card: {
+    width: '260',
+    height: '200',
+  },
+  cardFavorites: {
+    width: '150',
+    height: '110',
+  },
+  cardIcon: {
+    width: '18',
+    height: '19',
+  },
+  offerIcon: {
+    width: '31',
+    height: '33',
+  }
 };
 
 export const RATING = {
@@ -100,6 +109,11 @@ export enum ClassNameLogo {
   Footer = 'footer',
 }
 
+export enum BookmarkButtonClass {
+  Card = 'place-card',
+  Offer = 'offer',
+}
+
 export enum AppRoute {
   Main = '/',
   Favorites = '/favorites',
@@ -113,7 +127,7 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
-  Favorites = '/favorites',
+  Favorite = '/favorite',
 }
 
 export enum AuthStatus {
