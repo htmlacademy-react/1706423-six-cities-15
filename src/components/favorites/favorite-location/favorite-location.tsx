@@ -1,6 +1,6 @@
-import RentalOfferCard from '../rental-offer-card/rental-offer-card';
-import {AppRoute, ClassName} from '../../const';
-import {Offer} from '../../types';
+import RentalOfferCard from '../../rental-offer-card/rental-offer-card';
+import {AppRoute, ClassName} from '../../../const';
+import {Offer} from '../../../types';
 import {Link} from 'react-router-dom';
 
 type FavoriteLocationProps = {
