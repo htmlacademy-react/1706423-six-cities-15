@@ -1,16 +1,19 @@
 import {FormEvent, useCallback, useState} from 'react';
-import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING} from '../../../const';
+import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING, RequestStatus} from '../../../const';
 import {ChangeEventHandler} from '../../../types';
 import RatingFormField from '../rating-form-field/rating-form-field';
 import {postComment} from '../../../store/api-actions';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import ReviewTextarea from '../review-textarea/review-textarea';
+import {useAppSelector} from '../../../hooks/use-app-selector';
+import {commentsSelectors} from '../../../store/slices/comments-slice';
 
 type ReviewFormProps = {
   id: string;
 }
 
 const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
+  const status = useAppSelector(commentsSelectors.status);
   const [ratingValue, setRatingValue] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const dispatch = useAppDispatch();
@@ -36,9 +39,14 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
           rating: Number(ratingValue),
         },
       }));
-      setRatingValue('');
-      setComment('');
     }
+
+    if (status === RequestStatus.Failed) {
+      return;
+    }
+
+    setRatingValue('');
+    setComment('');
   };
 
   return (
@@ -76,6 +84,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
             ratingValue === ''
             || comment.length < MIN_COMMENT_SYMBOLS
             || comment.length > MAX_COMMENT_SYMBOLS
+            || status === RequestStatus.Loading
           }
         >
           Submit
