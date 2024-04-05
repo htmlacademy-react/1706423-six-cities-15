@@ -1,11 +1,14 @@
 import {Helmet} from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import {FormEvent, useRef} from 'react';
-import {AppRoute} from '../../const';
+import {AppRoute, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {login} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {userSelectors} from '../../store/slices/user-slice';
 
 const LoginPage = (): JSX.Element => {
+  const status = useAppSelector(userSelectors.status);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -57,7 +60,13 @@ const LoginPage = (): JSX.Element => {
                   pattern='(?=.*[0-9])(?=.*[a-z]).{2,}'
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button
+                disabled={status === RequestStatus.Loading}
+                className="login__submit form__submit button"
+                type="submit"
+              >
+                Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
