@@ -47,6 +47,7 @@ const userSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.authStatus = AuthStatus.NoAuth;
+        state.userData = null;
         state.status = RequestStatus.Success;
       });
   },

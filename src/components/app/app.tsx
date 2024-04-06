@@ -11,15 +11,23 @@ import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {checkAuth, fetchFavorites, fetchOffers} from '../../store/api-actions';
+import {getToken} from '../../services/token';
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOffers());
-    dispatch(checkAuth());
-    dispatch(fetchFavorites());
   }, [dispatch]);
+
+  const token = getToken();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(checkAuth());
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, token]);
 
   return (
     <HelmetProvider>
@@ -36,7 +44,7 @@ const App = (): JSX.Element => {
             />
             <Route path={AppRoute.NotFound} element={<NotFoundPage type='page' />} />
             <Route path={AppRoute.Login} element={
-              <PrivateRoute isRevers>
+              <PrivateRoute onlyNoAuth>
                 <LoginPage />
               </PrivateRoute>
             }
