@@ -6,19 +6,11 @@ import Loader from '../../components/loader/loader';
 import {citySelectors} from '../../store/slices/city-slice';
 import {offersSelectors} from '../../store/slices/offers-slice';
 import MainContent from '../../components/main/main-content/main-content';
-import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {useEffect} from 'react';
-import {fetchOffers} from '../../store/api-actions';
 
 const MainPage = (): JSX.Element => {
   const city = useAppSelector(citySelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchOffers());
-  }, [dispatch]);
 
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 

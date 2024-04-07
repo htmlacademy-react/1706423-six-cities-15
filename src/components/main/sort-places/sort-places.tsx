@@ -10,7 +10,7 @@ type SortPlacesProps = {
 const SortPlaces = memo(({sortItems, activeSortItem, setter}: SortPlacesProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const handleClick: MouseEventHandler<HTMLElement> = (evt) => {
+  const handleClickSortOptions: MouseEventHandler<HTMLElement> = (evt) => {
     if (activeSortItem !== evt.currentTarget.textContent) {
       setter(evt.currentTarget.textContent as SortItems[number]);
     }
@@ -20,7 +20,7 @@ const SortPlaces = memo(({sortItems, activeSortItem, setter}: SortPlacesProps): 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by&nbsp;</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={handleClick}>
+      <span className="places__sorting-type" tabIndex={0} onClick={handleClickSortOptions}>
         {activeSortItem}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -34,7 +34,7 @@ const SortPlaces = memo(({sortItems, activeSortItem, setter}: SortPlacesProps): 
             className={`places__option ${activeSortItem === item ? 'places__option--active' : ''}`}
             tabIndex={0}
             key={item}
-            onClick={handleClick}
+            onClick={handleClickSortOptions}
           >
             {item}
           </li>

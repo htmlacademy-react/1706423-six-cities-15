@@ -1,5 +1,5 @@
-import {Link} from 'react-router-dom';
-import {memo} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {MouseEventHandler, memo} from 'react';
 import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {logout} from '../../store/api-actions';
@@ -12,6 +12,13 @@ const HeaderNav = memo((): JSX.Element => {
   const authStatus = useAppSelector(userSelectors.authStatus);
   const dispatch = useAppDispatch();
   const email = useAppSelector(userSelectors.email);
+  const navigate = useNavigate();
+
+  const handleClickLogout: MouseEventHandler = (evt) => {
+    evt.preventDefault();
+    dispatch(logout())
+      .then(() => navigate(AppRoute.Login));
+  };
 
   return (
     <nav className="header__nav">
@@ -33,10 +40,7 @@ const HeaderNav = memo((): JSX.Element => {
         {authStatus === AuthStatus.Auth &&
           <li className="header__nav-item">
             <Link
-              onClick={(evt) => {
-                evt.preventDefault();
-                dispatch(logout());
-              }}
+              onClick={handleClickLogout}
               className="header__nav-link"
               to={AppRoute.Login}
             >

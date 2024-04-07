@@ -12,13 +12,16 @@ import Layout from '../layout/layout';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {checkAuth, fetchFavorites, fetchOffers} from '../../store/api-actions';
 import {getToken} from '../../services/token';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {userSelectors} from '../../store/slices/user-slice';
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(userSelectors.authStatus);
 
   useEffect(() => {
     dispatch(fetchOffers());
-  }, [dispatch]);
+  }, [dispatch, authStatus]);
 
   const token = getToken();
 

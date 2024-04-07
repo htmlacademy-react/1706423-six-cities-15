@@ -28,9 +28,12 @@ const MainContent = (): JSX.Element => {
 
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 
+  if (status === RequestStatus.Failed) {
+    return <p style={{textAlign: 'center'}}>Failed to load offers.</p>;
+  }
+
   return(
     <div className="cities">
-      {status === RequestStatus.Failed && <EmptyMainComponent city={city} />}
       {status === RequestStatus.Success && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
       {status === RequestStatus.Success && offersBySelectedCity.length > 0 &&
         <div className="cities__places-container container">

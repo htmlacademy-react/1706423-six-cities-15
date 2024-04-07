@@ -6,6 +6,7 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useNavigate} from 'react-router-dom';
 import {toggleFavorite} from '../../store/api-actions';
 import {favoritesSelectors} from '../../store/slices/favorites-slice';
+import { offersActions } from '../../store/slices/offers-slice';
 
 type BookmarkButtonProps = {
   isFavorite: boolean;
@@ -24,7 +25,8 @@ const BookmarkButton = memo(({offerId, isFavorite, className}:BookmarkButtonProp
     if (authStatus === AuthStatus.Auth) {
       const value = !isFavoriteOffer;
       setIsFavoriteOffer(value);
-      dispatch(toggleFavorite({offerId, status: Number(value)}));
+      dispatch(toggleFavorite({offerId, status: Number(value)}))
+        .then(() => dispatch(offersActions.changeFavoriteOffer({id: offerId, isFavorite: value})));
     } else {
       navigate(AppRoute.Login);
     }

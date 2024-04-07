@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Offer} from '../../types';
 import {fetchOffers} from '../api-actions';
 import {RequestStatus} from '../../const';
@@ -13,10 +13,20 @@ const initialState: OffersState = {
   status: RequestStatus.Idle,
 };
 
+type PayloadProps = {
+  id: string;
+  isFavorite: boolean;
+}
+
 const offersSlice = createSlice({
   name: 'offers',
   initialState,
-  reducers: {},
+  reducers: {
+    changeFavoriteOffer: (state, action: PayloadAction<PayloadProps>) => {
+      const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
+      state.offers[index].isFavorite = action.payload.isFavorite;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffers.pending, (state) => {
@@ -37,5 +47,6 @@ const offersSlice = createSlice({
 });
 
 const offersSelectors = offersSlice.selectors;
+const offersActions = offersSlice.actions;
 
-export {offersSlice, offersSelectors};
+export {offersSlice, offersSelectors, offersActions};
