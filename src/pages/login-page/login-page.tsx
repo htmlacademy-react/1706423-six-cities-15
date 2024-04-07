@@ -1,16 +1,18 @@
 import {Helmet} from 'react-helmet-async';
-import {Link} from 'react-router-dom';
 import {FormEvent, useRef} from 'react';
-import {AppRoute, RequestStatus} from '../../const';
+import {CITIES_TABS, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {login} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {userSelectors} from '../../store/slices/user-slice';
+import { getRandomCity } from '../../utils';
+import CityLink from '../../components/city-link/city-link';
 
 const LoginPage = (): JSX.Element => {
   const status = useAppSelector(userSelectors.status);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const randomCity = getRandomCity(CITIES_TABS);
 
   const dispatch = useAppDispatch();
 
@@ -57,7 +59,8 @@ const LoginPage = (): JSX.Element => {
                   className="login__input form__input"
                   type="password" name="password"
                   placeholder="Password" required
-                  pattern='(?=.*[0-9])(?=.*[a-z]).{2,}'
+                  pattern='(?=.*[0-9])(?=.*[a-zA-Z]).{2,}'
+                  title='Минимум 1 цифра и 1 буква'
                 />
               </div>
               <button
@@ -71,9 +74,7 @@ const LoginPage = (): JSX.Element => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Main}>
-                <span>Amsterdam</span>
-              </Link>
+              <CityLink city={randomCity} />
             </div>
           </section>
         </div>

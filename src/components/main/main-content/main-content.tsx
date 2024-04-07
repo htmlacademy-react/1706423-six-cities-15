@@ -3,16 +3,18 @@ import cn from 'classnames';
 import {ClassName, RequestStatus, SORT_ITEMS} from '../../../const';
 import {useAppSelector} from '../../../hooks/use-app-selector';
 import {offersSelectors} from '../../../store/slices/offers-slice';
-import {Offer, SortItems} from '../../../types';
+import {CityTubs, Offer, SortItems} from '../../../types';
 import EmptyMainComponent from '../empty-main-component/empty-main-component';
-import {citySelectors} from '../../../store/slices/city-slice';
 import FoundPlaces from '../found-places/found-places';
 import SortPlaces from '../sort-places/sort-places';
 import RentalOffersList from '../../rental-offers-list/rental-offers-list';
 import Map from '../../map/map';
 
-const MainContent = (): JSX.Element => {
-  const city = useAppSelector(citySelectors.city);
+type MainContentProps = {
+  city: CityTubs[number];
+};
+
+const MainContent = ({city}: MainContentProps): JSX.Element => {
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);

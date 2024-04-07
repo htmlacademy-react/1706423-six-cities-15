@@ -3,12 +3,15 @@ import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import {RequestStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Loader from '../../components/loader/loader';
-import {citySelectors} from '../../store/slices/city-slice';
 import {offersSelectors} from '../../store/slices/offers-slice';
 import MainContent from '../../components/main/main-content/main-content';
+import {CityTubs} from '../../types';
 
-const MainPage = (): JSX.Element => {
-  const city = useAppSelector(citySelectors.city);
+type MainPageProps = {
+  city: CityTubs[number];
+};
+
+const MainPage = ({city}: MainPageProps): JSX.Element => {
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status);
 
@@ -27,8 +30,8 @@ const MainPage = (): JSX.Element => {
         offersBySelectedCity.length === 0 ? 'page__main--index-empty' : ''}`}
       >
         <h1 className ="visually-hidden">Cities</h1>
-        <NavTabs />
-        <MainContent />
+        <NavTabs selectedCity={city.name} />
+        <MainContent city={city} />
       </main>
     </>
   );

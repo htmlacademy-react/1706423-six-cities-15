@@ -94,8 +94,9 @@ const OfferPage = (): JSX.Element => {
                 classNameCard={ClassName.Offer}
                 offers={nearestOffers}
               />}
-            {nearestOffersStatus === RequestStatus.Failed &&
-              <p>No places in the neighbourhood</p>}
+            {nearestOffersStatus === RequestStatus.Failed
+             || nearestOffers.length === 0
+             && <p style={{textAlign: 'center'}}>No places in the neighbourhood</p>}
           </section>
         </div>
       </main>

@@ -1,5 +1,5 @@
 import {AppRoute, LOGIN_ROOT_CLASS, MAIN_ROOT_CLASS, SortOption} from './const';
-import {Offer} from './types';
+import {CityTubs, Offer} from './types';
 
 export const getClassesLayout = (pathname: AppRoute) => {
   let classNameRoot = '';
@@ -21,3 +21,5 @@ export const sortBy = {
   [SortOption.PriceHighToLow]: (offers: Offer[]) => offers.sort((a, b) => b.price - a.price),
   [SortOption.RatingHighToLow]: (offers: Offer[]) => offers.sort((a, b) => b.rating - a.rating),
 };
+
+export const getRandomCity = (cities: CityTubs) => cities[Math.floor(Math.random() * cities.length)];
