@@ -1,9 +1,12 @@
 import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types';
-import FavoriteLocation from '../../components/favorite-location/favorite-location';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {offersSelectors} from '../../store/slices/offers-slice';
+import {favoritesSelectors} from '../../store/slices/favorites-slice';
+import EmptyFavoritesComponent from '../../components/favorites/empty-favorites-component/empty-favorites-component';
+import FavoritesContent from '../../components/favorites/favorites-content/favorites-content';
+import {RequestStatus} from '../../const';
+import Loader from '../../components/loader/loader';
 
 const groupByCityOffers = (offers: Offer[]) => {
   const groupedOffers = offers.reduce((obj: {[key: string]: Offer[]}, offer) => {
@@ -21,8 +24,13 @@ const groupByCityOffers = (offers: Offer[]) => {
 };
 
 const FavoritesPage = (): JSX.Element => {
-  const offers = useAppSelector(offersSelectors.offers);
-  const favoriteOffers = groupByCityOffers(offers.filter((offer) => offer.isFavorite));
+  const favoriteOffers = useAppSelector(favoritesSelectors.offers);
+  const requestStatus = useAppSelector(favoritesSelectors.status);
+  const groupedFavoriteOffers = groupByCityOffers(favoriteOffers);
+
+  if (requestStatus === RequestStatus.Loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -30,18 +38,8 @@ const FavoritesPage = (): JSX.Element => {
         <title>6 cities. Saved listing.</title>
       </Helmet>
 
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {Object.entries(favoriteOffers).map(([key, value]: [string, Offer[]]) => (
-                <FavoriteLocation key={key} city={key} offers={value} />
-              ))}
-            </ul>
-          </section>
-        </div>
-      </main>
+      {favoriteOffers.length === 0 && <EmptyFavoritesComponent />}
+      {favoriteOffers.length > 0 && <FavoritesContent groupedOffers={groupedFavoriteOffers} />}
       <Footer />
     </>
   );

@@ -1,16 +1,19 @@
 import {FormEvent, useCallback, useState} from 'react';
-import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING} from '../../../const';
+import {MAX_COMMENT_SYMBOLS, MIN_COMMENT_SYMBOLS, RATING, RequestStatus} from '../../../const';
 import {ChangeEventHandler} from '../../../types';
 import RatingFormField from '../rating-form-field/rating-form-field';
 import {postComment} from '../../../store/api-actions';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
-import ReviewTextarea from '../../review-textarea/review-textarea';
+import ReviewTextarea from '../review-textarea/review-textarea';
+import {useAppSelector} from '../../../hooks/use-app-selector';
+import {commentsSelectors} from '../../../store/slices/comments-slice';
 
 type ReviewFormProps = {
   id: string;
 }
 
 const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
+  const requestStatus = useAppSelector(commentsSelectors.status);
   const [ratingValue, setRatingValue] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const dispatch = useAppDispatch();
@@ -25,7 +28,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
     []
   );
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmitFormReview = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (ratingValue !== '' && comment !== '') {
@@ -35,15 +38,19 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
           comment: comment,
           rating: Number(ratingValue),
         },
-      }));
-      setRatingValue('');
-      setComment('');
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            setRatingValue('');
+            setComment('');
+          }
+        });
     }
   };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmitFormReview}
       className="reviews__form form"
       action="#" method="post"
     >
@@ -58,12 +65,14 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
               title={title}
               onChange={handleChangeRating}
               ratingValue={ratingValue}
+              disabled={requestStatus === RequestStatus.Loading}
             />
           ))}
       </div>
       <ReviewTextarea
         comment={comment}
         onChange={handleChangeComment}
+        disabled={requestStatus === RequestStatus.Loading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -76,6 +85,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
             ratingValue === ''
             || comment.length < MIN_COMMENT_SYMBOLS
             || comment.length > MAX_COMMENT_SYMBOLS
+            || requestStatus === RequestStatus.Loading
           }
         >
           Submit

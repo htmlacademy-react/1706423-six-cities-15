@@ -1,21 +1,25 @@
 import {Navigate} from 'react-router-dom';
-import {AppRoute, AuthStatus} from '../../const';
+import {AppRoute, AuthStatus, CITIES_TABS} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {userSelectors} from '../../store/slices/user-slice';
 
 type PrivateRouteProps = {
   children: JSX.Element;
-  isRevers?: boolean;
+  isReverse?: boolean;
 }
 
-const PrivateRoute = ({children, isRevers}: PrivateRouteProps): JSX.Element => {
+const PrivateRoute = ({children, isReverse}: PrivateRouteProps): JSX.Element => {
   const authStatus = useAppSelector(userSelectors.authStatus);
 
-  return (
-    authStatus === (isRevers ? AuthStatus.NoAuth : AuthStatus.Auth)
-      ? children
-      : <Navigate to={isRevers ? AppRoute.Main : AppRoute.Login} />
-  );
+  if (isReverse && authStatus === AuthStatus.Auth) {
+    return <Navigate to={`/${CITIES_TABS[0].id}`} />;
+  }
+
+  if (!isReverse && authStatus === AuthStatus.NoAuth) {
+    return <Navigate to={AppRoute.Login} />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;

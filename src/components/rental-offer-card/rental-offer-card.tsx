@@ -1,7 +1,8 @@
 import {Link, useLocation} from 'react-router-dom';
 import {memo} from 'react';
-import {AppRoute, FAVORITE_CARD_CLASS, STAR_WIDTH, IMG_CARD, IMG_CARD_FAVORITES} from '../../const';
+import {AppRoute, FAVORITE_CARD_CLASS, STAR_WIDTH, BookmarkButtonClass, IMAGE_SIZE} from '../../const';
 import {Offer} from '../../types';
+import BookmarkButton from '../bookmark-button/bookmark-button';
 
 type RentalOfferCardProps = {
   className: string;
@@ -25,8 +26,8 @@ const RentalOfferCard = memo(({className, offer, onMouseEnter, onMouseLeave}: Re
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} alt="Place image"
-            width={pathname as AppRoute === AppRoute.Favorites ? IMG_CARD_FAVORITES.width : IMG_CARD.width}
-            height={pathname as AppRoute === AppRoute.Favorites ? IMG_CARD_FAVORITES.height : IMG_CARD.height}
+            width={pathname as AppRoute === AppRoute.Favorites ? IMAGE_SIZE.cardFavorites.width : IMAGE_SIZE.card.width}
+            height={pathname as AppRoute === AppRoute.Favorites ? IMAGE_SIZE.cardFavorites.height : IMAGE_SIZE.card.height}
           />
         </Link>
       </div>
@@ -36,16 +37,11 @@ const RentalOfferCard = memo(({className, offer, onMouseEnter, onMouseLeave}: Re
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button button ${
-              isFavorite && 'place-card__bookmark-button--active'}`}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <BookmarkButton
+            offerId={id}
+            isFavorite={isFavorite}
+            className={BookmarkButtonClass.Card}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

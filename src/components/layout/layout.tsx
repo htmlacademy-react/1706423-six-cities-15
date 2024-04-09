@@ -3,10 +3,13 @@ import {AppRoute, ClassNameLogo} from '../../const';
 import HeaderNav from '../header-nav/header-nav';
 import {getClassesLayout} from '../../utils';
 import Logo from '../logo/logo';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { favoritesSelectors } from '../../store/slices/favorites-slice';
 
 const Layout = (): JSX.Element => {
   const {pathname} = useLocation();
-  const {classNameRoot} = getClassesLayout(pathname as AppRoute);
+  const favoriteOffersCount = useAppSelector(favoritesSelectors.offers).length;
+  const {classNameRoot} = getClassesLayout(pathname as AppRoute, !favoriteOffersCount);
 
   return (
     <div className={`page ${classNameRoot}`}>

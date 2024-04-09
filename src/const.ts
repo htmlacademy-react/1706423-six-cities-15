@@ -1,5 +1,6 @@
 export const CITIES_TABS = [
   {
+    id: 'paris',
     name: 'Paris',
     location: {
       latitude: 48.85661,
@@ -8,6 +9,7 @@ export const CITIES_TABS = [
     },
   },
   {
+    id: 'cologne',
     name: 'Cologne',
     location: {
       latitude: 50.938361,
@@ -16,6 +18,7 @@ export const CITIES_TABS = [
     },
   },
   {
+    id: 'brussels',
     name: 'Brussels',
     location: {
       latitude: 50.846557,
@@ -24,6 +27,7 @@ export const CITIES_TABS = [
     },
   },
   {
+    id: 'amsterdam',
     name: 'Amsterdam',
     location: {
       latitude: 52.37454,
@@ -32,6 +36,7 @@ export const CITIES_TABS = [
     },
   },
   {
+    id: 'hamburg',
     name: 'Hamburg',
     location: {
       latitude: 53.550341,
@@ -40,6 +45,7 @@ export const CITIES_TABS = [
     },
   },
   {
+    id: 'dusseldorf',
     name: 'Dusseldorf',
     location: {
       latitude: 51.225402,
@@ -58,15 +64,24 @@ export enum SortOption {
   RatingHighToLow = 'Top rated first',
 }
 
-export const IMG_CARD = {
-  width: '260',
-  height: '200',
-};
-
-export const IMG_CARD_FAVORITES = {
-  width: '150',
-  height: '110',
-};
+export const IMAGE_SIZE = {
+  card: {
+    width: '260',
+    height: '200',
+  },
+  cardFavorites: {
+    width: '150',
+    height: '110',
+  },
+  cardIcon: {
+    width: '18',
+    height: '19',
+  },
+  offerIcon: {
+    width: '31',
+    height: '33',
+  }
+} as const;
 
 export const RATING = {
   '5': 'perfect',
@@ -78,8 +93,10 @@ export const RATING = {
 
 export const STAR_WIDTH = 20;
 export const MAX_OFFER_PAGE_CARDS = 3;
+export const MAX_OFFER_IMAGES = 6;
 export const MAIN_ROOT_CLASS = 'page--gray page--main';
 export const LOGIN_ROOT_CLASS = 'page--gray page--login';
+export const FAVORITE_EMPTY_ROOT_CLASS = 'page--favorites-empty';
 export const FAVORITE_CARD_CLASS = 'favorites__card-info';
 export const MAX_RATING = 5;
 export const MAX_COMMENT_SYMBOLS = 300;
@@ -100,6 +117,11 @@ export enum ClassNameLogo {
   Footer = 'footer',
 }
 
+export enum BookmarkButtonClass {
+  Card = 'place-card',
+  Offer = 'offer',
+}
+
 export enum AppRoute {
   Main = '/',
   Favorites = '/favorites',
@@ -113,7 +135,7 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
-  Favorites = '/favorites',
+  Favorite = '/favorite',
 }
 
 export enum AuthStatus {

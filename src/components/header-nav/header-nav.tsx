@@ -1,18 +1,27 @@
 import {Link} from 'react-router-dom';
-import {memo} from 'react';
+import {MouseEventHandler, memo} from 'react';
 import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {logout} from '../../store/api-actions';
+import {fetchOffers, logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {offersSelectors} from '../../store/slices/offers-slice';
 import {userSelectors} from '../../store/slices/user-slice';
+import {favoritesSelectors} from '../../store/slices/favorites-slice';
 
 const HeaderNav = memo((): JSX.Element => {
-  const offers = useAppSelector(offersSelectors.offers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
+  const favoriteOffers = useAppSelector(favoritesSelectors.offers);
   const authStatus = useAppSelector(userSelectors.authStatus);
   const dispatch = useAppDispatch();
   const email = useAppSelector(userSelectors.email);
+
+  const handleClickLogout: MouseEventHandler = (evt) => {
+    evt.preventDefault();
+    dispatch(logout())
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          dispatch(fetchOffers());
+        }
+      });
+  };
 
   return (
     <nav className="header__nav">
@@ -34,10 +43,7 @@ const HeaderNav = memo((): JSX.Element => {
         {authStatus === AuthStatus.Auth &&
           <li className="header__nav-item">
             <Link
-              onClick={(evt) => {
-                evt.preventDefault();
-                dispatch(logout());
-              }}
+              onClick={handleClickLogout}
               className="header__nav-link"
               to={AppRoute.Login}
             >

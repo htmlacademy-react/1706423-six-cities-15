@@ -40,11 +40,7 @@ const Map = memo(({offers, city, selectedOfferId, className}: MapProps): JSX.Ele
       );
       markerLayer.current.addTo(map);
       markerLayer.current.clearLayers();
-    }
-  }, [city, map]);
 
-  useEffect(() => {
-    if (map) {
       offers.forEach(({id, location}) => {
         leaflet.marker({
           lat: location.latitude,
@@ -56,7 +52,7 @@ const Map = memo(({offers, city, selectedOfferId, className}: MapProps): JSX.Ele
         }).addTo(markerLayer.current);
       });
     }
-  }, [map, offers, selectedOfferId]);
+  }, [map, offers, selectedOfferId, city]);
 
   return (
     <section

@@ -1,24 +1,35 @@
 import {Helmet} from 'react-helmet-async';
-import {Link} from 'react-router-dom';
 import {FormEvent, useRef} from 'react';
-import {AppRoute} from '../../const';
+import {CITIES_TABS, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {login} from '../../store/api-actions';
+import {fetchFavorites, fetchOffers, login} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {userSelectors} from '../../store/slices/user-slice';
+import {getRandomCity} from '../../utils';
+import CityLink from '../../components/city-link/city-link';
 
 const LoginPage = (): JSX.Element => {
+  const requestStatus = useAppSelector(userSelectors.status);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const randomCity = getRandomCity(CITIES_TABS);
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmitFormLogin = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (emailRef.current !== null && passwordRef.current !== null) {
       dispatch(login({
         email: emailRef.current.value,
         password: passwordRef.current.value,
-      }));
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            dispatch(fetchOffers());
+            dispatch(fetchFavorites());
+          }
+        });
     }
   };
 
@@ -33,7 +44,7 @@ const LoginPage = (): JSX.Element => {
           <section className="login">
             <h1 className="login__title">Sign in</h1>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmitFormLogin}
               className="login__form form"
               action="#"
               method="post"
@@ -54,17 +65,22 @@ const LoginPage = (): JSX.Element => {
                   className="login__input form__input"
                   type="password" name="password"
                   placeholder="Password" required
-                  pattern='(?=.*[0-9])(?=.*[a-z]).{2,}'
+                  pattern='(?=.*[0-9])(?=.*[a-zA-Z]).{2,}'
+                  title='Минимум 1 цифра и 1 буква'
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button
+                disabled={requestStatus === RequestStatus.Loading}
+                className="login__submit form__submit button"
+                type="submit"
+              >
+                Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Main}>
-                <span>Amsterdam</span>
-              </Link>
+              <CityLink city={randomCity} />
             </div>
           </section>
         </div>
