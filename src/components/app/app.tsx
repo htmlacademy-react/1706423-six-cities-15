@@ -6,26 +6,24 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {AppRoute, AuthStatus, CITIES_TABS} from '../../const';
+import {AppRoute, CITIES_TABS} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {checkAuth, fetchFavorites, fetchOffers} from '../../store/api-actions';
-import {useAppSelector} from '../../hooks/use-app-selector';
-import {userSelectors} from '../../store/slices/user-slice';
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector(userSelectors.authStatus);
 
   useEffect(() => {
     dispatch(fetchOffers());
-    dispatch(checkAuth());
-
-    if (authStatus === AuthStatus.Auth) {
-      dispatch(fetchFavorites());
-    }
-  }, [dispatch, authStatus]);
+    dispatch(checkAuth())
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          dispatch(fetchFavorites());
+        }
+      });
+  }, [dispatch]);
 
   return (
     <HelmetProvider>
