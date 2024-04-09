@@ -20,8 +20,8 @@ import {commentsSelectors} from '../../store/slices/comments-slice';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 
 const OfferPage = (): JSX.Element => {
-  const offerStatus = useAppSelector(offerSelectors.status);
-  const nearestOffersStatus = useAppSelector(nearestOffersSelectors.status);
+  const offerRequestStatus = useAppSelector(offerSelectors.status);
+  const nearestOffersRequestStatus = useAppSelector(nearestOffersSelectors.status);
   const authStatus = useAppSelector(userSelectors.authStatus);
   const offer = useAppSelector(offerSelectors.offer);
   const nearestOffers = useAppSelector(nearestOffersSelectors.nearestOffers)
@@ -39,11 +39,11 @@ const OfferPage = (): JSX.Element => {
     ]);
   }, [dispatch, offerId]);
 
-  if (offerStatus === RequestStatus.Loading) {
+  if (offerRequestStatus === RequestStatus.Loading) {
     return <Loader />;
   }
 
-  if (offerStatus === RequestStatus.Failed || !offer) {
+  if (offerRequestStatus === RequestStatus.Failed || !offer) {
     return <NotFoundPage type='offer' />;
   }
 
@@ -88,13 +88,13 @@ const OfferPage = (): JSX.Element => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {nearestOffersStatus === RequestStatus.Success &&
+            {nearestOffersRequestStatus === RequestStatus.Success &&
               <RentalOfferList
                 classNamesList={'near-places__list'}
                 classNameCard={ClassName.Offer}
                 offers={nearestOffers}
               />}
-            {nearestOffersStatus === RequestStatus.Failed
+            {nearestOffersRequestStatus === RequestStatus.Failed
              || nearestOffers.length === 0
              && <p style={{textAlign: 'center'}}>No places in the neighbourhood</p>}
           </section>

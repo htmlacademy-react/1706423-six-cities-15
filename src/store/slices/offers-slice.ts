@@ -24,7 +24,9 @@ const offersSlice = createSlice({
   reducers: {
     changeFavoriteOffer: (state, action: PayloadAction<PayloadProps>) => {
       const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
-      state.offers[index].isFavorite = action.payload.isFavorite;
+      if (index !== -1) {
+        state.offers[index].isFavorite = action.payload.isFavorite;
+      }
     },
   },
   extraReducers(builder) {

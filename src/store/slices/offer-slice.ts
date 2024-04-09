@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {DataOffer} from '../../types';
 import {fetchOffer} from '../api-actions';
 import {RequestStatus} from '../../const';
@@ -13,10 +13,20 @@ const initialState: OfferState = {
   status: RequestStatus.Idle,
 };
 
+type PayloadOfferProps = {
+  id: string;
+  isFavorite: boolean;
+}
+
 const offerSlice = createSlice({
   name: 'offer',
   initialState,
   reducers: {
+    changeFavorite: (state, action: PayloadAction<PayloadOfferProps>) => {
+      if (state.offer?.id === action.payload.id) {
+        state.offer.isFavorite = action.payload.isFavorite;
+      }
+    },
   },
   extraReducers(builder) {
     builder
@@ -38,5 +48,6 @@ const offerSlice = createSlice({
 });
 
 const offerSelectors = offerSlice.selectors;
+const offerActions = offerSlice.actions;
 
-export {offerSlice, offerSelectors};
+export {offerSlice, offerSelectors, offerActions};
