@@ -5,9 +5,10 @@ type RatingFormFieldProps = {
   title: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   ratingValue: string;
+  disabled: boolean;
 }
 
-const RatingFormField = memo(({rating, title, onChange, ratingValue}: RatingFormFieldProps): JSX.Element => (
+const RatingFormField = memo(({rating, title, onChange, ratingValue, disabled}: RatingFormFieldProps): JSX.Element => (
   <>
     <input
       className="form__rating-input visually-hidden"
@@ -17,6 +18,7 @@ const RatingFormField = memo(({rating, title, onChange, ratingValue}: RatingForm
       type="radio"
       onChange={onChange}
       checked={ratingValue === rating}
+      disabled={disabled}
     />
     <label
       htmlFor={`${rating}-stars`}
