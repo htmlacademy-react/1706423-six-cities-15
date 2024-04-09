@@ -81,7 +81,7 @@ export const IMAGE_SIZE = {
     width: '31',
     height: '33',
   }
-};
+} as const;
 
 export const RATING = {
   '5': 'perfect',
@@ -93,8 +93,10 @@ export const RATING = {
 
 export const STAR_WIDTH = 20;
 export const MAX_OFFER_PAGE_CARDS = 3;
+export const MAX_OFFER_IMAGES = 6;
 export const MAIN_ROOT_CLASS = 'page--gray page--main';
 export const LOGIN_ROOT_CLASS = 'page--gray page--login';
+export const FAVORITE_EMPTY_ROOT_CLASS = 'page--favorites-empty';
 export const FAVORITE_CARD_CLASS = 'favorites__card-info';
 export const MAX_RATING = 5;
 export const MAX_COMMENT_SYMBOLS = 300;
