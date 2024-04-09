@@ -16,28 +16,22 @@ type MainContentProps = {
 
 const MainContent = ({city}: MainContentProps): JSX.Element => {
   const offers = useAppSelector(offersSelectors.offers);
-  const status = useAppSelector(offersSelectors.status);
+  const requestStatus = useAppSelector(offersSelectors.status);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
   const [activeSortItem, setActiveSortItem] = useState<SortItems[number]>(SORT_ITEMS[0]);
 
-  const handleOfferHover = (offer?: Offer) => {
-    let activeOffer: Offer | undefined;
-    if (offer) {
-      activeOffer = offers.find((item) => item.id === offer.id);
-    }
-    setSelectedOfferId(activeOffer ? activeOffer.id : null);
-  };
+  const handleOfferHover = (offer?: Offer) => setSelectedOfferId(offer ? offer.id : null);
 
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 
-  if (status === RequestStatus.Failed) {
+  if (requestStatus === RequestStatus.Failed) {
     return <p style={{textAlign: 'center'}}>Failed to load offers.</p>;
   }
 
   return(
     <div className="cities">
-      {status === RequestStatus.Success && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
-      {status === RequestStatus.Success && offersBySelectedCity.length > 0 &&
+      {requestStatus === RequestStatus.Success && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} />}
+      {requestStatus === RequestStatus.Success && offersBySelectedCity.length > 0 &&
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>

@@ -2,28 +2,34 @@ import {Helmet} from 'react-helmet-async';
 import {FormEvent, useRef} from 'react';
 import {CITIES_TABS, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {login} from '../../store/api-actions';
+import {fetchFavorites, fetchOffers, login} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {userSelectors} from '../../store/slices/user-slice';
-import { getRandomCity } from '../../utils';
+import {getRandomCity} from '../../utils';
 import CityLink from '../../components/city-link/city-link';
 
 const LoginPage = (): JSX.Element => {
-  const status = useAppSelector(userSelectors.status);
+  const requestStatus = useAppSelector(userSelectors.status);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const randomCity = getRandomCity(CITIES_TABS);
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmitFormLogin = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (emailRef.current !== null && passwordRef.current !== null) {
       dispatch(login({
         email: emailRef.current.value,
         password: passwordRef.current.value,
-      }));
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            dispatch(fetchOffers());
+            dispatch(fetchFavorites());
+          }
+        });
     }
   };
 
@@ -38,7 +44,7 @@ const LoginPage = (): JSX.Element => {
           <section className="login">
             <h1 className="login__title">Sign in</h1>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmitFormLogin}
               className="login__form form"
               action="#"
               method="post"
@@ -64,7 +70,7 @@ const LoginPage = (): JSX.Element => {
                 />
               </div>
               <button
-                disabled={status === RequestStatus.Loading}
+                disabled={requestStatus === RequestStatus.Loading}
                 className="login__submit form__submit button"
                 type="submit"
               >

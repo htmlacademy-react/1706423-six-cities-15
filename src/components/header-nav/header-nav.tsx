@@ -1,8 +1,8 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {MouseEventHandler, memo} from 'react';
 import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {logout} from '../../store/api-actions';
+import {fetchOffers, logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {userSelectors} from '../../store/slices/user-slice';
 import {favoritesSelectors} from '../../store/slices/favorites-slice';
@@ -12,12 +12,15 @@ const HeaderNav = memo((): JSX.Element => {
   const authStatus = useAppSelector(userSelectors.authStatus);
   const dispatch = useAppDispatch();
   const email = useAppSelector(userSelectors.email);
-  const navigate = useNavigate();
 
   const handleClickLogout: MouseEventHandler = (evt) => {
     evt.preventDefault();
     dispatch(logout())
-      .then(() => navigate(AppRoute.Login));
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          dispatch(fetchOffers());
+        }
+      });
   };
 
   return (

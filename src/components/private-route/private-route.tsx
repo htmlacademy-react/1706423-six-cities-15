@@ -1,28 +1,22 @@
-import {Navigate, useLocation, Location} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {Navigate} from 'react-router-dom';
+import {AppRoute, AuthStatus, CITIES_TABS} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {userSelectors} from '../../store/slices/user-slice';
 
 type PrivateRouteProps = {
   children: JSX.Element;
-  onlyNoAuth?: boolean;
+  isReverse?: boolean;
 }
 
-type FromState = {
-  from?: Location;
-}
+const PrivateRoute = ({children, isReverse}: PrivateRouteProps): JSX.Element => {
+  const authStatus = useAppSelector(userSelectors.authStatus);
 
-const PrivateRoute = ({children, onlyNoAuth}: PrivateRouteProps): JSX.Element => {
-  const location: Location<FromState> = useLocation() as Location<FromState>;
-  const user = useAppSelector(userSelectors.user);
-
-  if (onlyNoAuth && user) {
-    const from = location.state?.from || {pathname: AppRoute.Main};
-    return <Navigate to={from} />;
+  if (isReverse && authStatus === AuthStatus.Auth) {
+    return <Navigate to={`/${CITIES_TABS[0].id}`} />;
   }
 
-  if (!onlyNoAuth && !user) {
-    return <Navigate state={{from: location}} to={AppRoute.Login} />;
+  if (!isReverse && authStatus === AuthStatus.NoAuth) {
+    return <Navigate to={AppRoute.Login} />;
   }
 
   return children;

@@ -6,12 +6,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {AppRoute, CITIES_TABS} from '../../const';
+import {AppRoute, AuthStatus, CITIES_TABS} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {checkAuth, fetchFavorites, fetchOffers} from '../../store/api-actions';
-import {getToken} from '../../services/token';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {userSelectors} from '../../store/slices/user-slice';
 
@@ -21,16 +20,12 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(fetchOffers());
-  }, [dispatch, authStatus]);
+    dispatch(checkAuth());
 
-  const token = getToken();
-
-  useEffect(() => {
-    if (token) {
-      dispatch(checkAuth());
+    if (authStatus === AuthStatus.Auth) {
       dispatch(fetchFavorites());
     }
-  }, [dispatch, token]);
+  }, [dispatch, authStatus]);
 
   return (
     <HelmetProvider>
@@ -48,7 +43,7 @@ const App = (): JSX.Element => {
             />
             <Route path={AppRoute.NotFound} element={<NotFoundPage type='page' />} />
             <Route path={AppRoute.Login} element={
-              <PrivateRoute onlyNoAuth>
+              <PrivateRoute isReverse>
                 <LoginPage />
               </PrivateRoute>
             }

@@ -13,11 +13,11 @@ type MainPageProps = {
 
 const MainPage = ({city}: MainPageProps): JSX.Element => {
   const offers = useAppSelector(offersSelectors.offers);
-  const status = useAppSelector(offersSelectors.status);
+  const requestStatus = useAppSelector(offersSelectors.status);
 
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 
-  if (status === RequestStatus.Loading) {
+  if (requestStatus === RequestStatus.Loading) {
     return <Loader />;
   }
 
