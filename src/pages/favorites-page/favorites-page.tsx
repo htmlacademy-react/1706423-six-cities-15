@@ -24,11 +24,11 @@ const groupByCityOffers = (offers: Offer[]) => {
 };
 
 const FavoritesPage = (): JSX.Element => {
-  const offers = useAppSelector(favoritesSelectors.offers);
-  const status = useAppSelector(favoritesSelectors.status);
-  const groupedOffers = groupByCityOffers(offers);
+  const favoriteOffers = useAppSelector(favoritesSelectors.offers);
+  const requestStatus = useAppSelector(favoritesSelectors.status);
+  const groupedFavoriteOffers = groupByCityOffers(favoriteOffers);
 
-  if (status === RequestStatus.Loading) {
+  if (requestStatus === RequestStatus.Loading) {
     return <Loader />;
   }
 
@@ -38,8 +38,8 @@ const FavoritesPage = (): JSX.Element => {
         <title>6 cities. Saved listing.</title>
       </Helmet>
 
-      {offers.length === 0 && <EmptyFavoritesComponent />}
-      {offers.length > 0 && <FavoritesContent groupedOffers={groupedOffers} />}
+      {favoriteOffers.length === 0 && <EmptyFavoritesComponent />}
+      {favoriteOffers.length > 0 && <FavoritesContent groupedOffers={groupedFavoriteOffers} />}
       <Footer />
     </>
   );
