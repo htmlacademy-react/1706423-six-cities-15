@@ -14,7 +14,6 @@ type ReviewFormProps = {
 }
 
 const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
-  const requestStatus = useAppSelector(commentsSelectors.status);
   const postCommentStatus = useAppSelector(commentsSelectors.postCommentStatus);
   const [ratingValue, setRatingValue] = useState<string>('');
   const [comment, setComment] = useState<string>('');
@@ -67,14 +66,14 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
               title={title}
               onChange={handleChangeRating}
               ratingValue={ratingValue}
-              disabled={requestStatus === RequestStatus.Loading}
+              disabled={postCommentStatus === RequestStatus.Loading}
             />
           ))}
       </div>
       <ReviewTextarea
         comment={comment}
         onChange={handleChangeComment}
-        disabled={requestStatus === RequestStatus.Loading}
+        disabled={postCommentStatus === RequestStatus.Loading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -87,7 +86,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
             ratingValue === ''
             || comment.length < MIN_COMMENT_SYMBOLS
             || comment.length > MAX_COMMENT_SYMBOLS
-            || requestStatus === RequestStatus.Loading
+            || postCommentStatus === RequestStatus.Loading
           }
         >
           Submit
