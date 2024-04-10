@@ -7,9 +7,11 @@ import {useAppSelector} from '../../hooks/use-app-selector';
 import {userSelectors} from '../../store/slices/user-slice';
 import {getRandomCity} from '../../utils';
 import CityLink from '../../components/city-link/city-link';
+import ErrorMessage from '../../components/error-message/error-message';
 
 const LoginPage = (): JSX.Element => {
   const requestStatus = useAppSelector(userSelectors.status);
+  const hasErrorLogin = useAppSelector(userSelectors.hasErrorLogin);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const randomCity = getRandomCity(CITIES_TABS);
@@ -76,6 +78,7 @@ const LoginPage = (): JSX.Element => {
               >
                 Sign in
               </button>
+              {hasErrorLogin === RequestStatus.Failed && <ErrorMessage type='login' />}
             </form>
           </section>
           <section className="locations locations--login locations--current">

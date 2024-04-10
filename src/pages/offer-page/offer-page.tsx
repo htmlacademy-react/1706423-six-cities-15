@@ -18,6 +18,8 @@ import {nearestOffersSelectors} from '../../store/slices/nearestOffers-slice';
 import {userSelectors} from '../../store/slices/user-slice';
 import {commentsSelectors} from '../../store/slices/comments-slice';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
+import ErrorMessage from '../../components/error-message/error-message';
+import EmptyComponent from '../../components/empty-component/empty-component';
 
 const OfferPage = (): JSX.Element => {
   const offerRequestStatus = useAppSelector(offerSelectors.status);
@@ -94,9 +96,9 @@ const OfferPage = (): JSX.Element => {
                 classNameCard={ClassName.Offer}
                 offers={nearestOffers}
               />}
-            {nearestOffersRequestStatus === RequestStatus.Failed
-             || nearestOffers.length === 0
-             && <p style={{textAlign: 'center'}}>No places in the neighbourhood</p>}
+            {nearestOffersRequestStatus === RequestStatus.Failed && <ErrorMessage type='offers' />}
+            {nearestOffersRequestStatus === RequestStatus.Success && nearestOffers.length === 0
+              && <EmptyComponent type='offers' />}
           </section>
         </div>
       </main>

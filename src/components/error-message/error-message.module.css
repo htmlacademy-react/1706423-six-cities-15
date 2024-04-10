@@ -1,0 +1,14 @@
+.text {
+  position: relative;
+  margin: 0;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: -28px;
+  color: red;
+}
+
+.load {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 30px;
+}

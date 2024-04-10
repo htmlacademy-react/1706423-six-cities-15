@@ -7,12 +7,14 @@ type UserState = {
   authStatus: AuthStatus;
   userData: UserData | null;
   status: RequestStatus;
+  hasErrorLogin: RequestStatus;
 }
 
 const initialState: UserState = {
   authStatus: AuthStatus.Unknown,
   userData: null,
   status: RequestStatus.Idle,
+  hasErrorLogin: RequestStatus.Idle,
 };
 
 const userSlice = createSlice({
@@ -35,15 +37,18 @@ const userSlice = createSlice({
       })
       .addCase(login.pending, (state) => {
         state.status = RequestStatus.Loading;
+        state.hasErrorLogin = RequestStatus.Loading;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.authStatus = AuthStatus.Auth;
         state.userData = action.payload;
         state.status = RequestStatus.Success;
+        state.hasErrorLogin = RequestStatus.Success;
       })
       .addCase(login.rejected, (state) => {
         state.authStatus = AuthStatus.NoAuth;
         state.status = RequestStatus.Failed;
+        state.hasErrorLogin = RequestStatus.Failed;
       })
       .addCase(logout.fulfilled, (state) => {
         state.authStatus = AuthStatus.NoAuth;
@@ -56,6 +61,7 @@ const userSlice = createSlice({
     authStatus: (state: UserState) => state.authStatus,
     email: (state: UserState) => state.userData?.email,
     status: (state: UserState) => state.status,
+    hasErrorLogin: (state: UserState) => state.hasErrorLogin,
   }
 });
 

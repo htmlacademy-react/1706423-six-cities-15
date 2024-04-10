@@ -7,6 +7,7 @@ import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import ReviewTextarea from '../review-textarea/review-textarea';
 import {useAppSelector} from '../../../hooks/use-app-selector';
 import {commentsSelectors} from '../../../store/slices/comments-slice';
+import ErrorMessage from '../../error-message/error-message';
 
 type ReviewFormProps = {
   id: string;
@@ -14,6 +15,7 @@ type ReviewFormProps = {
 
 const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
   const requestStatus = useAppSelector(commentsSelectors.status);
+  const postCommentStatus = useAppSelector(commentsSelectors.postCommentStatus);
   const [ratingValue, setRatingValue] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const dispatch = useAppDispatch();
@@ -91,6 +93,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
           Submit
         </button>
       </div>
+      {postCommentStatus === RequestStatus.Failed && <ErrorMessage type='review' />}
     </form>
   );
 };

@@ -6,11 +6,13 @@ import {RequestStatus} from '../../const';
 type CommentsState = {
   comments: Comment[];
   status: RequestStatus;
+  postCommentStatus: RequestStatus;
 }
 
 const initialState: CommentsState = {
   comments: [],
   status: RequestStatus.Idle,
+  postCommentStatus: RequestStatus.Idle,
 };
 
 const commentsSlice = createSlice({
@@ -30,19 +32,20 @@ const commentsSlice = createSlice({
         state.status = RequestStatus.Failed;
       })
       .addCase(postComment.pending, (state) => {
-        state.status = RequestStatus.Loading;
+        state.postCommentStatus = RequestStatus.Loading;
       })
       .addCase(postComment.fulfilled, (state, action) => {
         state.comments.push(action.payload);
-        state.status = RequestStatus.Success;
+        state.postCommentStatus = RequestStatus.Success;
       })
       .addCase(postComment.rejected, (state) => {
-        state.status = RequestStatus.Failed;
+        state.postCommentStatus = RequestStatus.Failed;
       });
   },
   selectors: {
     comments: (state: CommentsState) => state.comments,
     status: (state: CommentsState) => state.status,
+    postCommentStatus: (state: CommentsState) => state.postCommentStatus,
   }
 });
 
