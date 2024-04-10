@@ -38,8 +38,10 @@ const FavoritesPage = (): JSX.Element => {
         <title>6 cities. Saved listing.</title>
       </Helmet>
 
-      {favoriteOffers.length === 0 && <EmptyFavoritesComponent />}
-      {favoriteOffers.length > 0 && <FavoritesContent groupedOffers={groupedFavoriteOffers} />}
+      {requestStatus === RequestStatus.Failed && <EmptyFavoritesComponent type='error' />}
+      {requestStatus === RequestStatus.Success && favoriteOffers.length === 0 && <EmptyFavoritesComponent type='empty' />}
+      {requestStatus === RequestStatus.Success && favoriteOffers.length > 0 &&
+        <FavoritesContent groupedOffers={groupedFavoriteOffers} />}
       <Footer />
     </>
   );

@@ -8,6 +8,7 @@ import {toggleFavorite} from '../../store/api-actions';
 import {favoritesSelectors} from '../../store/slices/favorites-slice';
 import {offersActions} from '../../store/slices/offers-slice';
 import {offerActions} from '../../store/slices/offer-slice';
+import { nearestOffersActions } from '../../store/slices/nearestOffers-slice';
 
 type BookmarkButtonProps = {
   isFavorite: boolean;
@@ -28,6 +29,7 @@ const BookmarkButton = memo(({offerId, isFavorite, className}:BookmarkButtonProp
           if (response.meta.requestStatus === 'fulfilled') {
             dispatch(offerActions.changeFavorite({id: offerId, isFavorite: !isFavorite}));
             dispatch(offersActions.changeFavoriteOffer({id: offerId, isFavorite: !isFavorite}));
+            dispatch(nearestOffersActions.changeFavoriteOffer({id: offerId, isFavorite: !isFavorite}));
           }
         });
     } else {

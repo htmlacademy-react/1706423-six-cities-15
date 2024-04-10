@@ -7,13 +7,14 @@ import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import ReviewTextarea from '../review-textarea/review-textarea';
 import {useAppSelector} from '../../../hooks/use-app-selector';
 import {commentsSelectors} from '../../../store/slices/comments-slice';
+import ErrorMessage from '../../error-message/error-message';
 
 type ReviewFormProps = {
   id: string;
 }
 
 const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
-  const requestStatus = useAppSelector(commentsSelectors.status);
+  const postCommentStatus = useAppSelector(commentsSelectors.postCommentStatus);
   const [ratingValue, setRatingValue] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const dispatch = useAppDispatch();
@@ -65,14 +66,14 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
               title={title}
               onChange={handleChangeRating}
               ratingValue={ratingValue}
-              disabled={requestStatus === RequestStatus.Loading}
+              disabled={postCommentStatus === RequestStatus.Loading}
             />
           ))}
       </div>
       <ReviewTextarea
         comment={comment}
         onChange={handleChangeComment}
-        disabled={requestStatus === RequestStatus.Loading}
+        disabled={postCommentStatus === RequestStatus.Loading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -85,12 +86,13 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
             ratingValue === ''
             || comment.length < MIN_COMMENT_SYMBOLS
             || comment.length > MAX_COMMENT_SYMBOLS
-            || requestStatus === RequestStatus.Loading
+            || postCommentStatus === RequestStatus.Loading
           }
         >
           Submit
         </button>
       </div>
+      {postCommentStatus === RequestStatus.Failed && <ErrorMessage type='review' />}
     </form>
   );
 };

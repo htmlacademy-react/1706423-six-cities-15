@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Offer} from '../../types';
 import {fetchNearestOffers} from '../api-actions';
 import {RequestStatus} from '../../const';
@@ -13,10 +13,22 @@ const initialState: NearestOffersState = {
   status: RequestStatus.Idle,
 };
 
+type PayloadProps = {
+  id: string;
+  isFavorite: boolean;
+}
+
 const nearestOffersSlice = createSlice({
   name: 'nearestOffers',
   initialState,
-  reducers: {},
+  reducers: {
+    changeFavoriteOffer: (state, action: PayloadAction<PayloadProps>) => {
+      const index = state.nearestOffers.findIndex((offer) => offer.id === action.payload.id);
+      if (index !== -1) {
+        state.nearestOffers[index].isFavorite = action.payload.isFavorite;
+      }
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchNearestOffers.pending, (state) => {
@@ -37,5 +49,6 @@ const nearestOffersSlice = createSlice({
 });
 
 const nearestOffersSelectors = nearestOffersSlice.selectors;
+const nearestOffersActions = nearestOffersSlice.actions;
 
-export {nearestOffersSlice, nearestOffersSelectors};
+export {nearestOffersSlice, nearestOffersSelectors, nearestOffersActions};
