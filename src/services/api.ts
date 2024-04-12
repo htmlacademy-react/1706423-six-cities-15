@@ -19,7 +19,7 @@ const shouldDisplayError = (response: AxiosResponse) => StatusCodeMapping[respon
 const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
-export const createAPi = (): AxiosInstance => {
+export const createApi = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,

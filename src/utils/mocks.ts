@@ -1,4 +1,11 @@
 import {Offer, Comment, DataOffer, UserData} from '../types';
+import { Action } from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {createApi} from '../services/api';
+import {State} from '../types';
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>;
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 
 export const makeFakeOffer = (isFavorite: boolean): Offer => (
   {
