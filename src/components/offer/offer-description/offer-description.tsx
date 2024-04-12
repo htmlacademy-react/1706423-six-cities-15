@@ -22,7 +22,7 @@ const OfferDescription = memo(({offer}: OfferDescriptionProps): JSX.Element => {
       </div>
       <ul className="offer__features">
         <li className="offer__feature offer__feature--entire">
-          {type}
+          {`${type.charAt(0).toUpperCase()}${type.slice(1)}`}
         </li>
         <li className="offer__feature offer__feature--bedrooms">
           {bedrooms} Bedroom{bedrooms > 1 && 's'}
