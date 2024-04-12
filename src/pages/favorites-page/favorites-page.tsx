@@ -9,15 +9,15 @@ import {RequestStatus} from '../../const';
 import Loader from '../../components/loader/loader';
 
 const groupByCityOffers = (offers: Offer[]) => {
-  const groupedOffers = offers.reduce((obj: {[key: string]: Offer[]}, offer) => {
+  const groupedOffers = offers.reduce((group: {[key: string]: Offer[]}, offer) => {
     const key = offer.city.name;
 
-    if (!obj.hasOwnProperty.call(obj, key)) {
-      obj[key] = [];
+    if (!group.hasOwnProperty.call(group, key)) {
+      group[key] = [];
     }
 
-    obj[key].push(offer);
-    return obj;
+    group[key].push(offer);
+    return group;
   }, {});
 
   return groupedOffers;
