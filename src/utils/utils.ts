@@ -1,5 +1,5 @@
-import {AppRoute, CITIES_TABS, FAVORITE_EMPTY_ROOT_CLASS, LOGIN_ROOT_CLASS, MAIN_ROOT_CLASS, SortOption} from './const';
-import {CityTubs, Offer} from './types';
+import {AppRoute, CITIES_TABS, FAVORITE_EMPTY_ROOT_CLASS, LOGIN_ROOT_CLASS, MAIN_ROOT_CLASS, SortOption} from '../const';
+import {CityTubs, Offer} from '../types';
 
 export const getClassesLayout = (pathname: AppRoute, isEmpty: boolean) => {
   let classNameRoot = '';

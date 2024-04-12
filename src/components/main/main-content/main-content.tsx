@@ -2,7 +2,7 @@ import {useState} from 'react';
 import cn from 'classnames';
 import {ClassName, RequestStatus, SORT_ITEMS} from '../../../const';
 import {useAppSelector} from '../../../hooks/use-app-selector';
-import {offersSelectors} from '../../../store/slices/offers-slice';
+import {offersSelectors} from '../../../store/offers-slice/offers-slice';
 import {CityTubs, Offer, SortItems} from '../../../types';
 import EmptyMainComponent from '../empty-main-component/empty-main-component';
 import FoundPlaces from '../found-places/found-places';

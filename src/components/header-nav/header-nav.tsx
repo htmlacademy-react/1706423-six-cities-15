@@ -4,8 +4,8 @@ import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {fetchOffers, logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {userSelectors} from '../../store/slices/user-slice';
-import {favoritesSelectors} from '../../store/slices/favorites-slice';
+import {userSelectors} from '../../store/user-slice/user-slice';
+import {favoritesSelectors} from '../../store/favorites-slice/favorites-slice';
 
 const HeaderNav = memo((): JSX.Element => {
   const favoriteOffers = useAppSelector(favoritesSelectors.offers);

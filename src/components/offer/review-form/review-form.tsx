@@ -6,7 +6,7 @@ import {postComment} from '../../../store/api-actions';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import ReviewTextarea from '../review-textarea/review-textarea';
 import {useAppSelector} from '../../../hooks/use-app-selector';
-import {commentsSelectors} from '../../../store/slices/comments-slice';
+import {commentsSelectors} from '../../../store/comments-slice/comments-slice';
 import ErrorMessage from '../../error-message/error-message';
 
 type ReviewFormProps = {

@@ -2,7 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {favoritesSelectors} from '../../store/slices/favorites-slice';
+import {favoritesSelectors} from '../../store/favorites-slice/favorites-slice';
 import EmptyFavoritesComponent from '../../components/favorites/empty-favorites-component/empty-favorites-component';
 import FavoritesContent from '../../components/favorites/favorites-content/favorites-content';
 import {RequestStatus} from '../../const';

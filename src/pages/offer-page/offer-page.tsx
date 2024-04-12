@@ -13,10 +13,10 @@ import {AuthStatus, BookmarkButtonClass, ClassName, MAX_OFFER_PAGE_CARDS, Reques
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchComments, fetchNearestOffers, fetchOffer} from '../../store/api-actions';
-import {offerSelectors} from '../../store/slices/offer-slice';
-import {nearestOffersSelectors} from '../../store/slices/nearestOffers-slice';
-import {userSelectors} from '../../store/slices/user-slice';
-import {commentsSelectors} from '../../store/slices/comments-slice';
+import {offerSelectors} from '../../store/offer-slice/offer-slice';
+import {nearestOffersSelectors} from '../../store/nearest-offers-slice/nearest-offers-slice';
+import {userSelectors} from '../../store/user-slice/user-slice';
+import {commentsSelectors} from '../../store/comments-slice/comments-slice';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import ErrorMessage from '../../components/error-message/error-message';
 import EmptyComponent from '../../components/empty-component/empty-component';

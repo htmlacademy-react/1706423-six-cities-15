@@ -3,7 +3,7 @@ import Review from '../review/review';
 import {Comment} from '../../../types';
 import {MAX_REVIEWS, RequestStatus} from '../../../const';
 import { useAppSelector } from '../../../hooks/use-app-selector';
-import { commentsSelectors } from '../../../store/slices/comments-slice';
+import { commentsSelectors } from '../../../store/comments-slice/comments-slice';
 import ErrorMessage from '../../error-message/error-message';
 import EmptyComponent from '../../empty-component/empty-component';
 

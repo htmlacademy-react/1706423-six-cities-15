@@ -4,8 +4,8 @@ import {CITIES_TABS, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchFavorites, fetchOffers, login} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {userSelectors} from '../../store/slices/user-slice';
-import {getRandomCity} from '../../utils';
+import {userSelectors} from '../../store/user-slice/user-slice';
+import {getRandomCity} from '../../utils/utils';
 import CityLink from '../../components/city-link/city-link';
 import ErrorMessage from '../../components/error-message/error-message';
 
