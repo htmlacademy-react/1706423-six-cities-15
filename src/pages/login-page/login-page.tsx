@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {FormEvent, useRef} from 'react';
+import {FormEvent, useMemo, useRef} from 'react';
 import {CITIES_TABS, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchFavorites, fetchOffers, login} from '../../store/api-actions';
@@ -14,7 +14,7 @@ const LoginPage = (): JSX.Element => {
   const hasErrorLogin = useAppSelector(userSelectors.hasErrorLogin);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const randomCity = getRandomCity(CITIES_TABS);
+  const randomCity = useMemo(() => getRandomCity(CITIES_TABS), []);
 
   const dispatch = useAppDispatch();
 
