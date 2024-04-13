@@ -124,7 +124,7 @@ export enum BookmarkButtonClass {
 export enum AppRoute {
   Main = '/',
   Favorites = '/favorites',
-  Offer = '/offers/:offerId',
+  Offer = '/offer/:offerId',
   Login = '/login',
   NotFound = '*',
 }
