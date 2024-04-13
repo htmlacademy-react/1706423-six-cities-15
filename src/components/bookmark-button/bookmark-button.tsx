@@ -1,14 +1,14 @@
 import {memo} from 'react';
 import {AppRoute, AuthStatus, BookmarkButtonClass, IMAGE_SIZE, RequestStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {userSelectors} from '../../store/slices/user-slice';
+import {userSelectors} from '../../store/user-slice/user-slice';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useNavigate} from 'react-router-dom';
 import {toggleFavorite} from '../../store/api-actions';
-import {favoritesSelectors} from '../../store/slices/favorites-slice';
-import {offersActions} from '../../store/slices/offers-slice';
-import {offerActions} from '../../store/slices/offer-slice';
-import { nearestOffersActions } from '../../store/slices/nearestOffers-slice';
+import {favoritesSelectors} from '../../store/favorites-slice/favorites-slice';
+import {offersActions} from '../../store/offers-slice/offers-slice';
+import {offerActions} from '../../store/offer-slice/offer-slice';
+import { nearestOffersActions } from '../../store/nearest-offers-slice/nearest-offers-slice';
 
 type BookmarkButtonProps = {
   isFavorite: boolean;
@@ -39,6 +39,7 @@ const BookmarkButton = memo(({offerId, isFavorite, className}:BookmarkButtonProp
 
   return (
     <button
+      data-testid="bookmark"
       disabled={requestStatus === RequestStatus.Loading}
       onClick={handleButtonClick}
       className={`${className}__bookmark-button button ${

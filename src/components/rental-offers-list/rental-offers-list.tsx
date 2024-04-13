@@ -2,7 +2,7 @@ import {memo, useCallback} from 'react';
 import {ClassName} from '../../const';
 import {Offer, SortItems} from '../../types';
 import RentalOfferCard from '../rental-offer-card/rental-offer-card';
-import {sortBy} from '../../utils';
+import {sortBy} from '../../utils/utils';
 
 type RentalOffersListProps = {
   classNamesList: string;
@@ -27,7 +27,7 @@ const RentalOfferList = memo(({offers, onOfferHover, classNameCard, classNamesLi
     : offers;
 
   return (
-    <div className={`${classNamesList} places__list`}>
+    <div className={`${classNamesList} places__list`} data-testid="places-list">
       {currentOffers.map((offer) => (
         <RentalOfferCard
           className={classNameCard}

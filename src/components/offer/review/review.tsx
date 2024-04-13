@@ -11,7 +11,7 @@ const Review = memo(({review}: ReviewProps): JSX.Element => {
   const commentData: Date = new Date(date);
 
   return (
-    <li className="reviews__item">
+    <li className="reviews__item" data-testid="review-container">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img

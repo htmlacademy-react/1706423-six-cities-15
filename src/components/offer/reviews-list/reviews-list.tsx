@@ -3,7 +3,7 @@ import Review from '../review/review';
 import {Comment} from '../../../types';
 import {MAX_REVIEWS, RequestStatus} from '../../../const';
 import { useAppSelector } from '../../../hooks/use-app-selector';
-import { commentsSelectors } from '../../../store/slices/comments-slice';
+import { commentsSelectors } from '../../../store/comments-slice/comments-slice';
 import ErrorMessage from '../../error-message/error-message';
 import EmptyComponent from '../../empty-component/empty-component';
 
@@ -17,7 +17,7 @@ const ReviewsList = memo(({comments}: ReviewsListProps): JSX.Element => {
 
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
+      <h2 className="reviews__title" data-testid="reviews-title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
       {requestStatus === RequestStatus.Failed && <ErrorMessage type='reviews' />}
       {requestStatus === RequestStatus.Success && comments.length === 0 && <EmptyComponent type='reviews' />}
       {requestStatus === RequestStatus.Success && comments.length > 0 &&

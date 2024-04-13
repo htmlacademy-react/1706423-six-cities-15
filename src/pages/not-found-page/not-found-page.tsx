@@ -16,7 +16,7 @@ type NotFoundPageProps = {
 const NotFoundPage = ({type}: NotFoundPageProps): JSX.Element => (
   <>
     <Helmet>
-      <title>6 cities. Page not found.</title>
+      <title>6 cities. {variants[type].text}</title>
     </Helmet>
     <main className="page__main">
       <section className={cls.content}>

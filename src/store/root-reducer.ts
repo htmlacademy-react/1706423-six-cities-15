@@ -1,10 +1,10 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {offersSlice} from './slices/offers-slice';
-import {userSlice} from './slices/user-slice';
-import {offerSlice} from './slices/offer-slice';
-import {nearestOffersSlice} from './slices/nearestOffers-slice';
-import {commentsSlice} from './slices/comments-slice';
-import {favoritesSlice} from './slices/favorites-slice';
+import {offersSlice} from './offers-slice/offers-slice';
+import {userSlice} from './user-slice/user-slice';
+import {offerSlice} from './offer-slice/offer-slice';
+import {nearestOffersSlice} from './nearest-offers-slice/nearest-offers-slice';
+import {commentsSlice} from './comments-slice/comments-slice';
+import {favoritesSlice} from './favorites-slice/favorites-slice';
 
 export const rootReducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,

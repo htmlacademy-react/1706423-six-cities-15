@@ -6,7 +6,7 @@ type NavTabsProps = {
 };
 
 const NavTabs = ({selectedCity}: NavTabsProps): JSX.Element =>(
-  <div className="tabs">
+  <div className="tabs" data-testid="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {CITIES_TABS.map((city) => (

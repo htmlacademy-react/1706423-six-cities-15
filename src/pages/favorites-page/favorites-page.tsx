@@ -2,22 +2,22 @@ import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {favoritesSelectors} from '../../store/slices/favorites-slice';
+import {favoritesSelectors} from '../../store/favorites-slice/favorites-slice';
 import EmptyFavoritesComponent from '../../components/favorites/empty-favorites-component/empty-favorites-component';
 import FavoritesContent from '../../components/favorites/favorites-content/favorites-content';
 import {RequestStatus} from '../../const';
 import Loader from '../../components/loader/loader';
 
 const groupByCityOffers = (offers: Offer[]) => {
-  const groupedOffers = offers.reduce((obj: {[key: string]: Offer[]}, offer) => {
+  const groupedOffers = offers.reduce((group: {[key: string]: Offer[]}, offer) => {
     const key = offer.city.name;
 
-    if (!obj.hasOwnProperty.call(obj, key)) {
-      obj[key] = [];
+    if (!group.hasOwnProperty.call(group, key)) {
+      group[key] = [];
     }
 
-    obj[key].push(offer);
-    return obj;
+    group[key].push(offer);
+    return group;
   }, {});
 
   return groupedOffers;

@@ -1,10 +1,10 @@
 import {Outlet, useLocation} from 'react-router-dom';
 import {AppRoute, ClassNameLogo} from '../../const';
 import HeaderNav from '../header-nav/header-nav';
-import {getClassesLayout} from '../../utils';
+import {getClassesLayout} from '../../utils/utils';
 import Logo from '../logo/logo';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { favoritesSelectors } from '../../store/slices/favorites-slice';
+import { favoritesSelectors } from '../../store/favorites-slice/favorites-slice';
 
 const Layout = (): JSX.Element => {
   const {pathname} = useLocation();
@@ -12,7 +12,7 @@ const Layout = (): JSX.Element => {
   const {classNameRoot} = getClassesLayout(pathname as AppRoute, !favoriteOffersCount);
 
   return (
-    <div className={`page ${classNameRoot}`}>
+    <div className={`page ${classNameRoot}`} data-testid="layout">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

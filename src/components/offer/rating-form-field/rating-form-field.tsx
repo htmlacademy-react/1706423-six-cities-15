@@ -19,6 +19,7 @@ const RatingFormField = memo(({rating, title, onChange, ratingValue, disabled}: 
       onChange={onChange}
       checked={ratingValue === rating}
       disabled={disabled}
+      data-testid="rating-input"
     />
     <label
       htmlFor={`${rating}-stars`}

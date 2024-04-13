@@ -13,16 +13,16 @@ const OfferDescription = memo(({offer}: OfferDescriptionProps): JSX.Element => {
 
   return (
     <>
-      <div className="offer__rating rating">
+      <div className="offer__rating rating" data-testid="offer-rating">
         <div className="offer__stars rating__stars">
           <span style={{width: `${STAR_WIDTH * Math.round(rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="offer__rating-value rating__value">{rating}</span>
       </div>
-      <ul className="offer__features">
+      <ul className="offer__features" data-testid="offer-features">
         <li className="offer__feature offer__feature--entire">
-          {type}
+          {`${type.charAt(0).toUpperCase()}${type.slice(1)}`}
         </li>
         <li className="offer__feature offer__feature--bedrooms">
           {bedrooms} Bedroom{bedrooms > 1 && 's'}
@@ -31,7 +31,7 @@ const OfferDescription = memo(({offer}: OfferDescriptionProps): JSX.Element => {
             Max {maxAdults} adult{maxAdults > 1 && 's'}
         </li>
       </ul>
-      <div className="offer__price">
+      <div className="offer__price" data-testid="offer-price">
         <b className="offer__price-value">&euro;{price}</b>
         <span className="offer__price-text">&nbsp;night</span>
       </div>

@@ -1,11 +1,11 @@
 import {Helmet} from 'react-helmet-async';
-import {FormEvent, useRef} from 'react';
+import {FormEvent, useMemo, useRef} from 'react';
 import {CITIES_TABS, RequestStatus} from '../../const';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {fetchFavorites, fetchOffers, login} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {userSelectors} from '../../store/slices/user-slice';
-import {getRandomCity} from '../../utils';
+import {userSelectors} from '../../store/user-slice/user-slice';
+import {getRandomCity} from '../../utils/utils';
 import CityLink from '../../components/city-link/city-link';
 import ErrorMessage from '../../components/error-message/error-message';
 
@@ -14,7 +14,7 @@ const LoginPage = (): JSX.Element => {
   const hasErrorLogin = useAppSelector(userSelectors.hasErrorLogin);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const randomCity = getRandomCity(CITIES_TABS);
+  const randomCity = useMemo(() => getRandomCity(CITIES_TABS), []);
 
   const dispatch = useAppDispatch();
 
@@ -41,7 +41,7 @@ const LoginPage = (): JSX.Element => {
         <title>6 cities. Sign in.</title>
       </Helmet>
 
-      <main className="page__main page__main--login">
+      <main data-testid="login-page" className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
@@ -58,6 +58,7 @@ const LoginPage = (): JSX.Element => {
                   className="login__input form__input"
                   type="email" name="email"
                   placeholder="Email" required
+                  data-testid="email"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -69,6 +70,7 @@ const LoginPage = (): JSX.Element => {
                   placeholder="Password" required
                   pattern='(?=.*[0-9])(?=.*[a-zA-Z]).{2,}'
                   title='Минимум 1 цифра и 1 буква'
+                  data-testid="password"
                 />
               </div>
               <button

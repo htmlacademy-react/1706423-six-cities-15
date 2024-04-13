@@ -58,6 +58,7 @@ const Map = memo(({offers, city, selectedOfferId, className}: MapProps): JSX.Ele
     <section
       className={`${className}__map map`}
       ref={mapRef}
+      data-testid="map"
     >
 
     </section>

@@ -12,7 +12,7 @@ const FavoriteLocation = ({city, offers}: FavoriteLocationProps): JSX.Element =>
   const currentCity = CITIES_TABS.find((item) => item.name === city) as CityTubs[number];
 
   return (
-    <li className="favorites__locations-items">
+    <li className="favorites__locations-items" data-testid="favorites-location">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <CityLink city={currentCity} />

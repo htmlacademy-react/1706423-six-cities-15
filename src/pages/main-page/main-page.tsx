@@ -3,7 +3,7 @@ import NavTabs from '../../components/main/nav-tabs/nav-tabs';
 import {RequestStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Loader from '../../components/loader/loader';
-import {offersSelectors} from '../../store/slices/offers-slice';
+import {offersSelectors} from '../../store/offers-slice/offers-slice';
 import MainContent from '../../components/main/main-content/main-content';
 import {CityTubs} from '../../types';
 

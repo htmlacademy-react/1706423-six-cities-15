@@ -2,7 +2,7 @@ import {useState} from 'react';
 import cn from 'classnames';
 import {ClassName, RequestStatus, SORT_ITEMS} from '../../../const';
 import {useAppSelector} from '../../../hooks/use-app-selector';
-import {offersSelectors} from '../../../store/slices/offers-slice';
+import {offersSelectors} from '../../../store/offers-slice/offers-slice';
 import {CityTubs, Offer, SortItems} from '../../../types';
 import EmptyMainComponent from '../empty-main-component/empty-main-component';
 import FoundPlaces from '../found-places/found-places';
@@ -25,7 +25,7 @@ const MainContent = ({city}: MainContentProps): JSX.Element => {
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 
   return(
-    <div className="cities">
+    <div className="cities" data-testid="main-content">
       {requestStatus === RequestStatus.Failed && <EmptyMainComponent city={city} type='error' />}
       {requestStatus === RequestStatus.Success && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} type='empty' />}
       {requestStatus === RequestStatus.Success && offersBySelectedCity.length > 0 &&

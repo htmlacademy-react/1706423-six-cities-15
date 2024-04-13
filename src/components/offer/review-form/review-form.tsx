@@ -6,7 +6,7 @@ import {postComment} from '../../../store/api-actions';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch';
 import ReviewTextarea from '../review-textarea/review-textarea';
 import {useAppSelector} from '../../../hooks/use-app-selector';
-import {commentsSelectors} from '../../../store/slices/comments-slice';
+import {commentsSelectors} from '../../../store/comments-slice/comments-slice';
 import ErrorMessage from '../../error-message/error-message';
 
 type ReviewFormProps = {
@@ -54,6 +54,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
       onSubmit={handleSubmitFormReview}
       className="reviews__form form"
       action="#" method="post"
+      data-testid="reviews-form"
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
