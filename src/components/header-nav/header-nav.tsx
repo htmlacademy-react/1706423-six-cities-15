@@ -1,8 +1,8 @@
-import {Link} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import {MouseEventHandler, memo} from 'react';
 import {AppRoute, AuthStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {fetchOffers, logout} from '../../store/api-actions';
+import {fetchNearestOffers, fetchOffer, fetchOffers, logout} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {userSelectors} from '../../store/user-slice/user-slice';
 import {favoritesSelectors} from '../../store/favorites-slice/favorites-slice';
@@ -12,6 +12,8 @@ const HeaderNav = memo((): JSX.Element => {
   const authStatus = useAppSelector(userSelectors.authStatus);
   const dispatch = useAppDispatch();
   const email = useAppSelector(userSelectors.email);
+  const {pathname} = useLocation();
+  const {offerId} = useParams();
 
   const handleClickLogout: MouseEventHandler = (evt) => {
     evt.preventDefault();
@@ -19,6 +21,10 @@ const HeaderNav = memo((): JSX.Element => {
       .then((response) => {
         if (response.meta.requestStatus === 'fulfilled') {
           dispatch(fetchOffers());
+          if (pathname === `/offer/${offerId}`) {
+            dispatch(fetchOffer(offerId as string));
+            dispatch(fetchNearestOffers(offerId as string));
+          }
         }
       });
   };
