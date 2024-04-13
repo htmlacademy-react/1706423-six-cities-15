@@ -34,7 +34,7 @@ describe('Favorite Offers Slice', () => {
       status: RequestStatus.Loading,
     };
 
-    const result = favoritesSlice.reducer(undefined, fetchFavorites.pending);
+    const result = favoritesSlice.reducer(undefined, fetchFavorites.pending('', undefined));
 
     expect(result).toEqual(expectedState);
   });
@@ -57,18 +57,23 @@ describe('Favorite Offers Slice', () => {
       status: RequestStatus.Failed,
     };
 
-    const result = favoritesSlice.reducer(undefined, fetchFavorites.rejected);
+    const result = favoritesSlice.reducer(undefined, fetchFavorites.rejected(null, '', undefined));
 
     expect(result).toEqual(expectedState);
   });
 
   it('should set "status" to "RequestStatus.Loading" with "toggleFavorite.pending"', () => {
+    const mockOffer = makeFakeOffer(false);
+    const favoriteData = {
+      offerId: mockOffer.id,
+      status: 1,
+    };
     const expectedState = {
       offers: [],
       status: RequestStatus.Loading,
     };
 
-    const result = favoritesSlice.reducer(undefined, toggleFavorite.pending);
+    const result = favoritesSlice.reducer(undefined, toggleFavorite.pending('', favoriteData));
 
     expect(result).toEqual(expectedState);
   });
@@ -114,12 +119,17 @@ describe('Favorite Offers Slice', () => {
   });
 
   it('should set "status" to "RequestStatus.Failed" with "toggleFavorite.rejected', () => {
+    const mockOffer = makeFakeOffer(false);
+    const favoriteData = {
+      offerId: mockOffer.id,
+      status: 1,
+    };
     const expectedState = {
       offers: [],
       status: RequestStatus.Failed,
     };
 
-    const result = favoritesSlice.reducer(undefined, toggleFavorite.rejected);
+    const result = favoritesSlice.reducer(undefined, toggleFavorite.rejected(null, '', favoriteData));
 
     expect(result).toEqual(expectedState);
   });

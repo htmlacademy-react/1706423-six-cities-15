@@ -40,7 +40,7 @@ describe('User Slice', () => {
       hasErrorLogin: RequestStatus.Idle,
     };
 
-    const result = userSlice.reducer(undefined, checkAuth.pending);
+    const result = userSlice.reducer(undefined, checkAuth.pending('', undefined));
 
     expect(result).toEqual(expectedState);
   });
@@ -67,12 +67,14 @@ describe('User Slice', () => {
       hasErrorLogin: RequestStatus.Idle,
     };
 
-    const result = userSlice.reducer(undefined, checkAuth.rejected);
+    const result = userSlice.reducer(undefined, checkAuth.rejected(null, '', undefined));
 
     expect(result).toEqual(expectedState);
   });
 
   it('should set "status" and "hasErrorLogin" to "RequestStatus.Loading" with "login.pending"', () => {
+    const user = makeFakeUser();
+    const userData = {email: user.email, password: 'w2'};
     const expectedState = {
       authStatus: AuthStatus.Unknown,
       userData: null,
@@ -80,7 +82,7 @@ describe('User Slice', () => {
       hasErrorLogin: RequestStatus.Loading,
     };
 
-    const result = userSlice.reducer(undefined, login.pending);
+    const result = userSlice.reducer(undefined, login.pending('', userData));
 
     expect(result).toEqual(expectedState);
   });
@@ -101,6 +103,8 @@ describe('User Slice', () => {
   });
 
   it('should set "NoAuth" with "login.rejected" action', () => {
+    const user = makeFakeUser();
+    const userData = {email: user.email, password: 'w2'};
     const expectedState = {
       authStatus: AuthStatus.NoAuth,
       userData: null,
@@ -108,7 +112,7 @@ describe('User Slice', () => {
       hasErrorLogin: RequestStatus.Failed,
     };
 
-    const result = userSlice.reducer(undefined, login.rejected);
+    const result = userSlice.reducer(undefined, login.rejected(null, '', userData));
 
     expect(result).toEqual(expectedState);
   });
@@ -128,7 +132,7 @@ describe('User Slice', () => {
       hasErrorLogin: RequestStatus.Idle,
     };
 
-    const result = userSlice.reducer(initialState, logout.fulfilled);
+    const result = userSlice.reducer(initialState, logout.fulfilled(undefined, '', undefined));
 
     expect(result).toEqual(expectedState);
   });

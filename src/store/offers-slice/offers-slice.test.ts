@@ -34,7 +34,7 @@ describe('Offers Slice', () => {
       status: RequestStatus.Loading,
     };
 
-    const result = offersSlice.reducer(undefined, fetchOffers.pending);
+    const result = offersSlice.reducer(undefined, fetchOffers.pending('', undefined));
 
     expect(result).toEqual(expectedState);
   });
@@ -57,7 +57,7 @@ describe('Offers Slice', () => {
       status: RequestStatus.Failed,
     };
 
-    const result = offersSlice.reducer(undefined, fetchOffers.rejected);
+    const result = offersSlice.reducer(undefined, fetchOffers.rejected(null, '', undefined));
 
     expect(result).toEqual(expectedState);
   });

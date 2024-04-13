@@ -34,7 +34,7 @@ describe('Nearest Offers Slice', () => {
       status: RequestStatus.Loading,
     };
 
-    const result = nearestOffersSlice.reducer(undefined, fetchNearestOffers.pending);
+    const result = nearestOffersSlice.reducer(undefined, fetchNearestOffers.pending('', ''));
 
     expect(result).toEqual(expectedState);
   });
@@ -57,7 +57,7 @@ describe('Nearest Offers Slice', () => {
       status: RequestStatus.Failed,
     };
 
-    const result = nearestOffersSlice.reducer(undefined, fetchNearestOffers.rejected);
+    const result = nearestOffersSlice.reducer(undefined, fetchNearestOffers.rejected(null, '', ''));
 
     expect(result).toEqual(expectedState);
   });
