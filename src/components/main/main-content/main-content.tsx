@@ -25,7 +25,7 @@ const MainContent = ({city}: MainContentProps): JSX.Element => {
   const offersBySelectedCity = offers.filter((offer) => offer.city.name === city.name);
 
   return(
-    <div className="cities">
+    <div className="cities" data-testid="main-content">
       {requestStatus === RequestStatus.Failed && <EmptyMainComponent city={city} type='error' />}
       {requestStatus === RequestStatus.Success && offersBySelectedCity.length === 0 && <EmptyMainComponent city={city} type='empty' />}
       {requestStatus === RequestStatus.Success && offersBySelectedCity.length > 0 &&

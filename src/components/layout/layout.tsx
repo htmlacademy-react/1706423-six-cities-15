@@ -12,7 +12,7 @@ const Layout = (): JSX.Element => {
   const {classNameRoot} = getClassesLayout(pathname as AppRoute, !favoriteOffersCount);
 
   return (
-    <div className={`page ${classNameRoot}`}>
+    <div className={`page ${classNameRoot}`} data-testid="layout">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

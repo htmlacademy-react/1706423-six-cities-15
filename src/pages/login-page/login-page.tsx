@@ -41,7 +41,7 @@ const LoginPage = (): JSX.Element => {
         <title>6 cities. Sign in.</title>
       </Helmet>
 
-      <main className="page__main page__main--login">
+      <main data-testid="login-page" className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
@@ -58,6 +58,7 @@ const LoginPage = (): JSX.Element => {
                   className="login__input form__input"
                   type="email" name="email"
                   placeholder="Email" required
+                  data-testid="email"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -69,6 +70,7 @@ const LoginPage = (): JSX.Element => {
                   placeholder="Password" required
                   pattern='(?=.*[0-9])(?=.*[a-zA-Z]).{2,}'
                   title='Минимум 1 цифра и 1 буква'
+                  data-testid="password"
                 />
               </div>
               <button

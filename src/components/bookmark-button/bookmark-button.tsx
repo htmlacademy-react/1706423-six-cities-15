@@ -39,6 +39,7 @@ const BookmarkButton = memo(({offerId, isFavorite, className}:BookmarkButtonProp
 
   return (
     <button
+      data-testid="bookmark"
       disabled={requestStatus === RequestStatus.Loading}
       onClick={handleButtonClick}
       className={`${className}__bookmark-button button ${

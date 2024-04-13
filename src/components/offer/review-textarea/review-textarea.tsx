@@ -15,6 +15,7 @@ const ReviewTextarea = memo(({comment, onChange, disabled}: ReviewTextareaProps)
     value={comment}
     onChange={onChange}
     disabled={disabled}
+    data-testid="textarea"
   >
   </textarea>
 ));

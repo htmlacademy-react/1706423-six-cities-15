@@ -8,7 +8,7 @@ type FavoritesContentProps = {
 };
 
 const FavoritesContent = ({groupedOffers}: FavoritesContentProps): JSX.Element => (
-  <main className="page__main page__main--favorites">
+  <main className="page__main page__main--favorites" data-testid="favorites-content">
     <div className="page__favorites-container container">
       <section className="favorites">
         <h1 className="favorites__title">Saved listing</h1>

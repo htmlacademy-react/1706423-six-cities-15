@@ -54,6 +54,7 @@ const ReviewForm = ({id}: ReviewFormProps): JSX.Element => {
       onSubmit={handleSubmitFormReview}
       className="reviews__form form"
       action="#" method="post"
+      data-testid="reviews-form"
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

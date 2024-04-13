@@ -3,6 +3,7 @@ import { Action } from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {createApi} from '../services/api';
 import {State} from '../types';
+import { AuthStatus, RequestStatus } from '../const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>;
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
@@ -93,3 +94,34 @@ export const makeFakeUser = (): UserData => (
     token: 'T2xpdmVyLmNvbm5lckBnbWFpbC5jb20='
   }
 );
+
+export const makeFakeStore = (initialState?: Partial<State>): State => ({
+  offers: {
+    offers: [],
+    status: RequestStatus.Idle,
+  },
+  offer: {
+    offer: null,
+    status: RequestStatus.Idle,
+  },
+  nearestOffers: {
+    nearestOffers: [],
+    status: RequestStatus.Idle,
+  },
+  favorites: {
+    offers: [],
+    status: RequestStatus.Idle,
+  },
+  comments: {
+    comments: [],
+    status: RequestStatus.Idle,
+    postCommentStatus: RequestStatus.Idle,
+  },
+  user: {
+    authStatus: AuthStatus.Unknown,
+    userData: null,
+    status: RequestStatus.Idle,
+    hasErrorLogin: RequestStatus.Idle,
+  },
+  ...initialState ?? {},
+});
