@@ -37,7 +37,7 @@ describe('Comments Slice', () => {
       postCommentStatus: RequestStatus.Idle,
     };
 
-    const result = commentsSlice.reducer(undefined, fetchComments.pending);
+    const result = commentsSlice.reducer(undefined, fetchComments.pending('', ''));
 
     expect(result).toEqual(expectedState);
   });
@@ -62,19 +62,27 @@ describe('Comments Slice', () => {
       postCommentStatus: RequestStatus.Idle,
     };
 
-    const result = commentsSlice.reducer(undefined, fetchComments.rejected);
+    const result = commentsSlice.reducer(undefined, fetchComments.rejected(null, '', ''));
 
     expect(result).toEqual(expectedState);
   });
 
   it('should set "postCommentStatus" to "RequestStatus.Loading" with "postComment.pending"', () => {
+    const mockComment = makeFakeComment();
+    const postCommentData = {
+      id: mockComment.id,
+      review: {
+        rating: mockComment.rating,
+        comment: mockComment.comment,
+      },
+    };
     const expectedState = {
       comments: [],
       status: RequestStatus.Idle,
       postCommentStatus: RequestStatus.Loading,
     };
 
-    const result = commentsSlice.reducer(undefined, postComment.pending);
+    const result = commentsSlice.reducer(undefined, postComment.pending('', postCommentData));
 
     expect(result).toEqual(expectedState);
   });
@@ -100,13 +108,21 @@ describe('Comments Slice', () => {
   });
 
   it('should set "postCommentStatus" to "RequestStatus.Failed" with "postComment.rejected', () => {
+    const mockComment = makeFakeComment();
+    const postCommentData = {
+      id: mockComment.id,
+      review: {
+        rating: mockComment.rating,
+        comment: mockComment.comment,
+      },
+    };
     const expectedState = {
       comments: [],
       status: RequestStatus.Idle,
       postCommentStatus: RequestStatus.Failed,
     };
 
-    const result = commentsSlice.reducer(undefined, postComment.rejected);
+    const result = commentsSlice.reducer(undefined, postComment.rejected(null, '', postCommentData));
 
     expect(result).toEqual(expectedState);
   });
