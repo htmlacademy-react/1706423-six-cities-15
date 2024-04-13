@@ -36,7 +36,7 @@ describe('Application Routing', () => {
     expect(screen.getByTestId(expectedTestId)).toBeInTheDocument();
   });
 
-  it('should render "OfferPage" when user navigate to "/offers/:id"', () => {
+  it('should render "OfferPage" when user navigate to "/offer/:id"', () => {
     const mockOffer = makeFakeOfferPage(false);
     const expectedText = mockOffer.title;
     const {withStoreComponent} = withStore(<App />, makeFakeStore({
@@ -47,7 +47,7 @@ describe('Application Routing', () => {
     }));
 
     render(
-      <MemoryRouter initialEntries={[`/offers/${mockOffer.id}`]}>
+      <MemoryRouter initialEntries={[`/offer/${mockOffer.id}`]}>
         {withStoreComponent}
       </MemoryRouter>
     );
